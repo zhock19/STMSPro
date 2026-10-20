@@ -292,6 +292,108 @@ input,select{font-family:inherit;}
 .field input:focus, .field select:focus{border-color:var(--lime);}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
+/* ---------- PLAYER REGISTRATION (personal info + ID verification) ---------- */
+#gate-register{align-items:flex-start;}
+.auth-card.auth-card-wide{max-width:640px;margin:20px auto;}
+.reg-section-title{
+  font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--lime);margin:22px 0 12px;padding-top:16px;border-top:1px solid var(--line);
+}
+.reg-hint{font-size:11.5px;color:var(--muted-2);margin-top:6px;line-height:1.5;font-family:var(--font-body);text-transform:none;letter-spacing:0;}
+.req{color:var(--danger);}
+.field textarea{
+  width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;
+  color:var(--text);font-size:14px;outline:none;resize:vertical;min-height:64px;font-family:inherit;transition:border-color .15s;
+}
+.field textarea:focus{border-color:var(--lime);}
+.id-drop-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.id-drop-row .photo-drop{margin-bottom:0;}
+.id-drop-row .photo-drop .photo-preview{width:100%;height:90px;object-fit:cover;}
+.check-row{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:12px;cursor:pointer;}
+.check-row input{margin-top:3px;accent-color:var(--lime);flex-shrink:0;}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;}
+.id-img{width:100%;max-height:200px;object-fit:contain;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;cursor:zoom-in;margin-top:4px;}
+.id-img.zoomed{max-height:none;cursor:zoom-out;}
+@media (max-width:560px){
+  #gate-register .field-row, .id-drop-row, .detail-grid{grid-template-columns:1fr;}
+}
+
+/* ---------- ADMIN REPORTS PAGE ---------- */
+.rep-toolbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end;margin-bottom:14px;}
+.rep-toolbar label,.rep-form label{display:block;font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;}
+.rep-toolbar select,.rep-toolbar input,.rep-form select,.rep-form input,.rep-form textarea,.rep-inline input,.rep-inline select{
+  width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:9px 10px;color:var(--text);font-size:13px;outline:none;font-family:inherit;
+}
+.rep-toolbar select:focus,.rep-toolbar input:focus,.rep-form select:focus,.rep-form input:focus,.rep-form textarea:focus{border-color:var(--lime);}
+.rep-actions{display:flex;flex-wrap:wrap;gap:8px;}
+.rep-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;}
+.rep-stat{background:linear-gradient(180deg, rgba(18,26,51,0.9), rgba(12,18,36,0.7));border:1px solid var(--line);border-radius:14px;padding:14px 16px;}
+.rep-stat-label{font-size:11.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
+.rep-stat-value{font-family:var(--font-display);font-size:28px;font-weight:700;margin:4px 0 2px;}
+.rep-stat-sub{font-size:11.5px;color:var(--muted-2);}
+.rep-stat.warn .rep-stat-value{color:#FFB84D;} .rep-stat.bad .rep-stat-value{color:var(--danger);}
+.rep-attn{margin-bottom:16px;}
+.rep-attn h3{font-size:14px;margin-bottom:10px;}
+.rep-attn-item{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:13px;flex-wrap:wrap;}
+.rep-attn-item:first-of-type{border-top:none;}
+.rep-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;background:var(--muted);}
+.rep-dot.bad{background:var(--danger);} .rep-dot.warn{background:#FFB84D;} .rep-dot.info{background:var(--lime);}
+.rep-attn-count{font-family:var(--font-mono);font-weight:700;min-width:28px;}
+.rep-attn-text{flex:1;min-width:200px;color:var(--text);}
+.rep-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.rep-section{display:none;}
+.rep-section.active{display:block;}
+.rep-sec-title{font-size:18px;margin-bottom:12px;}
+.rep-block{margin-bottom:22px;}
+.rep-block h3{font-size:14px;margin-bottom:3px;}
+.rep-note{font-size:12px;color:var(--muted);margin:2px 0 10px;line-height:1.5;}
+.rep-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;}
+.rep-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.rep-table th{text-align:left;color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:rgba(255,255,255,0.02);}
+.rep-table td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+.rep-table tr:last-child td{border-bottom:none;}
+.rep-badge{display:inline-block;padding:3px 9px;border-radius:100px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;}
+.rb-ok{background:rgba(52,211,153,0.14);color:var(--mint);}
+.rb-warn{background:rgba(255,184,77,0.16);color:#FFB84D;}
+.rb-bad{background:rgba(255,77,109,0.14);color:var(--danger);}
+.rb-info{background:rgba(76,141,255,0.14);color:var(--lime);}
+.rb-mute{background:rgba(255,255,255,0.06);color:var(--muted);}
+.rep-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end;}
+.rep-form .wide{grid-column:1/-1;}
+.rep-form textarea{min-height:60px;resize:vertical;}
+.rep-inline{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.rep-inline select{min-width:150px;width:auto;padding:6px 8px;}
+.rep-inline input{width:72px;padding:6px 8px;}
+.rep-print-only{display:none;}
+@media (max-width:640px){ .rep-stat-value{font-size:24px;} }
+@media print{
+  body{background:#fff!important;color:#000!important;}
+  .sidebar,.ticker-wrap,.topbar,.mobile-nav,.toast,.rep-no-print,.sync-status,.team-roster-overlay{display:none!important;}
+  .main{display:block!important;}
+  .content{padding:0!important;}
+  .screen{display:none!important;}
+  #screen-reports{display:block!important;animation:none!important;}
+  #reports-coach{display:none!important;}
+  .rep-print-only{display:block!important;margin-bottom:14px;color:#000;}
+  .rep-print-only h1{font-size:20px;margin-bottom:2px;color:#000;}
+  .rep-print-only p{font-size:11px;color:#333;margin:0;}
+  .rep-section{display:none!important;}
+  .rep-section.active{display:block!important;}
+  body.rep-print-all .rep-section{display:block!important;page-break-before:always;}
+  body.rep-print-all .rep-section:first-of-type{page-break-before:auto;}
+  .rep-sec-title,.rep-block h3{color:#000!important;}
+  .rep-note{color:#333!important;}
+  .rep-summary{grid-template-columns:repeat(4,1fr)!important;}
+  .rep-stat{background:#fff!important;border:1px solid #888!important;color:#000!important;}
+  .rep-stat *{color:#000!important;}
+  .rep-table-wrap{border:1px solid #888!important;overflow:visible!important;}
+  .rep-table th{background:#eee!important;color:#000!important;border-bottom:1px solid #888!important;}
+  .rep-table td{color:#000!important;border-bottom:1px solid #ccc!important;}
+  .rep-table tr{page-break-inside:avoid;}
+  .rep-act{display:none!important;}
+  .rep-badge{background:#fff!important;color:#000!important;border:1px solid #888;}
+}
+
 /* ---------- CALENDAR-STYLE DATE PICKER (Tournament Generator: Start/End Date) ---------- */
 .datefield{position:relative;}
 .datefield-display{
@@ -770,7 +872,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
     <button class="back-link" onclick="showGate('gate-welcome')">← Back</button>
     <div class="auth-head">
       <h2 class="display">Coach Access</h2>
-      <p>Sign in to manage your own team's roster and registrations. Your login is created by the administrator once your Coach registration is approved.</p>
+      <p>Sign in to manage your own team's roster and registrations. Your login is created once an Official approves your Coach registration.</p>
     </div>
     <div id="coach-error" class="error-msg">Invalid email or password. Try again.</div>
     <div class="field">
@@ -812,10 +914,11 @@ tr:hover td{background:rgba(76,141,255,0.03);}
 <!-- ================= GATE: REGISTER (Player = info only, no login · Coach & Official = set a password, account created on admin approval) ================= -->
 <div id="gate-register" class="gate" style="display:none;">
   <div class="gate-bg"></div><div class="gate-grid-lines"></div>
-  <div class="card auth-card">
+  <div class="card auth-card auth-card-wide">
     <button class="back-link" onclick="showGate('gate-welcome')">← Back</button>
     <div class="auth-head">
       <h2 class="display">Register Your Information</h2>
+      <p id="reg-intro-text"></p>
     </div>
     <div id="register-error" class="error-msg">Please enter your full name and a valid email.</div>
     <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;">Select your role</label>
@@ -824,12 +927,14 @@ tr:hover td{background:rgba(76,141,255,0.03);}
       <button class="role-opt" data-role="Coach" onclick="pickRole(this)">Coach</button>
       <button class="role-opt" data-role="Official" onclick="pickRole(this)">Official</button>
     </div>
-    <div class="field"><label>Full Name</label><input type="text" id="reg-name" placeholder="Juan Dela Cruz"></div>
+    <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" id="reg-name" placeholder="Juan Dela Cruz" autocomplete="off" oninput="checkRegName()"><div class="reg-hint" id="reg-name-hint" style="color:var(--danger);display:none;"></div></div>
     <div class="field-row">
-      <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="you@email.com"></div>
-      <div class="field"><label>Phone</label><input type="tel" id="reg-phone" placeholder="+63 900 000 0000"></div>
+      <div class="field"><label>Email <span class="req">*</span></label><input type="email" id="reg-email" placeholder="you@email.com"></div>
+      <div class="field"><label>Phone <span class="req" id="reg-phone-req">*</span></label><input type="tel" id="reg-phone" placeholder="09XXXXXXXXX" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" autocomplete="off" oninput="this.value=this.value.replace(/\D/g,'').slice(0,11)"></div>
     </div>
-    <div class="field-row" id="reg-team-sport-row">
+
+    <!-- Coach only -->
+    <div class="field-row" id="reg-team-sport-row" style="display:none;">
       <div class="field"><label>Team / Organization</label><input type="text" id="reg-team" placeholder="Optional"></div>
       <div class="field">
         <label>Preferred Sport</label>
@@ -845,12 +950,95 @@ tr:hover td{background:rgba(76,141,255,0.03);}
       <label>Create Password</label>
       <input type="password" id="reg-password" placeholder="Minimum 6 characters">
     </div>
-    <label class="photo-drop" id="reg-photo-drop">
-      <img id="reg-photo-preview" class="photo-preview" alt="Profile photo preview">
-      <span class="photo-drop-text" id="reg-photo-text">📷 Upload profile photo (optional)</span>
-      <span class="photo-drop-filename" id="reg-photo-filename"></span>
-      <input type="file" id="reg-photo-input" accept="image/*" onchange="handlePhotoUpload(this)">
-    </label>
+
+    <!-- Player only: coach, personal info, school, ID verification, emergency contact, consent -->
+    <div id="reg-player-section">
+      <div class="reg-section-title" style="margin-top:8px;">1 · Your Coach &amp; Team</div>
+      <div class="field">
+        <label>Select your coach <span class="req">*</span></label>
+        <select id="reg-coach" onchange="onRegCoachChange()"><option value="">— Select your coach —</option></select>
+        <div class="reg-hint" id="reg-coach-hint"></div>
+      </div>
+
+      <div class="reg-section-title">2 · Personal Information</div>
+      <div class="field-row">
+        <div class="field"><label>Date of Birth <span class="req">*</span></label><input type="date" id="reg-dob"></div>
+        <div class="field"><label>Sex <span class="req">*</span></label>
+          <select id="reg-gender"><option value="">— Select —</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Home Address <span class="req">*</span></label>
+        <textarea id="reg-address" placeholder="House no. / Street, Barangay, City / Municipality, Province"></textarea>
+      </div>
+
+      <div class="reg-section-title">3 · School Information</div>
+      <div class="field-row">
+        <div class="field"><label>School / Institution <span class="req">*</span></label><input type="text" id="reg-school" placeholder="e.g. Tangub City Global College"></div>
+        <div class="field"><label>School ID Number <span class="req">*</span></label><input type="text" id="reg-student-id" placeholder="e.g. 2023-00123"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Course / Program <span class="req">*</span></label><input type="text" id="reg-course" placeholder="e.g. BS Computer Science"></div>
+        <div class="field"><label>Year Level <span class="req">*</span></label>
+          <select id="reg-year">
+            <option value="">— Select —</option>
+            <option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>5th Year +</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="reg-section-title">4 · Identity Verification</div>
+      <p class="reg-hint" style="margin:-4px 0 12px;">Upload clear photos so your coach can verify you. Your name, photo and school ID number must be readable. Images are compressed automatically.</p>
+      <div class="id-drop-row">
+        <label class="photo-drop">
+          <img id="reg-idfront-preview" class="photo-preview" alt="School ID front preview">
+          <span class="photo-drop-text" id="reg-idfront-text">🪪 School ID — FRONT <span class="req">*</span></span>
+          <span class="photo-drop-filename" id="reg-idfront-filename"></span>
+          <input type="file" accept="image/*" onchange="handleRegImage(this,'idFront','reg-idfront')">
+        </label>
+        <label class="photo-drop">
+          <img id="reg-idback-preview" class="photo-preview" alt="School ID back preview">
+          <span class="photo-drop-text" id="reg-idback-text">🪪 School ID — BACK (optional)</span>
+          <span class="photo-drop-filename" id="reg-idback-filename"></span>
+          <input type="file" accept="image/*" onchange="handleRegImage(this,'idBack','reg-idback')">
+        </label>
+      </div>
+      <label class="photo-drop">
+        <img id="reg-pphoto-preview" class="photo-preview" alt="Your photo preview">
+        <span class="photo-drop-text" id="reg-pphoto-text">📷 Your photo — clear face, no filter <span class="req">*</span></span>
+        <span class="photo-drop-filename" id="reg-pphoto-filename"></span>
+        <input type="file" accept="image/*" onchange="handleRegImage(this,'photo','reg-pphoto')">
+      </label>
+
+      <div class="reg-section-title">5 · Sports Details</div>
+      <div class="field-row">
+        <div class="field"><label>Position</label><input type="text" id="reg-position" placeholder="Optional · e.g. Point Guard"></div>
+        <div class="field"><label>Preferred Jersey No.</label><input type="text" id="reg-jersey" placeholder="Optional · e.g. 23"></div>
+      </div>
+
+      <div class="reg-section-title">6 · Emergency Contact &amp; Health</div>
+      <div class="field-row">
+        <div class="field"><label>Contact Person <span class="req">*</span></label><input type="text" id="reg-em-name" placeholder="Parent / guardian / relative"></div>
+        <div class="field"><label>Relationship <span class="req">*</span></label><input type="text" id="reg-em-rel" placeholder="e.g. Mother"></div>
+      </div>
+      <div class="field"><label>Contact Number <span class="req">*</span></label><input type="tel" id="reg-em-phone" placeholder="09XXXXXXXXX" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" autocomplete="off" oninput="this.value=this.value.replace(/\D/g,'').slice(0,11)"></div>
+      <div class="field"><label>Medical conditions / allergies (optional)</label>
+        <textarea id="reg-medical" placeholder="Anything your coach should know in case of an emergency"></textarea>
+      </div>
+
+      <div class="reg-section-title">7 · Confirmation</div>
+      <label class="check-row"><input type="checkbox" id="reg-consent-truth"><span>I confirm that all information and documents I submitted are true and belong to me. If I am under 18, my parent or guardian allows me to join.</span></label>
+      <label class="check-row"><input type="checkbox" id="reg-consent-privacy"><span>I agree that my personal information and ID will be stored and viewed by my coach and the tournament administrator only for tournament registration and verification (Data Privacy Act of 2012).</span></label>
+    </div>
+
+    <!-- Coach / Official: optional profile photo -->
+    <div id="reg-generic-photo" style="display:none;">
+      <label class="photo-drop" id="reg-photo-drop">
+        <img id="reg-photo-preview" class="photo-preview" alt="Profile photo preview">
+        <span class="photo-drop-text" id="reg-photo-text">📷 Upload profile photo (optional)</span>
+        <span class="photo-drop-filename" id="reg-photo-filename"></span>
+        <input type="file" accept="image/*" onchange="handleRegImage(this,'photo','reg-photo')">
+      </label>
+    </div>
     <button class="btn btn-primary btn-block" onclick="registerSubmit()">Submit Registration</button>
     <div class="auth-switch">Already registered? <button onclick="showGate('gate-welcome')">Back to live scores</button></div>
   </div>
@@ -948,6 +1136,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
     <button class="navlink" id="coach-nav-myteam" style="display:none;" data-screen="myteam" onclick="nav('myteam')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 014-4h6a4 4 0 014 4v2"/><circle cx="19" cy="8" r="3"/><path d="M17 21v-2a4 4 0 00-1-2.6"/></svg>
       My Team
+      <span class="nav-badge" id="coach-myteam-badge" style="display:none;">0</span>
     </button>
     <button class="navlink" id="coach-nav-reports" style="display:none;" data-screen="reports" onclick="nav('reports')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M6 3h8l6 6v11a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
@@ -1138,6 +1327,8 @@ tr:hover td{background:rgba(76,141,255,0.03);}
               <option value="upcoming">Upcoming</option>
               <option value="live">Live</option>
               <option value="done">Accomplish</option>
+              <option value="postponed">Postponed</option>
+              <option value="cancelled">Cancelled</option>
             </select>
             <button class="btn btn-primary btn-sm" onclick="addMatch()">Add</button>
           </div>
@@ -1150,12 +1341,15 @@ tr:hover td{background:rgba(76,141,255,0.03);}
       <!-- ===== STANDINGS ===== -->
       <section class="screen" id="screen-standings">
         <div class="tabs" id="standings-tabs">
-          <button class="tab-btn active" onclick="renderStandings('Northside Ballers')">Group A</button>
-          <button class="tab-btn" onclick="renderStandings('Group B')">Group B</button>
+          <button class="tab-btn active" data-group="all" onclick="setStandingsGroup('all')">All teams</button>
+          <button class="tab-btn" data-group="A" onclick="setStandingsGroup('A')">Group A</button>
+          <button class="tab-btn" data-group="B" onclick="setStandingsGroup('B')">Group B</button>
         </div>
+        <div class="card" id="standings-season-card" style="display:none;margin-bottom:18px;"></div>
         <div class="card">
           <div class="section-head" style="margin-top:0;">
             <h2>Standings</h2>
+            <select id="standings-tournament-filter" onchange="setStandingsTournament(this.value)" style="display:none;margin-left:auto;margin-right:10px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:7px 10px;color:var(--text);font-size:12.5px;max-width:220px;"></select>
             <button class="btn btn-ghost btn-sm" id="standings-add-btn" style="display:none;" onclick="addStandingRow()">+ Add Team</button>
           </div>
           <div class="table-wrap">
@@ -1200,7 +1394,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
               <span class="topbar-sub" id="reg-count" style="text-transform:none;"></span>
             </div>
           </div>
-          <p class="topbar-sub" style="text-transform:none;margin-bottom:10px;">Approving a <b style="color:var(--text);">Coach</b> or <b style="color:var(--text);">Official</b> registration creates their dashboard login using the password they set when they registered.</p>
+          <p class="topbar-sub" id="reg-help-text" style="text-transform:none;margin-bottom:10px;"></p>
           <div id="registrations-list"></div>
         </div>
       </section>
@@ -1309,30 +1503,71 @@ tr:hover td{background:rgba(76,141,255,0.03);}
         </div>
       </section>
 
-      <!-- ===== REPORTS (Admin / Coach) ===== -->
+      <!-- ===== REPORTS (Admin: full reports page · Coach: simple summary cards) ===== -->
       <section class="screen" id="screen-reports">
-        <div class="grid grid-3">
-          <div class="card">
-            <h3 style="font-size:14px;margin-bottom:4px;">Tournament Summary</h3>
-            <p class="topbar-sub" style="margin-bottom:14px;">Teams, matches, results overview</p>
-            <div style="display:flex;gap:8px;">
-              <button class="btn btn-ghost btn-sm" onclick="exportToast('PDF')">Export PDF</button>
-              <button class="btn btn-ghost btn-sm" onclick="exportToast('Excel')">Excel</button>
+        <div id="reports-admin" style="display:none;">
+          <div class="rep-print-only" id="rep-print-header"></div>
+
+          <div class="card rep-no-print" style="margin-bottom:16px;">
+            <div class="rep-toolbar">
+              <div><label for="rf-tournament">Tournament</label><select id="rf-tournament" onchange="repFilterChanged()"></select></div>
+              <div><label for="rf-sport">Sport</label><select id="rf-sport" onchange="repFilterChanged()"></select></div>
+              <div><label for="rf-team">Team</label><select id="rf-team" onchange="repFilterChanged()"></select></div>
+              <div><label for="rf-status">Status</label><select id="rf-status" onchange="repFilterChanged()"></select></div>
+              <div><label for="rf-from">From</label><input type="date" id="rf-from" onchange="repFilterChanged()"></div>
+              <div><label for="rf-to">To</label><input type="date" id="rf-to" onchange="repFilterChanged()"></div>
+              <div><button class="btn btn-ghost btn-sm" onclick="repResetFilters()">Reset filters</button></div>
             </div>
-          </div>
-          <div class="card">
-            <h3 style="font-size:14px;margin-bottom:4px;">Player Statistics</h3>
-            <p class="topbar-sub" style="margin-bottom:14px;">Full stat lines for all players</p>
-            <div style="display:flex;gap:8px;">
-              <button class="btn btn-ghost btn-sm" onclick="exportToast('CSV')">Export CSV</button>
-              <button class="btn btn-ghost btn-sm" onclick="exportToast('Excel')">Excel</button>
+            <div class="rep-actions">
+              <button class="btn btn-primary btn-sm" onclick="repPrint(false)">🖨 Print / Save as PDF (this report)</button>
+              <button class="btn btn-ghost btn-sm" onclick="repPrint(true)">🖨 Print full report</button>
+              <button class="btn btn-ghost btn-sm" onclick="repExportCsv(false)">⬇ CSV (this report)</button>
+              <button class="btn btn-ghost btn-sm" onclick="repExportCsv(true)">⬇ CSV (all reports)</button>
+              <button class="btn btn-ghost btn-sm" onclick="repExportExcel()">⬇ Excel (all reports)</button>
             </div>
+            <p class="rep-note" style="margin:10px 0 0;">Filters apply to every report where they make sense (a status like Pending only affects registrations and teams; a status like Live only affects games). In the print window, choose <b>Save as PDF</b> as the printer to get a PDF file.</p>
           </div>
-          <div class="card">
-            <h3 style="font-size:14px;margin-bottom:4px;">Team Rankings</h3>
-            <p class="topbar-sub" style="margin-bottom:14px;">Standings snapshot across groups</p>
-            <div style="display:flex;gap:8px;">
-              <button class="btn btn-ghost btn-sm" onclick="exportToast('PDF')">Export PDF</button>
+
+          <div class="rep-summary" id="rep-summary"></div>
+          <div class="card rep-attn rep-no-print" id="rep-attention"></div>
+          <div class="rep-tabs rep-no-print" id="rep-tabs"></div>
+          <div id="rep-sections">
+            <div class="rep-section" id="rep-sec-registration"></div>
+            <div class="rep-section" id="rep-sec-teams"></div>
+            <div class="rep-section" id="rep-sec-matches"></div>
+            <div class="rep-section" id="rep-sec-results"></div>
+            <div class="rep-section" id="rep-sec-officials"></div>
+            <div class="rep-section" id="rep-sec-venues"></div>
+            <div class="rep-section" id="rep-sec-discipline"></div>
+            <div class="rep-section" id="rep-sec-audit"></div>
+            <div class="rep-section" id="rep-sec-audience"></div>
+          </div>
+        </div>
+
+        <div id="reports-coach">
+          <div class="grid grid-3">
+            <div class="card">
+              <h3 style="font-size:14px;margin-bottom:4px;">Tournament Summary</h3>
+              <p class="topbar-sub" style="margin-bottom:14px;">Teams, matches, results overview</p>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-ghost btn-sm" onclick="exportToast('PDF')">Export PDF</button>
+                <button class="btn btn-ghost btn-sm" onclick="exportToast('Excel')">Excel</button>
+              </div>
+            </div>
+            <div class="card">
+              <h3 style="font-size:14px;margin-bottom:4px;">Player Statistics</h3>
+              <p class="topbar-sub" style="margin-bottom:14px;">Full stat lines for all players</p>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-ghost btn-sm" onclick="exportToast('CSV')">Export CSV</button>
+                <button class="btn btn-ghost btn-sm" onclick="exportToast('Excel')">Excel</button>
+              </div>
+            </div>
+            <div class="card">
+              <h3 style="font-size:14px;margin-bottom:4px;">Team Rankings</h3>
+              <p class="topbar-sub" style="margin-bottom:14px;">Standings snapshot across groups</p>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-ghost btn-sm" onclick="exportToast('PDF')">Export PDF</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1370,6 +1605,12 @@ tr:hover td{background:rgba(76,141,255,0.03);}
               <h2 style="font-size:15px;margin-bottom:6px;">Announcements</h2>
               <div id="myteam-announce-list"></div>
             </div>
+          </div>
+
+                    <div class="section-head"><h2>Player Registrations</h2><span class="topbar-sub" id="myteam-pending-count"></span></div>
+          <div class="card" style="margin-bottom:22px;">
+            <p class="topbar-sub" style="text-transform:none;margin-bottom:10px;">Players who chose you as their coach. Review their details and school ID, then accept — accepted players join your roster automatically. Only you can accept or reject your own players.</p>
+            <div id="myteam-pending-list"></div>
           </div>
 
           <div class="section-head"><h2>Roster</h2><span class="topbar-sub" id="myteam-roster-count"></span></div>
@@ -1469,6 +1710,22 @@ tr:hover td{background:rgba(76,141,255,0.03);}
   <div class="team-roster-modal">
     <button class="team-roster-close" onclick="closeTeamRosterModal()" aria-label="Close">✕</button>
     <div id="team-roster-modal-body"></div>
+  </div>
+</div>
+
+<!-- ================= REPORTS: MANAGE-GAME MODAL (postpone / forfeit / cancel / restore) ================= -->
+<div class="team-roster-overlay" id="rep-action-overlay" onclick="if(event.target===this) repCloseMatchAction()">
+  <div class="team-roster-modal" style="max-width:520px;">
+    <button class="team-roster-close" onclick="repCloseMatchAction()" aria-label="Close">✕</button>
+    <div id="rep-action-body"></div>
+  </div>
+</div>
+
+<!-- ================= PLAYER DETAILS MODAL (admin sees accepted players · coach sees own players) ================= -->
+<div class="team-roster-overlay" id="player-detail-overlay" onclick="if(event.target===this) closePlayerDetails()">
+  <div class="team-roster-modal" style="max-width:640px;">
+    <button class="team-roster-close" onclick="closePlayerDetails()" aria-label="Close">✕</button>
+    <div id="player-detail-body"></div>
   </div>
 </div>
 
@@ -1660,7 +1917,7 @@ const auditLog = [
   {id:2, t:'Team Approved', d:'Iron Spikers approved for City Volleyball Championship.', who:'Administrator', when:'Aug 3, 2026'},
 ];
 function logAudit(title, detail, who){
-  auditLog.unshift({id: fsIdCounter++, t:title, d:detail, who: who || 'Administrator', when: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})});
+  auditLog.unshift({id: fsIdCounter++, t:title, d:detail, who: who || 'Administrator', when: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}), time: new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})});
   /* QUOTA FIX: the audit log grows with every single action and was previously unbounded —
      every new tab/device then had to read the whole history on its first snapshot. Keep only
      the most recent AUDIT_KEEP entries in memory; the listener below reads the same number. */
@@ -1670,7 +1927,7 @@ function logAudit(title, detail, who){
 /* Officials assist the admin on shared actions (teams, registrations, bracket, schedule) —
    the audit trail should show which of the two actually performed the action. */
 function actorLabel(){
-  return currentRole === 'official' ? 'Official' : 'Administrator';
+  return currentRole === 'official' ? 'Official' : currentRole === 'coach' ? 'Coach' : 'Administrator';
 }
 /* Per-tournament official assignment: the admin assigns exactly one official per tournament.
    That official can delete teams and generate the bracket ONLY for their assigned tournament —
@@ -1734,6 +1991,7 @@ let viewingTourneyId = null; // set when a coach/spectator/admin opens a tournam
    deletes docs for items removed locally). schedulePersist() is called from
    showToast(), which runs after essentially every action in this app, so a
    sync happens automatically ~500ms after anything changes. */
+const incidents = []; // disciplinary records (cards, suspensions, protests) — shown in Admin → Reports
 const FS_COLLECTIONS = {
   tournaments:      { arr: tournaments,      key: 'id' },
   teams:            { arr: teams,            key: 'id' },
@@ -1744,6 +2002,7 @@ const FS_COLLECTIONS = {
   auditLog:         { arr: auditLog,         key: 'id' },
   coachAccounts:    { arr: coachAccounts,    key: 'email' },
   officialAccounts: { arr: officialAccounts, key: 'email' },
+  incidents:        { arr: incidents,        key: 'id' },
 };
 let fsIdCounter = Date.now();
 let fsReady = false; // don't sync to Firestore until the initial seed/load has finished
@@ -1908,9 +2167,14 @@ function checkForNewRegistrations(){
     const fresh = registrations.filter(r=>!knownRegistrationIds.has(r.id));
     // Only surface this to the people who review registrations, so players/spectators
     // browsing the public views aren't interrupted by unrelated admin notifications.
-    if(fresh.length && (currentRole==='admin' || currentRole==='official')){
-      fresh.forEach(r=>showToastOnly(`🔔 New ${r.role} registration: ${r.name}`));
-    }
+    fresh.forEach(r=>{
+      if(r.status !== 'Pending') return;
+      if((currentRole==='coach' && canReviewRegistration(r)) ||
+         (currentRole==='official' && r.role==='Coach') ||
+         (currentRole==='admin' && (r.role==='Official' || r.role==='Spectator'))){
+        showToastOnly(`🔔 New ${r.role} registration: ${r.name}`);
+      }
+    });
   }
   knownRegistrationIds = currentIds;
 }
@@ -2106,6 +2370,7 @@ function showGate(id){
   document.body.classList.remove('app-entered');
   document.querySelectorAll('.gate').forEach(g=>g.style.display='none');
   document.getElementById(id).style.display='flex';
+  if(id==='gate-register'){ const selRole=document.querySelector('.role-opt.selected'); applyRoleUI(selRole?selRole.dataset.role:'Player'); }
   document.getElementById('admin-error').style.display='none';
   document.getElementById('register-error').style.display='none';
   const coachErr = document.getElementById('coach-error');
@@ -2116,31 +2381,73 @@ function showGate(id){
 function pickRole(el){
   document.querySelectorAll('.role-opt').forEach(r=>r.classList.remove('selected'));
   el.classList.add('selected');
-  const role = el.dataset.role;
-  const pwWrap = document.getElementById('reg-password-wrap');
+  applyRoleUI(el.dataset.role);
+  checkRegName();
+}
+/* Shows only the form sections that belong to the chosen role. */
+function applyRoleUI(role){
+  const isPlayer = role === 'Player', isCoach = role === 'Coach', isOfficial = role === 'Official';
+  const show = (id, disp)=>{ const e = document.getElementById(id); if(e) e.style.display = disp; };
+  show('reg-password-wrap', (isCoach || isOfficial) ? 'block' : 'none');
   const pwInput = document.getElementById('reg-password');
-  if(role === 'Coach' || role === 'Official'){
-    pwWrap.style.display = 'block';
-  } else {
-    pwWrap.style.display = 'none';
-    if(pwInput) pwInput.value = '';
+  if(!(isCoach || isOfficial) && pwInput) pwInput.value = '';
+  show('reg-team-sport-row', isCoach ? 'grid' : 'none');
+  if(!isCoach){
+    const teamInput = document.getElementById('reg-team'); if(teamInput) teamInput.value = '';
+    const sportSelect = document.getElementById('reg-sport'); if(sportSelect) sportSelect.selectedIndex = 0;
   }
-
-  // Officials only need name, email, phone, and a password — hide Team/Organization and Preferred Sport for them.
-  const teamSportRow = document.getElementById('reg-team-sport-row');
-  const teamInput = document.getElementById('reg-team');
-  const sportSelect = document.getElementById('reg-sport');
-  if(role === 'Official'){
-    teamSportRow.style.display = 'none';
-    if(teamInput) teamInput.value = '';
-    if(sportSelect) sportSelect.selectedIndex = 0;
-  } else {
-    teamSportRow.style.display = 'grid';
+  show('reg-player-section', isPlayer ? 'block' : 'none');
+  show('reg-generic-photo', isPlayer ? 'none' : 'block');
+  show('reg-phone-req', isPlayer ? 'inline' : 'none');
+  const intro = document.getElementById('reg-intro-text');
+  if(intro){
+    intro.textContent = isPlayer
+      ? 'Your coach reviews and accepts your registration. Open for college students only — fill in your details and upload your school ID so you can be verified.'
+      : isCoach
+        ? 'Your registration is reviewed and accepted by an Official. You can log in with the password you set once it is approved.'
+        : 'Your registration is reviewed and accepted by the Administrator. You can log in with the password you set once it is approved.';
+  }
+  if(isPlayer){
+    const dob = document.getElementById('reg-dob');
+    if(dob) dob.max = new Date().toISOString().slice(0,10);
+    populateRegCoachSelect();
   }
 }
 
-/* ---- Profile photo upload on the Register page ---- */
-function handlePhotoUpload(input){
+/* ---- Image uploads on the Register page (compressed so Firestore docs stay small) ---- */
+let pendingIdFront = null;
+let pendingIdBack = null;
+function compressImage(file, maxDim, quality){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onerror = ()=>reject(new Error('read'));
+    reader.onload = e=>{
+      const img = new Image();
+      img.onerror = ()=>reject(new Error('decode'));
+      img.onload = ()=>{
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        const w = Math.max(1, Math.round(img.width * scale)), h = Math.max(1, Math.round(img.height * scale));
+        const c = document.createElement('canvas'); c.width = w; c.height = h;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(c.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+async function compressImageToLimit(file, maxDim, limitChars){
+  const tries = [[maxDim,0.72],[Math.round(maxDim*0.8),0.6],[Math.round(maxDim*0.6),0.5]];
+  let out = null;
+  for(const [d,q] of tries){
+    out = await compressImage(file, d, q);
+    if(out.length <= limitChars) break;
+  }
+  return out;
+}
+async function handleRegImage(input, key, prefix){
   const file = input.files && input.files[0];
   if(!file) return;
   if(!file.type.startsWith('image/')){
@@ -2148,103 +2455,240 @@ function handlePhotoUpload(input){
     input.value = '';
     return;
   }
-  const reader = new FileReader();
-  reader.onload = function(e){
-    pendingRegPhoto = e.target.result;
-    const preview = document.getElementById('reg-photo-preview');
-    preview.src = pendingRegPhoto;
+  try{
+    const isId = (key === 'idFront' || key === 'idBack');
+    const data = await compressImageToLimit(file, isId ? 1000 : 500, isId ? 260000 : 90000);
+    if(key === 'photo') pendingRegPhoto = data;
+    else if(key === 'idFront') pendingIdFront = data;
+    else pendingIdBack = data;
+    const preview = document.getElementById(prefix + '-preview');
+    preview.src = data;
     preview.style.display = 'block';
-    document.getElementById('reg-photo-text').style.display = 'none';
-    document.getElementById('reg-photo-filename').textContent = `✓ ${file.name}`;
-  };
-  reader.readAsDataURL(file);
+    document.getElementById(prefix + '-text').style.display = 'none';
+    document.getElementById(prefix + '-filename').textContent = `✓ ${file.name}`;
+  }catch(err){
+    showToast("Couldn't read that image. Please try another file.");
+    input.value = '';
+  }
 }
-function resetPhotoUpload(){
-  pendingRegPhoto = null;
-  const input = document.getElementById('reg-photo-input');
-  const preview = document.getElementById('reg-photo-preview');
-  if(input) input.value = '';
-  if(preview){ preview.src=''; preview.style.display='none'; }
-  const text = document.getElementById('reg-photo-text');
-  if(text) text.style.display = 'block';
-  const filename = document.getElementById('reg-photo-filename');
-  if(filename) filename.textContent = '';
+function resetRegImages(){
+  pendingRegPhoto = null; pendingIdFront = null; pendingIdBack = null;
+  ['reg-photo','reg-pphoto','reg-idfront','reg-idback'].forEach(prefix=>{
+    const preview = document.getElementById(prefix + '-preview');
+    if(preview){ preview.src = ''; preview.style.display = 'none'; }
+    const text = document.getElementById(prefix + '-text'); if(text) text.style.display = '';
+    const fn = document.getElementById(prefix + '-filename'); if(fn) fn.textContent = '';
+  });
+  document.querySelectorAll('#gate-register input[type="file"]').forEach(i=>{ i.value = ''; });
+}
+function resetPhotoUpload(){ resetRegImages(); }
+
+/* ---- Coach picker: only coaches who already created a team can receive players ---- */
+let regCoachChoices = [];
+function populateRegCoachSelect(){
+  const sel = document.getElementById('reg-coach');
+  if(!sel) return;
+  const prevEmail = (sel.value !== '' && regCoachChoices[Number(sel.value)]) ? regCoachChoices[Number(sel.value)].email : null;
+  regCoachChoices = [];
+  coachAccounts.forEach(c=>{
+    if(!c.team) return;
+    const t = teams.find(t=>t.name === c.team);
+    if(!t) return;
+    regCoachChoices.push({email:c.email, name:c.name, team:t.name, sport:t.sport});
+  });
+  sel.innerHTML = '<option value="">— Select your coach —</option>' + regCoachChoices.map((c,i)=>
+    `<option value="${i}">${escH(c.name)} — ${escH(c.team)} (${escH(c.sport)})</option>`).join('');
+  if(prevEmail){
+    const idx = regCoachChoices.findIndex(c=>c.email === prevEmail);
+    if(idx !== -1) sel.value = String(idx);
+  }
+  onRegCoachChange();
+}
+function onRegCoachChange(){
+  const sel = document.getElementById('reg-coach');
+  const hint = document.getElementById('reg-coach-hint');
+  if(!sel || !hint) return;
+  if(!regCoachChoices.length){
+    hint.textContent = 'No coach has created a team yet, so player registration is not open. Ask your coach to register and create their team first.';
+    return;
+  }
+  const c = sel.value !== '' ? regCoachChoices[Number(sel.value)] : null;
+  hint.textContent = c
+    ? `You are registering for ${c.team} · ${c.sport}. Coach ${c.name} will review your details and ID.`
+    : 'Only coaches who already created a team are listed. Your coach decides whether to accept you.';
+}
+function ageFromDob(iso){
+  const d = new Date(iso + 'T00:00:00');
+  if(isNaN(d.getTime())) return null;
+  const now = new Date();
+  let a = now.getFullYear() - d.getFullYear();
+  const m = now.getMonth() - d.getMonth();
+  if(m < 0 || (m === 0 && now.getDate() < d.getDate())) a--;
+  return a;
 }
 
+/* ---- registration checks: unique player names + 11-digit phone numbers ---- */
+function normPersonName(n){
+  return String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+}
+/* True when a player with this name is already registered (pending or approved), on any team roster, or in the player stats. */
+function playerNameExists(name){
+  const k = normPersonName(name);
+  if(!k) return false;
+  if(registrations.some(r=>r.role === 'Player' && r.status !== 'Rejected' && normPersonName(r.name) === k)) return true;
+  if(teams.some(t=>t.players.some(p=>normPersonName(p) === k))) return true;
+  if(players.some(p=>normPersonName(p.name) === k)) return true;
+  return false;
+}
+function isValidPhone11(p){ return /^09\d{9}$/.test(String(p || '')); } // 11 digits, must start with 09
+function checkRegName(){
+  const hint = document.getElementById('reg-name-hint'), input = document.getElementById('reg-name');
+  if(!hint || !input) return;
+  const sel = document.querySelector('.role-opt.selected');
+  if(sel && sel.dataset.role === 'Player' && input.value.trim() && playerNameExists(input.value)){
+    hint.textContent = 'This name is already in the system. If you are a different person, add your middle name or initial.';
+    hint.style.display = 'block';
+  } else {
+    hint.textContent = '';
+    hint.style.display = 'none';
+  }
+}
 function registerSubmit(){
   const role = document.querySelector('.role-opt.selected').dataset.role;
-  const name = document.getElementById('reg-name').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const phone = document.getElementById('reg-phone').value.trim();
-  const team = role === 'Official' ? '' : document.getElementById('reg-team').value.trim();
-  const sport = role === 'Official' ? '—' : document.getElementById('reg-sport').value;
+  const val = id => { const e = document.getElementById(id); return e ? e.value.trim() : ''; };
+  const name = val('reg-name'), email = val('reg-email'), phone = val('reg-phone');
   const errEl = document.getElementById('register-error');
+  const fail = msg => {
+    errEl.textContent = msg;
+    errEl.style.display = 'block';
+    if(errEl.scrollIntoView) errEl.scrollIntoView({behavior:'smooth', block:'center'});
+  };
   const needsPassword = (role === 'Coach' || role === 'Official');
   const password = needsPassword ? document.getElementById('reg-password').value : '';
 
   const emailOk = /^\S+@\S+\.\S+$/.test(email);
-  if(!name || !emailOk){
-    errEl.textContent = 'Please enter your full name and a valid email.';
-    errEl.style.display = 'block';
-    return;
+  if(!name || !emailOk) return fail('Please enter your full name and a valid email.');
+  if(phone && !isValidPhone11(phone)) return fail('Phone number must be 11 digits and start with 09 (numbers only), e.g. 09171234567.');
+  if(role === 'Player' && playerNameExists(name)){
+    return fail(`A player named "${name}" is already in the system. If that is you, you are already registered. If you are a different person with the same name, add your middle name or initial (e.g. "Juan D. Cruz").`);
   }
-  if(needsPassword && password.length < 6){
-    errEl.textContent = 'Coaches and Officials must set a password (at least 6 characters).';
-    errEl.style.display = 'block';
-    return;
+  if(needsPassword && password.length < 6) return fail('Coaches and Officials must set a password (at least 6 characters).');
+  const emailLc = email.toLowerCase();
+  if(registrations.some(r=>r.role === role && String(r.email||'').toLowerCase() === emailLc && r.status !== 'Rejected')){
+    return fail(`A ${role} registration with this email already exists.`);
+  }
+
+  let team = '', sport = '—', extra = {};
+  if(role === 'Coach'){
+    team = val('reg-team');
+    sport = document.getElementById('reg-sport').value;
+  } else if(role === 'Player'){
+    const ci = document.getElementById('reg-coach').value;
+    const coach = ci !== '' ? regCoachChoices[Number(ci)] : null;
+    if(!coach) return fail('Please select your coach.');
+    if(!phone) return fail('Please enter your phone number.');
+    const dob = val('reg-dob'), gender = val('reg-gender'), address = val('reg-address');
+    const school = val('reg-school'), studentId = val('reg-student-id'), course = val('reg-course'), yearLevel = val('reg-year');
+    const emName = val('reg-em-name'), emRel = val('reg-em-rel'), emPhone = val('reg-em-phone');
+    if(!dob) return fail('Please enter your date of birth.');
+    const age = ageFromDob(dob);
+    if(age === null || age < 16 || age > 60) return fail('Please check your date of birth.');
+    if(!gender) return fail('Please select your sex.');
+    if(address.length < 10) return fail('Please enter your complete home address.');
+    if(!school || !studentId || !course || !yearLevel) return fail('Please complete your school information (school, ID number, course and year level).');
+    if(!emName || !emRel || !emPhone) return fail('Please complete your emergency contact.');
+    if(!isValidPhone11(emPhone)) return fail('Emergency contact number must be 11 digits and start with 09 (numbers only), e.g. 09171234567.');
+    if(!pendingRegPhoto) return fail('Please upload a clear photo of yourself.');
+    if(!pendingIdFront) return fail('Please upload the front of your school ID.');
+    if(!document.getElementById('reg-consent-truth').checked || !document.getElementById('reg-consent-privacy').checked){
+      return fail('Please tick both confirmation boxes to continue.');
+    }
+    if(registrations.some(r=>r.role === 'Player' && r.status !== 'Rejected' && r.studentId
+        && String(r.studentId).toLowerCase() === studentId.toLowerCase()
+        && String(r.school||'').toLowerCase() === school.toLowerCase())){
+      return fail('This school ID number is already registered.');
+    }
+    team = coach.team;
+    sport = coach.sport;
+    extra = {
+      coachEmail: coach.email, coachName: coach.name,
+      dob, age, gender, address, school, studentId, course, yearLevel,
+      position: val('reg-position'), jersey: val('reg-jersey'),
+      emergencyName: emName, emergencyRel: emRel, emergencyPhone: emPhone,
+      medical: val('reg-medical'),
+      idFront: pendingIdFront, idBack: pendingIdBack || '',
+      consent: true, consentAt: new Date().toISOString()
+    };
   }
   errEl.style.display = 'none';
 
   regIdCounter += 1;
-  const newReg = {
+  const newReg = Object.assign({
     id: regIdCounter,
     role, name, email, phone,
     team: team || '—',
     sport,
     status: 'Pending',
     date: new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}),
-    photo: pendingRegPhoto
-  };
+    photo: pendingRegPhoto || null
+  }, extra);
   if(needsPassword) newReg.password = password;
   registrations.push(newReg);
 
-  // Notify the admin that someone new has submitted their information via "Register Your Information".
-  announcements.unshift({
-    id: fsIdCounter++,
-    t: `🆕 New ${role} Registration: ${name}`,
-    d: `${name} submitted their information (${email}${phone ? ' · '+phone : ''}) and is awaiting your review in Registrations.`,
-    forAdmin: true
-  });
-  logAudit('New Registration Submitted', `${name} registered as ${role} — awaiting admin review.`, name);
+  // Notify whoever is responsible for reviewing this kind of registration.
+  if(role === 'Player'){
+    announcements.unshift({
+      id: fsIdCounter++,
+      t: `🆕 New Player Registration: ${name}`,
+      d: `${name} (${extra.school}) registered under your team and is waiting for your review in My Team → Player Registrations.`,
+      forCoach: extra.coachName
+    });
+    logAudit('New Registration Submitted', `${name} registered as Player under Coach ${extra.coachName} — awaiting coach review.`, name);
+  } else if(role === 'Coach'){
+    announcements.unshift({
+      id: fsIdCounter++,
+      t: `🆕 New Coach Registration: ${name}`,
+      d: `${name} submitted their information and is awaiting an Official's review in Registrations.`,
+      forOfficial: true
+    });
+    logAudit('New Registration Submitted', `${name} registered as Coach — awaiting official review.`, name);
+  } else {
+    announcements.unshift({
+      id: fsIdCounter++,
+      t: `🆕 New ${role} Registration: ${name}`,
+      d: `${name} submitted their information (${email}${phone ? ' · '+phone : ''}) and is awaiting your review in Registrations.`,
+      forAdmin: true
+    });
+    logAudit('New Registration Submitted', `${name} registered as ${role} — awaiting admin review.`, name);
+  }
 
   renderRegistrationsAdmin();
   renderDirectory();
   buildDashboard();
 
-  // Reset the form and send them back to the public live view.
-  // Player/Spectator registrations are info-only. Coach/Official accounts are
-  // created automatically (using the password they just set) once an admin approves them.
-  document.getElementById('reg-name').value = '';
-  document.getElementById('reg-email').value = '';
-  document.getElementById('reg-phone').value = '';
-  document.getElementById('reg-team').value = '';
-  document.getElementById('reg-password').value = '';
-  document.getElementById('reg-password-wrap').style.display = 'none';
+  // Reset the whole form and send them back to the public live view.
+  document.querySelectorAll('#gate-register input:not([type="file"]):not([type="checkbox"]), #gate-register textarea').forEach(e=>{ e.value = ''; });
+  document.querySelectorAll('#gate-register input[type="checkbox"]').forEach(c=>{ c.checked = false; });
+  document.querySelectorAll('#gate-register select').forEach(s=>{ s.selectedIndex = 0; });
+  resetRegImages();
   document.querySelectorAll('.role-opt').forEach(r=>r.classList.remove('selected'));
   document.querySelector('.role-opt[data-role="Player"]').classList.add('selected');
-  document.getElementById('reg-team-sport-row').style.display = 'grid';
-  resetPhotoUpload();
+  applyRoleUI('Player');
+  checkRegName();
 
   showGate('gate-welcome');
-  const msg = needsPassword
-    ? `Thanks, ${name} — your ${role} registration was submitted. You can log in with the password you set once the admin approves it.`
-    : `Thanks, ${name} — your registration was submitted for admin review.`;
+  const msg = role === 'Player'
+    ? `Thanks, ${name} — your registration was sent to Coach ${extra.coachName} for review.`
+    : role === 'Coach'
+      ? `Thanks, ${name} — your Coach registration was submitted. You can log in with the password you set once an Official approves it.`
+      : `Thanks, ${name} — your Official registration was submitted. You can log in with the password you set once the admin approves it.`;
   showToast(msg);
 }
 function adminLogin(){
   const email = document.getElementById('admin-email').value.trim();
   const pass = document.getElementById('admin-pass').value.trim();
   if(email==='admin@gmail.com' && pass==='admin123'){
+    logAudit('Login', 'Administrator signed in.', 'Administrator'); schedulePersist();
     enterApp('admin','Administrator');
   } else {
     document.getElementById('admin-error').style.display='block';
@@ -2256,12 +2700,13 @@ function coachLogin(){
   const acct = coachAccounts.find(c=>c.email.toLowerCase()===email && c.password===pass);
   if(acct){
     currentCoachEmail = acct.email;
+    logAudit('Login', `Coach ${acct.name} signed in.`, acct.name); schedulePersist();
     enterApp('coach', acct.name);
   } else {
     const pendingCoach = registrations.find(r=>r.role==='Coach' && r.email.toLowerCase()===email && r.status==='Pending');
     const errEl = document.getElementById('coach-error');
     errEl.textContent = pendingCoach
-      ? 'Your coach registration is still awaiting admin approval. Check back once it\'s approved.'
+      ? 'Your coach registration is still awaiting an Official\'s approval. Check back once it\'s approved.'
       : 'Invalid email or password. Try again, or register first if you\'re a new coach.';
     errEl.style.display='block';
   }
@@ -2272,6 +2717,7 @@ function officialLogin(){
   const acct = officialAccounts.find(o=>o.email.toLowerCase()===email && o.password===pass);
   if(acct){
     currentOfficialEmail = acct.email;
+    logAudit('Login', `Official ${acct.name} signed in.`, acct.name); schedulePersist();
     enterApp('official', acct.name);
   } else {
     const pendingOfficial = registrations.find(r=>r.role==='Official' && r.email.toLowerCase()===email && r.status==='Pending');
@@ -2313,10 +2759,10 @@ function enterApp(role, name){
   document.getElementById('schedule-generator-card').style.display = (isAdmin||isOfficial) ? 'block' : 'none';
   const regRoleFilterEl = document.getElementById('reg-role-filter');
   if(regRoleFilterEl){
-    regRoleFilterEl.querySelectorAll('option[value="Official"], option[value="Spectator"]').forEach(o=>{
-      o.style.display = isOfficial ? 'none' : '';
+    regRoleFilterEl.querySelectorAll('option[value="Player"], option[value="Official"], option[value="Spectator"]').forEach(o=>{
+      o.hidden = isOfficial; o.disabled = isOfficial;
     });
-    if(isOfficial && (regRoleFilterEl.value==='Official' || regRoleFilterEl.value==='Spectator')) regRoleFilterEl.value='all';
+    if(isOfficial && regRoleFilterEl.value!=='Coach' && regRoleFilterEl.value!=='all') regRoleFilterEl.value='all';
   }
   regRoleFilter = regRoleFilterEl ? regRoleFilterEl.value : 'all';
   buildAll();
@@ -2365,6 +2811,7 @@ function nav(screen){
   document.getElementById('topbar-title').textContent = titles[screen][0];
   document.getElementById('topbar-sub').textContent = titles[screen][1];
   if(screen==='teams') renderTeamsAdmin();
+  if(screen==='reports') buildReportsPage();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -2545,7 +2992,7 @@ function closeTeamRosterModal(){
   if(el) el.classList.remove('open');
 }
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ closeTeamRosterModal(); closeMatchQr(); }
+  if(e.key === 'Escape'){ closeTeamRosterModal(); closeMatchQr(); closePlayerDetails(); repCloseMatchAction(); }
 });
 
 /* ---- Teams (Admin-only): every team across every tournament, filterable, approve/delete from one place ---- */
@@ -2620,6 +3067,7 @@ function buildAll(){
   renderRegistrationsAdmin();
   renderSentNotifications();
   renderAuditLog();
+  renderReportsIfOpen();
   buildMyTeam();
   populateBracketTournamentSelect();
   populateScheduleTournamentSelect();
@@ -2663,90 +3111,183 @@ function buildLandingLive(){
 function renderDirectory(){
   const el = document.getElementById('directory-list');
   if(!el) return;
-  el.innerHTML = registrations.map(r=>`
+  // Only accepted people are listed publicly. Players' contact details are never shown here.
+  const visible = registrations.filter(r=>r.status === 'Approved');
+  el.innerHTML = visible.map(r=>`
     <div class="reg-row">
       <div class="reg-meta">
-        <div class="avatar" style="width:40px;height:40px;font-size:14px;">${r.photo ? `<img src="${r.photo}" alt="${r.name}">` : initials(r.name)}</div>
+        <div class="avatar" style="width:40px;height:40px;font-size:14px;">${avatarHtml(r)}</div>
         <div class="reg-info">
-          <div class="name">${r.name}</div>
-          <div class="sub">${r.team!=='—' ? r.team+' · ' : ''}${r.sport}</div>
+          <div class="name">${escH(r.name)}</div>
+          <div class="sub">${r.team && r.team!=='—' ? escH(r.team)+' · ' : ''}${escH(r.sport)}</div>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:14px;">
-        ${publicInfoVisible
-          ? `<div class="reg-contact">${r.email}<br>${r.phone||''}</div>`
-          : `<div class="reg-contact hidden-info">Contact hidden by admin</div>`}
-        <span class="role-tag">${r.role}</span>
+        ${r.role === 'Player'
+          ? `<div class="reg-contact hidden-info">Player details are private</div>`
+          : publicInfoVisible
+            ? `<div class="reg-contact">${escH(r.email)}<br>${escH(r.phone||'')}</div>`
+            : `<div class="reg-contact hidden-info">Contact hidden by admin</div>`}
+        <span class="role-tag">${escH(r.role)}</span>
       </div>
-    </div>`).join('') || `<p class="topbar-sub" style="text-transform:none;">No one has registered yet.</p>`;
+    </div>`).join('') || `<p class="topbar-sub" style="text-transform:none;">No one has been accepted yet.</p>`;
 }
 
-/* ---- Registrations (admin-only): manage, view personal info, approve, delete ---- */
+/* ---- small helpers for safely rendering user-submitted text/images ---- */
+function escH(v){ return escapeHtml(v == null ? '' : String(v)); }
+function safeImg(src){
+  return (typeof src === 'string' && src.startsWith('data:image/') && !/["'<>\s]/.test(src)) ? src : '';
+}
+function avatarHtml(r){
+  const img = safeImg(r && r.photo);
+  return img ? `<img src="${img}" alt="">` : escH(initials(r ? r.name : ''));
+}
+function hasPlayerDetails(r){ return !!(r && (r.dob || r.school || r.idFront)); }
+function myCoachEmailLc(){ return String(currentCoachEmail || '').toLowerCase(); }
+
+/* ================= WHO CAN ACCEPT WHOM =================
+   Player   → only the coach the player registered under
+   Coach    → only an Official
+   Official → only the Administrator (Spectator registrations too)
+   The Administrator can view accepted players' full details, but cannot accept players or coaches. */
+function canReviewRegistration(r){
+  if(!r) return false;
+  if(r.role === 'Player') return currentRole === 'coach' && !!r.coachEmail && String(r.coachEmail).toLowerCase() === myCoachEmailLc();
+  if(r.role === 'Coach') return currentRole === 'official';
+  return currentRole === 'admin';
+}
+function canDeleteRegistration(r){
+  if(!r) return false;
+  if(currentRole === 'admin') return true;
+  if(currentRole === 'official') return r.role === 'Player' || r.role === 'Coach';
+  return false;
+}
+/* Admin: only players already accepted by a coach. Coach: only their own players. */
+function canViewPlayerDetails(r){
+  if(!r || r.role !== 'Player') return false;
+  if(currentRole === 'admin') return r.status === 'Approved';
+  if(currentRole === 'coach') return !!r.coachEmail && String(r.coachEmail).toLowerCase() === myCoachEmailLc();
+  return false;
+}
+function registrationsInScope(){
+  if(currentRole === 'official') return registrations.filter(r=>r.role === 'Coach');
+  if(currentRole === 'admin') return registrations.filter(r=>r.role !== 'Player' || r.status === 'Approved' || !r.coachEmail);
+  return [];
+}
+
+/* ---- Registrations screen (admin + official) ---- */
 let regRoleFilter = 'all';
 function filterRegRole(sel){
   regRoleFilter = sel.value;
   renderRegistrationsAdmin();
 }
-/* ---- Nav badges: show a red count bubble on the Registrations nav item while there are Pending registrations ---- */
+/* ---- Nav badges: red count bubble while there is something waiting for THIS role to review ---- */
 function updateRegistrationBadges(){
-  const pendingAll = registrations.filter(r=>r.status==='Pending');
-  const pendingOfficialScope = pendingAll.filter(r=>r.role==='Player'||r.role==='Coach');
-  const adminBadge = document.getElementById('admin-registrations-badge');
-  const officialBadge = document.getElementById('official-registrations-badge');
-  if(adminBadge){
-    adminBadge.textContent = pendingAll.length > 99 ? '99+' : pendingAll.length;
-    adminBadge.style.display = pendingAll.length > 0 ? 'inline-block' : 'none';
-  }
-  if(officialBadge){
-    officialBadge.textContent = pendingOfficialScope.length > 99 ? '99+' : pendingOfficialScope.length;
-    officialBadge.style.display = pendingOfficialScope.length > 0 ? 'inline-block' : 'none';
-  }
+  const pending = registrations.filter(r=>r.status === 'Pending');
+  const setBadge = (id, n)=>{
+    const b = document.getElementById(id);
+    if(!b) return;
+    b.textContent = n > 99 ? '99+' : n;
+    b.style.display = n > 0 ? 'inline-block' : 'none';
+  };
+  setBadge('admin-registrations-badge', pending.filter(r=>r.role === 'Official' || r.role === 'Spectator').length);
+  setBadge('official-registrations-badge', pending.filter(r=>r.role === 'Coach').length);
+  setBadge('coach-myteam-badge', currentRole === 'coach' ? pending.filter(r=>canReviewRegistration(r)).length : 0);
 }
 function renderRegistrationsAdmin(){
   const el = document.getElementById('registrations-list');
   const countEl = document.getElementById('reg-count');
   updateRegistrationBadges();
   if(!el) return;
-  // Officials assist the admin here too, but only for Player and Coach registrations — not fellow Officials or Spectators.
-  const scoped = currentRole==='official' ? registrations.filter(r=>r.role==='Player'||r.role==='Coach') : registrations;
-  const list = regRoleFilter==='all' ? scoped : scoped.filter(r=>r.role===regRoleFilter);
+  const help = document.getElementById('reg-help-text');
+  if(help){
+    help.innerHTML = currentRole === 'official'
+      ? `As an <b style="color:var(--text);">Official</b> you accept or reject <b style="color:var(--text);">Coach</b> registrations. Approving one creates the coach's dashboard login using the password they set.`
+      : `As <b style="color:var(--text);">Administrator</b> you accept or reject <b style="color:var(--text);">Official</b> registrations. <b style="color:var(--text);">Players</b> are accepted by their own coach — once accepted they appear here with their full details and ID. <b style="color:var(--text);">Coaches</b> are accepted by an Official.`;
+  }
+  const scoped = registrationsInScope();
+  const list = regRoleFilter === 'all' ? scoped : scoped.filter(r=>r.role === regRoleFilter);
   if(countEl) countEl.textContent = `${list.length} of ${scoped.length} total`;
-  el.innerHTML = list.map(r=>`
+  el.innerHTML = list.map(r=>{
+    const canReview = r.status === 'Pending' && canReviewRegistration(r);
+    const isPlayer = r.role === 'Player';
+    const sub = isPlayer
+      ? `${escH(r.school || '—')}${r.course ? ' · '+escH(r.course) : ''} · ${escH(r.sport)} · Coach ${escH(r.coachName || '—')}`
+      : `${r.team && r.team!=='—' ? escH(r.team)+' · ' : ''}${escH(r.sport)}`;
+    let waiting = '';
+    if(r.status === 'Pending' && !canReview){
+      waiting = r.role === 'Coach' ? 'Awaiting an Official'
+        : isPlayer ? (r.coachEmail ? 'Awaiting coach' : 'No coach selected (old entry)')
+        : 'Awaiting admin';
+    }
+    return `
     <div class="reg-row">
       <div class="reg-meta">
-        <div class="avatar" style="width:40px;height:40px;font-size:14px;">${r.photo ? `<img src="${r.photo}" alt="${r.name}">` : initials(r.name)}</div>
+        <div class="avatar" style="width:40px;height:40px;font-size:14px;">${avatarHtml(r)}</div>
         <div class="reg-info">
-          <div class="name">${r.name} <span class="role-tag" style="margin-left:6px;">${r.role}</span></div>
-          <div class="sub">${r.team!=='—' ? r.team+' · ' : ''}${r.sport} · Registered ${r.date}</div>
+          <div class="name">${escH(r.name)} <span class="role-tag" style="margin-left:6px;">${escH(r.role)}</span></div>
+          <div class="sub">${sub} · Registered ${escH(r.date)}</div>
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-        <div class="reg-contact">${r.email}<br>${r.phone||''}</div>
-        <span class="pill ${r.status==='Approved'?'pill-upcoming':r.status==='Rejected'?'pill-done':'pill-live'}">${r.status}</span>
-        ${r.status==='Pending' ? `
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+        <div class="reg-contact">${escH(r.email)}<br>${escH(r.phone||'')}</div>
+        <span class="pill ${r.status==='Approved'?'pill-upcoming':r.status==='Rejected'?'pill-done':'pill-live'}">${escH(r.status)}</span>
+        ${waiting ? `<span class="topbar-sub" style="text-transform:none;margin:0;font-size:11.5px;">${waiting}</span>` : ''}
+        ${canViewPlayerDetails(r) && hasPlayerDetails(r) ? `<button class="btn btn-outline-mint btn-sm" onclick="openPlayerDetails(${r.id})">View Details</button>` : ''}
+        ${canReview ? `
           <button class="btn btn-outline-mint btn-sm" onclick="approveRegistration(${r.id})">Approve</button>
           <button class="btn btn-ghost btn-sm" onclick="rejectRegistration(${r.id})">Reject</button>
         ` : ''}
-        <button class="btn btn-danger btn-sm" onclick="deleteRegistration(${r.id})">Delete</button>
+        ${canDeleteRegistration(r) ? `<button class="btn btn-danger btn-sm" onclick="deleteRegistration(${r.id})">Delete</button>` : ''}
       </div>
-    </div>`).join('') || `<p class="topbar-sub" style="text-transform:none;">No registrations match this filter.</p>`;
+    </div>`;
+  }).join('') || `<p class="topbar-sub" style="text-transform:none;">No registrations match this filter.</p>`;
+}
+function reviewDeniedMessage(reg){
+  return reg.role === 'Player' ? "Only this player's own coach can accept or reject their registration."
+    : reg.role === 'Coach' ? 'Only an Official can accept or reject a Coach registration.'
+    : 'Only the Administrator can accept or reject this registration.';
 }
 function approveRegistration(id){
-  const reg = registrations.find(r=>r.id===id);
+  const reg = registrations.find(r=>r.id === id);
   if(!reg) return;
-  reg.status = 'Approved';
+  if(!canReviewRegistration(reg)){ showToast(reviewDeniedMessage(reg)); return; }
+  if(reg.status !== 'Pending'){ showToast('This registration was already reviewed.'); return; }
+  const today = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 
+  if(reg.role === 'Player'){
+    const team = getMyTeam();
+    if(!team){ showToast('Create your team first before accepting players.'); return; }
+    if(reg.sport && team.sport && reg.sport !== team.sport){ showToast(`${reg.name} registered for ${reg.sport}, not ${team.sport}.`); return; }
+    if(rosteredPlayerNames().has(reg.name)){ showToast(`A player named ${reg.name} is already on a roster.`); return; }
+    reg.status = 'Approved';
+    reg.team = team.name;
+    reg.reviewedBy = team.coach;
+    reg.reviewedAt = today;
+    team.players.push(reg.name);
+    logAudit('Player Accepted by Coach', `${reg.name} accepted into ${team.name} by Coach ${team.coach}.`, team.coach);
+    buildMyTeam();
+    renderRegistrationsAdmin();
+    renderDirectory();
+    renderPlayers();
+    showToast(`${reg.name} accepted and added to ${team.name}.`);
+    return;
+  }
+
+  reg.status = 'Approved';
+  reg.reviewedBy = actorLabel();
+  reg.reviewedAt = today;
   if(reg.role === 'Coach'){
-    const existing = coachAccounts.find(c=>c.email.toLowerCase()===reg.email.toLowerCase());
+    const existing = coachAccounts.find(c=>c.email.toLowerCase() === reg.email.toLowerCase());
     if(existing){
       showToast(`${reg.name} already has a coach account.`);
     } else {
       coachAccounts.push({email:reg.email, password:reg.password, name:reg.name, team: ''});
-      logAudit('Coach Account Approved', `${reg.name} approved as coach — dashboard login created with their chosen password.`, actorLabel());
+      logAudit('Coach Account Approved', `${reg.name} approved as coach by an Official — dashboard login created with their chosen password.`, actorLabel());
       showToast(`Coach account created for ${reg.name}. They can now log in with the password they set.`);
     }
   } else if(reg.role === 'Official'){
-    const existing = officialAccounts.find(o=>o.email.toLowerCase()===reg.email.toLowerCase());
+    const existing = officialAccounts.find(o=>o.email.toLowerCase() === reg.email.toLowerCase());
     if(existing){
       showToast(`${reg.name} already has an official account.`);
     } else {
@@ -2762,37 +3303,146 @@ function approveRegistration(id){
   renderDirectory();
 }
 function rejectRegistration(id){
-  const reg = registrations.find(r=>r.id===id);
+  const reg = registrations.find(r=>r.id === id);
   if(!reg) return;
+  if(!canReviewRegistration(reg)){ showToast(reviewDeniedMessage(reg)); return; }
+  if(reg.status !== 'Pending'){ showToast('This registration was already reviewed.'); return; }
   reg.status = 'Rejected';
-  logAudit('Registration Rejected', `${reg.name} (${reg.role}) registration rejected.`, actorLabel());
+  reg.reviewedBy = currentRole === 'coach' ? 'Coach' : actorLabel();
+  const who = currentRole === 'coach' ? (getMyTeam() ? getMyTeam().coach : 'Coach') : actorLabel();
+  logAudit('Registration Rejected', `${reg.name} (${reg.role}) registration rejected by ${who}.`, who);
   renderRegistrationsAdmin();
   renderDirectory();
+  if(currentRole === 'coach') buildMyTeam();
   showToast(`Rejected ${reg.name}'s registration.`);
 }
 function deleteRegistration(id){
-  const reg = registrations.find(r=>r.id===id);
+  const reg = registrations.find(r=>r.id === id);
   if(!reg) return;
+  if(!canDeleteRegistration(reg)){ showToast("You don't have permission to delete this registration."); return; }
   if(!confirm(`Delete ${reg.name}'s registration? This can't be undone.`)) return;
-  const idx = registrations.findIndex(r=>r.id===id);
+  const idx = registrations.findIndex(r=>r.id === id);
   registrations.splice(idx,1);
   deleteFromFirestore('registrations', id);
 
   // If this person also has a login account (Coach/Official), revoke it too so they can no longer sign in.
   let accountRevoked = false;
   if(reg.role === 'Coach'){
-    const ai = coachAccounts.findIndex(c=>c.email.toLowerCase()===reg.email.toLowerCase());
+    const ai = coachAccounts.findIndex(c=>c.email.toLowerCase() === reg.email.toLowerCase());
     if(ai !== -1){ const removedEmail = coachAccounts[ai].email; coachAccounts.splice(ai,1); deleteFromFirestore('coachAccounts', removedEmail); accountRevoked = true; }
   } else if(reg.role === 'Official'){
-    const ai = officialAccounts.findIndex(o=>o.email.toLowerCase()===reg.email.toLowerCase());
+    const ai = officialAccounts.findIndex(o=>o.email.toLowerCase() === reg.email.toLowerCase());
     if(ai !== -1){ const removedEmail = officialAccounts[ai].email; officialAccounts.splice(ai,1); deleteFromFirestore('officialAccounts', removedEmail); accountRevoked = true; }
   }
 
   logAudit('Registration Deleted', `${reg.name} (${reg.role}) registration deleted.${accountRevoked ? ' Their login account was also revoked.' : ''}`, actorLabel());
+  closePlayerDetails();
   renderRegistrationsAdmin();
   renderDirectory();
   renderPlayers();
   showToast(accountRevoked ? `Deleted ${reg.name} and revoked their account access` : `Deleted registration for ${reg.name}`);
+}
+
+/* ================= COACH: player registrations waiting for this coach ================= */
+function rosterRegFor(name){
+  return registrations.find(r=>r.role === 'Player' && r.name === name && r.status === 'Approved'
+    && r.coachEmail && String(r.coachEmail).toLowerCase() === myCoachEmailLc());
+}
+function renderCoachPlayerRequests(){
+  const listEl = document.getElementById('myteam-pending-list');
+  const countEl = document.getElementById('myteam-pending-count');
+  updateRegistrationBadges();
+  if(!listEl) return;
+  const pending = registrations.filter(r=>r.role === 'Player' && r.status === 'Pending' && canReviewRegistration(r));
+  if(countEl) countEl.textContent = pending.length ? `${pending.length} awaiting your review` : 'Nothing waiting';
+  listEl.innerHTML = pending.map(r=>{
+    const age = r.dob ? ageFromDob(r.dob) : null;
+    return `
+    <div class="reg-row">
+      <div class="reg-meta">
+        <div class="avatar" style="width:40px;height:40px;font-size:14px;">${avatarHtml(r)}</div>
+        <div class="reg-info">
+          <div class="name">${escH(r.name)}</div>
+          <div class="sub">${escH(r.school || '—')}${r.yearLevel ? ' · '+escH(r.yearLevel) : ''}${age !== null ? ' · '+age+' yrs' : ''} · Registered ${escH(r.date)}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+        ${hasPlayerDetails(r) ? `<button class="btn btn-outline-mint btn-sm" onclick="openPlayerDetails(${r.id})">View Details &amp; ID</button>` : ''}
+        <button class="btn btn-primary btn-sm" onclick="approveRegistration(${r.id})">Accept</button>
+        <button class="btn btn-ghost btn-sm" onclick="rejectRegistration(${r.id})">Reject</button>
+      </div>
+    </div>`;
+  }).join('') || `<p class="topbar-sub" style="text-transform:none;">No pending player registrations. Players who pick you as their coach will show up here.</p>`;
+}
+
+/* ================= PLAYER DETAILS MODAL (admin: accepted players · coach: own players) ================= */
+function detailItem(label, value){
+  return `<div><div class="team-roster-label">${escH(label)}</div><div style="font-size:13.5px;word-break:break-word;">${escH(value || '—')}</div></div>`;
+}
+function openPlayerDetails(id){
+  const r = registrations.find(x=>x.id === id);
+  const body = document.getElementById('player-detail-body');
+  if(!r || !body) return;
+  if(!canViewPlayerDetails(r) || !hasPlayerDetails(r)){ showToast("You don't have access to this player's details."); return; }
+  const age = r.dob ? ageFromDob(r.dob) : null;
+  const dobText = r.dob ? `${fmtDisplayDate(r.dob)}${age !== null ? ' ('+age+' yrs old)' : ''}` : '';
+  const idBlock = (src, label)=> safeImg(src)
+    ? `<div><div class="team-roster-label">${label}</div><img class="id-img" src="${safeImg(src)}" alt="${label}" onclick="this.classList.toggle('zoomed')"></div>`
+    : `<div><div class="team-roster-label">${label}</div><div class="topbar-sub" style="text-transform:none;margin:4px 0 0;">Not provided</div></div>`;
+  const photo = safeImg(r.photo);
+  body.innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;padding-right:34px;">
+      <div class="avatar" style="width:56px;height:56px;font-size:18px;flex-shrink:0;">${photo ? `<img src="${photo}" alt="">` : escH(initials(r.name))}</div>
+      <div style="min-width:0;">
+        <h2 style="font-size:19px;line-height:1.2;">${escH(r.name)}</h2>
+        <div class="topbar-sub" style="text-transform:none;margin-top:3px;">${escH(r.sport)}${r.team && r.team!=='—' ? ' · '+escH(r.team) : ''}</div>
+      </div>
+      <span class="pill ${r.status==='Approved'?'pill-upcoming':r.status==='Rejected'?'pill-done':'pill-live'}" style="margin-left:auto;flex-shrink:0;">${escH(r.status)}</span>
+    </div>
+
+    <div class="reg-section-title">Contact</div>
+    <div class="detail-grid">${detailItem('Email', r.email)}${detailItem('Phone', r.phone)}</div>
+
+    <div class="reg-section-title">Personal Information</div>
+    <div class="detail-grid">
+      ${detailItem('Date of Birth', dobText)}${detailItem('Sex', r.gender)}
+      <div style="grid-column:1/-1;">${detailItem('Home Address', r.address)}</div>
+    </div>
+
+    <div class="reg-section-title">School Information</div>
+    <div class="detail-grid">
+      ${detailItem('School / Institution', r.school)}${detailItem('School ID Number', r.studentId)}
+      ${detailItem('Course / Program', r.course)}${detailItem('Year Level', r.yearLevel)}
+    </div>
+
+    <div class="reg-section-title">Identity Verification</div>
+    <div class="id-drop-row" style="margin-bottom:0;">${idBlock(r.idFront,'School ID — Front')}${idBlock(r.idBack,'School ID — Back')}</div>
+    <p class="reg-hint">Tap an image to enlarge it.</p>
+
+    <div class="reg-section-title">Sports Details</div>
+    <div class="detail-grid">
+      ${detailItem('Coach', r.coachName)}${detailItem('Position', r.position)}
+      ${detailItem('Preferred Jersey No.', r.jersey)}${detailItem('Registered', r.date)}
+    </div>
+
+    <div class="reg-section-title">Emergency Contact &amp; Health</div>
+    <div class="detail-grid">
+      ${detailItem('Contact Person', r.emergencyName)}${detailItem('Relationship', r.emergencyRel)}
+      ${detailItem('Contact Number', r.emergencyPhone)}
+      <div style="grid-column:1/-1;">${detailItem('Medical conditions / allergies', r.medical)}</div>
+    </div>
+
+    <div class="reg-section-title">Review</div>
+    <div class="detail-grid">
+      ${detailItem('Accepted / reviewed by', r.reviewedBy ? ('Coach ' + r.reviewedBy) : '')}${detailItem('Reviewed on', r.reviewedAt)}
+      ${detailItem('Consent confirmed', r.consentAt ? new Date(r.consentAt).toLocaleString() : '')}
+    </div>
+  `;
+  document.getElementById('player-detail-overlay').classList.add('open');
+}
+function closePlayerDetails(){
+  const el = document.getElementById('player-detail-overlay');
+  if(el) el.classList.remove('open');
 }
 
 /* ---- Delete a registered player straight from Search Players (admin/official only) ---- */
@@ -2948,21 +3598,31 @@ function buildMyTeam(){
   `;
   // Show general announcements + anything specifically addressed to this coach or to coaches in general,
   // filtering out admin-only notices so the coach doesn't see internal approval-queue alerts.
-  const myAnnouncements = announcements.filter(a => !a.forAdmin && (!a.forCoach || a.forCoach === team.coach)).slice(0,4);
+  const myAnnouncements = announcements.filter(a => !a.forAdmin && !a.forOfficial && (!a.forCoach || a.forCoach === team.coach)).slice(0,4);
   announceEl.innerHTML = myAnnouncements.map(a=>`
     <div class="announce"><div class="announce-dot"></div><div><b>${a.t}</b><p>${a.d}</p></div></div>`).join('') || `<p class="topbar-sub" style="text-transform:none;">No announcements yet.</p>`;
 
   rosterCountEl.textContent = `${team.players.length} player(s)`;
-  rosterListEl.innerHTML = team.players.map((p,i)=>`
+  rosterListEl.innerHTML = team.players.map((p,i)=>{
+    const pr = rosterRegFor(p);
+    return `
     <div class="reg-row">
       <div class="reg-meta">
-        <div class="avatar" style="width:36px;height:36px;font-size:13px;">${initials(p)}</div>
-        <div class="reg-info"><div class="name">${p}</div></div>
+        <div class="avatar" style="width:36px;height:36px;font-size:13px;">${pr ? avatarHtml(pr) : escH(initials(p))}</div>
+        <div class="reg-info">
+          <div class="name">${escH(p)}</div>
+          ${pr && pr.school ? `<div class="sub">${escH(pr.school)}${pr.yearLevel ? ' · '+escH(pr.yearLevel) : ''}</div>` : ''}
+        </div>
       </div>
-      <button class="btn btn-danger btn-sm" onclick="removePlayerFromMyTeam(${i})">Remove</button>
-    </div>`).join('') || `<p class="topbar-sub" style="text-transform:none;">No players on the roster yet.</p>`;
+      <div style="display:flex;gap:8px;">
+        ${pr && hasPlayerDetails(pr) ? `<button class="btn btn-outline-mint btn-sm" onclick="openPlayerDetails(${pr.id})">Details</button>` : ''}
+        <button class="btn btn-danger btn-sm" onclick="removePlayerFromMyTeam(${i})">Remove</button>
+      </div>
+    </div>`;
+  }).join('') || `<p class="topbar-sub" style="text-transform:none;">No players on the roster yet.</p>`;
+  renderCoachPlayerRequests();
 
-  const upcoming = schedule.filter(m => (m.a===team.name || m.b===team.name) && m.status!=='done');
+  const upcoming = schedule.filter(m => (m.a===team.name || m.b===team.name) && m.status!=='done' && m.status!=='cancelled');
   upcomingEl.innerHTML = upcoming.map(m=>`
     <div class="card ${m.status==='live'?'live-clickable':''}" ${m.status==='live'?`onclick="openLiveViewer(${m.id})"`:''}>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -3023,7 +3683,8 @@ function availableRegisteredPlayers(team){
   // this is what stops a coach from pulling in a player from a totally
   // different sport into their roster.
   const taken = rosteredPlayerNames();
-  return registeredPlayers().filter(p => !taken.has(p.name) && (!team || p.sport === team.sport));
+  return registeredPlayers().filter(p => !taken.has(p.name) && (!team || p.sport === team.sport)
+    && (!p.coachEmail || String(p.coachEmail).toLowerCase() === myCoachEmailLc()));
 }
 function populateAddPlayerSelect(){
   // Reset the search box + hidden selection whenever the roster panel rebuilds.
@@ -3074,6 +3735,7 @@ function addPlayerToMyTeam(){
   const match = registeredPlayers().find(p => p.name === name);
   if(!match){ showToast("That name isn't a registered, approved player."); populateAddPlayerSelect(); return; }
   if(match.sport !== team.sport){ showToast(`${name} registered for ${match.sport}, not ${team.sport} — can't add to this roster.`); populateAddPlayerSelect(); return; }
+  if(match.coachEmail && String(match.coachEmail).toLowerCase() !== myCoachEmailLc()){ showToast(`${name} registered under a different coach.`); populateAddPlayerSelect(); return; }
   // Guard against a player already on a roster (theirs or another team's) slipping through.
   if(rosteredPlayerNames().has(name)){ showToast('That player is already on a roster.'); populateAddPlayerSelect(); return; }
   team.players.push(name);
@@ -3114,12 +3776,12 @@ function buildDashboard(){
   const statsGrid = document.getElementById('dashboard-stats-grid');
   if(statsGrid) statsGrid.style.display = (currentRole==='coach' || currentRole==='spectator') ? 'none' : '';
 
-  const live = schedule.filter(s=>s.status!=='done').slice(0,3);
+  const live = schedule.filter(s=>s.status!=='done' && s.status!=='cancelled').slice(0,3);
   document.getElementById('today-matches').innerHTML = schedule.slice(0,3).map(m=>`
     <div class="card ${m.status==='live'?'live-clickable':''}" ${m.status==='live'?`onclick="openLiveViewer(${m.id})"`:''}>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
         <span class="mono" style="color:var(--muted);font-size:12px;">${m.time}</span>
-        <span class="pill ${m.status==='live'?'pill-live':m.status==='done'?'pill-done':'pill-upcoming'}">${m.status==='live'?'Live':m.status==='done'?'Accomplish':'Upcoming'}</span>
+        ${matchPillHtml(m)}
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <div class="team-cell"><div class="team-logo" style="background:${colorFor(m.a)}">${initials(m.a)}</div>${m.a}</div>
@@ -3142,7 +3804,7 @@ function buildDashboard(){
 
   // Public dashboard: hide admin-only approval-queue alerts and other coaches' personal notices.
   const isAdminView = currentRole === 'admin';
-  const visibleAnnouncements = announcements.filter(a => isAdminView ? true : (!a.forAdmin && !a.forCoach));
+  const visibleAnnouncements = announcements.filter(a => isAdminView ? true : (!a.forAdmin && !a.forCoach && (!a.forOfficial || currentRole==='official')));
   document.getElementById('announce-list').innerHTML = visibleAnnouncements.slice(0,6).map(a=>`
     <div class="announce"><div class="announce-dot"></div><div><b>${a.t}</b><p>${a.d}</p></div></div>`).join('') || `<p class="topbar-sub" style="text-transform:none;">No announcements yet.</p>`;
 
@@ -3575,6 +4237,8 @@ function buildSchedule(){
           <option value="upcoming" ${m.status==='upcoming'?'selected':''}>Upcoming</option>
           <option value="live" ${m.status==='live'?'selected':''}>Live</option>
           <option value="done" ${m.status==='done'?'selected':''}>Accomplish</option>
+          <option value="postponed" ${m.status==='postponed'?'selected':''}>Postponed</option>
+          <option value="cancelled" ${m.status==='cancelled'?'selected':''}>Cancelled</option>
         </select>
         <div class="sched-actions">
           <button class="btn btn-primary btn-sm" onclick="saveMatch(${m.id})">Save</button>
@@ -3591,7 +4255,7 @@ function buildSchedule(){
         <div class="team-logo" style="background:${colorFor(m.b)}">${initials(m.b)}</div>${m.b}
       </div>
       <div class="sched-venue">${m.venue}</div>
-      <span class="pill ${m.status==='live'?'pill-live':m.status==='done'?'pill-done':'pill-upcoming'}">${m.status==='live'?'Live':m.status==='done'?'Accomplish':'Upcoming'}</span>
+      ${matchPillHtml(m)}
       ${conflict ? `<span class="pill" style="background:rgba(255,77,109,0.14);color:var(--danger);" title="Same time+venue or a team is double-booked">⚠ Conflict</span>` : ''}
       ${canManage ? `
       <div class="sched-actions">
@@ -3697,15 +4361,70 @@ function resortStandings(){
   standings.sort((x,y)=> y.pts - x.pts || y.w - x.w);
   standings.forEach((s,i)=> s.rank = i+1);
 }
+/* ---- Standings groups + tournament filter ----
+   Every row belongs to Group A or Group B. Rows saved before groups existed count as Group A, so
+   nothing disappears. The admin picks a team's group with "Edit" (a drop-down appears in that row). */
+let standingsGroup = 'all';      // 'all' | 'A' | 'B'
+let standingsTournament = '';    // '' = every tournament
+function groupOf(s){ return s.group === 'B' ? 'B' : 'A'; }
+function escAttr(v){
+  return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function setStandingsGroup(g){
+  standingsGroup = g;
+  editingStandingId = null;
+  renderStandings();
+}
+function setStandingsTournament(v){
+  standingsTournament = v;
+  editingStandingId = null;
+  renderStandings();
+}
 function renderStandings(){
   resortStandings();
   const isAdmin = currentRole === 'admin';
-  document.getElementById('standings-body').innerHTML = standings.map(s=>{
+
+  // Tournament filter (only tournaments that currently have teams in the standings)
+  let tObj = standingsTournament ? tournaments.find(t=>t.name === standingsTournament) : null;
+  if(standingsTournament && (!tObj || !seasonRows(tObj).length)){ standingsTournament = ''; tObj = null; }
+  const sel = document.getElementById('standings-tournament-filter');
+  if(sel){
+    const names = tournaments.filter(t=>seasonRows(t).length).map(t=>t.name);
+    const sig = names.join('|');
+    if(sel.dataset.sig !== sig){
+      sel.innerHTML = '<option value="">All tournaments</option>' + names.map(n=>`<option value="${escAttr(n)}">${escH(n)}</option>`).join('');
+      sel.dataset.sig = sig;
+    }
+    sel.value = standingsTournament;
+    sel.style.display = names.length ? '' : 'none';
+  }
+
+  const names = tObj ? seasonTeamNames(tObj) : null;
+  const base = names ? standings.filter(s=>names.has(s.team)) : standings.slice();
+  const counts = {all: base.length, A: base.filter(s=>groupOf(s) === 'A').length, B: base.filter(s=>groupOf(s) === 'B').length};
+  document.querySelectorAll('#standings-tabs .tab-btn').forEach(b=>{
+    const g = b.dataset.group;
+    b.classList.toggle('active', g === standingsGroup);
+    b.textContent = (g === 'all' ? 'All teams' : 'Group ' + g) + ` (${counts[g]})`;
+  });
+
+  const rows = standingsGroup === 'all' ? base : base.filter(s=>groupOf(s) === standingsGroup);
+  const emptyMsg = standingsGroup === 'all'
+    ? 'No teams in the standings yet.'
+    : `No teams in Group ${standingsGroup} yet.${isAdmin ? ' Use Edit on a team and choose Group ' + standingsGroup + ' to move it here.' : ''}`;
+  document.getElementById('standings-body').innerHTML = rows.map((s,i)=>{
+    const rank = i + 1;
     if(isAdmin && editingStandingId === s.id){
       return `
       <tr>
-        <td>${s.rank}</td>
-        <td><input type="text" id="edit-st-team" class="standings-team-input" value="${s.team}"></td>
+        <td>${rank}</td>
+        <td>
+          <input type="text" id="edit-st-team" class="standings-team-input" value="${escAttr(s.team)}">
+          <select id="edit-st-group" style="margin-top:6px;width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:6px 8px;color:var(--text);font-size:12.5px;">
+            <option value="A" ${groupOf(s) === 'A' ? 'selected' : ''}>Group A</option>
+            <option value="B" ${groupOf(s) === 'B' ? 'selected' : ''}>Group B</option>
+          </select>
+        </td>
         <td><input type="number" id="edit-st-w" class="standings-edit-input" value="${s.w}"></td>
         <td><input type="number" id="edit-st-l" class="standings-edit-input" value="${s.l}"></td>
         <td class="mono">${calcWinPct(s.w,s.l)}</td>
@@ -3720,8 +4439,8 @@ function renderStandings(){
     }
     return `
     <tr>
-      <td class="${s.rank===1?'rank-1':''}">${s.rank}</td>
-      <td><div class="team-cell"><div class="team-logo" style="background:${colorFor(s.team)}">${initials(s.team)}</div>${s.team}</div></td>
+      <td class="${rank === 1 ? 'rank-1' : ''}">${rank}</td>
+      <td><div class="team-cell"><div class="team-logo" style="background:${colorFor(s.team)}">${escH(initials(s.team))}</div>${escH(s.team)}${standingsGroup === 'all' ? `<span class="rep-badge rb-mute" style="margin-left:8px;">Group ${groupOf(s)}</span>` : ''}</div></td>
       <td>${s.w}</td><td>${s.l}</td><td>${calcWinPct(s.w,s.l)}</td>
       <td class="mono" style="color:var(--lime);font-weight:700;">${s.pts}</td>
       ${isAdmin ? `<td><div style="display:flex;gap:6px;">
@@ -3729,11 +4448,13 @@ function renderStandings(){
         <button class="btn btn-danger btn-sm" onclick="deleteStanding(${s.id})">Delete</button>
       </div></td>` : ''}
     </tr>`;
-  }).join('') || `<tr><td colspan="7"><p class="topbar-sub" style="text-transform:none;">No teams in the standings yet.</p></td></tr>`;
+  }).join('') || `<tr><td colspan="7"><p class="topbar-sub" style="text-transform:none;">${escH(emptyMsg)}</p></td></tr>`;
+  if(typeof renderStandingsSeason === 'function') renderStandingsSeason();
 }
 function addStandingRow(){
+  standingsTournament = ''; // make sure the new row is visible
   standingIdCounter += 1;
-  standings.push({id: standingIdCounter, rank: standings.length+1, team:'New Team', w:0, l:0, pts:0});
+  standings.push({id: standingIdCounter, rank: standings.length+1, team:'New Team', w:0, l:0, pts:0, group: standingsGroup === 'B' ? 'B' : 'A'});
   editingStandingId = standingIdCounter;
   renderStandings();
   showToast('New row added — fill in the details and Save');
@@ -3757,7 +4478,9 @@ function saveStanding(id){
     showToast('Team name is required.');
     return;
   }
-  Object.assign(s, {team, w, l, pts});
+  const grpEl = document.getElementById('edit-st-group');
+  const group = grpEl ? (grpEl.value === 'B' ? 'B' : 'A') : groupOf(s);
+  Object.assign(s, {team, w, l, pts, group});
   editingStandingId = null;
   logAudit('Standings Updated', `${team}: ${w}W-${l}L, ${pts} pts.`, 'Administrator');
   renderStandings();
@@ -3773,6 +4496,190 @@ function deleteStanding(id){
   logAudit('Standings Row Removed', `${s.team} removed from the standings.`, 'Administrator');
   renderStandings();
   showToast(`Removed ${s.team}`);
+}
+
+/* ====================================================================================
+   SEASON CLOSE-OUT — champion detection + "Reset standings"
+   • Everyone sees the champion and the saved past seasons on the Standings page.
+   • Only the Administrator, or the Official assigned to that tournament, can reset it.
+   • A normal reset needs a decided champion (Finals winner for bracket tournaments, or the
+     team on top once every game of a league/round-robin tournament is finished).
+   • Resetting first SAVES the final standings + champion into the tournament's season history,
+     then sets that tournament's teams back to 0W-0L-0pts and marks the tournament Completed.
+     Game results stay in the Schedule / Reports. Other tournaments are never touched.
+   ==================================================================================== */
+function seasonTeamNames(t){
+  const names = new Set(teams.filter(x=>x.tournament === t.name).map(x=>x.name));
+  schedule.filter(m=>m.tournament === t.name).forEach(m=>{ names.add(m.a); names.add(m.b); });
+  return names;
+}
+function seasonRows(t){
+  const names = seasonTeamNames(t);
+  return standings.filter(s=>names.has(s.team));
+}
+function bracketFinal(t){
+  if(!currentBracket || !currentBracket.length || currentBracketTournament !== t.name) return null;
+  const last = currentBracket[currentBracket.length - 1];
+  return (last && last.round === 'Finals' && last.matches.length === 1) ? last.matches[0] : null;
+}
+function bracketSig(f){ return f ? `${f.a}|${f.b}|${f.sa}|${f.sb}` : ''; }
+/* Returns {team, how} when a champion is decided, {tie:true} when the top spot is tied, otherwise null. */
+function getTournamentChampion(t){
+  const lastSeason = Array.isArray(t.seasons) && t.seasons.length ? t.seasons[0] : null;
+  if(/elim/i.test(t.format || '')){
+    const f = bracketFinal(t);
+    if(!f || !f.winner) return null;
+    if(lastSeason && lastSeason.bracketSig && lastSeason.bracketSig === bracketSig(f)) return null; // that bracket was already closed out
+    return {team: f.winner === 'a' ? f.a : f.b, how: 'Won the Finals', sig: bracketSig(f)};
+  }
+  const games = schedule.filter(m=>m.tournament === t.name && m.status !== 'cancelled');
+  if(!games.length || games.some(m=>m.status !== 'done')) return null;
+  const rows = seasonRows(t).slice().sort((a,b)=>b.pts - a.pts || b.w - a.w || a.l - b.l);
+  if(!rows.length || (!rows[0].w && !rows[0].pts)) return null;
+  if(rows[1] && rows[1].pts === rows[0].pts && rows[1].w === rows[0].w && rows[1].l === rows[0].l) return {tie:true, team:'', how:'Tied at the top'};
+  return {team: rows[0].team, how: 'Top of the standings after every game', sig: ''};
+}
+function canResetStandings(t){
+  if(currentRole === 'admin') return true;
+  return currentRole === 'official' && !!currentOfficialEmail && t.assignedOfficial === currentOfficialEmail;
+}
+function renderStandingsSeason(){
+  const el = document.getElementById('standings-season-card');
+  if(!el) return;
+  const items = tournaments.map(t=>({
+    t, hasData: seasonRows(t).length > 0, champ: getTournamentChampion(t), seasons: Array.isArray(t.seasons) ? t.seasons : []
+  })).filter(x=>x.hasData || x.seasons.length);
+  if(!items.length){ el.style.display = 'none'; el.innerHTML = ''; return; }
+  el.style.display = 'block';
+  el.innerHTML = `<div class="section-head" style="margin-top:0;"><h2>🏆 Champions &amp; Seasons</h2></div>` + items.map(x=>{
+    const t = x.t, canAct = canResetStandings(t);
+    let state = '';
+    if(x.hasData && x.champ && x.champ.team){
+      state = `<span style="font-weight:700;">🏆 Champion: ${escH(x.champ.team)}</span>` +
+        (canAct ? `<button class="btn btn-primary btn-sm" onclick="resetTournamentStandings(${t.id})">Reset standings for a new season</button>` : '');
+    } else if(x.hasData && x.champ && x.champ.tie){
+      state = `<span class="topbar-sub" style="text-transform:none;margin:0;">Tied at the top — no champion yet</span>` +
+        (currentRole === 'admin' ? `<button class="btn btn-ghost btn-sm" onclick="resetTournamentStandings(${t.id},true)">Reset anyway…</button>` : '');
+    } else if(x.hasData){
+      state = `<span class="topbar-sub" style="text-transform:none;margin:0;">Season in progress</span>` +
+        (currentRole === 'admin' ? `<button class="btn btn-ghost btn-sm" onclick="resetTournamentStandings(${t.id},true)">Reset anyway…</button>` : '');
+    } else {
+      state = `<span class="topbar-sub" style="text-transform:none;margin:0;">Season closed ✓ — standings cleared</span>`;
+    }
+    const hist = x.seasons.map((se, idx)=>`
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-top:10px;flex-wrap:wrap;">
+        <details style="flex:1;min-width:240px;">
+          <summary style="cursor:pointer;font-size:13px;">Season closed ${escH(se.date || '')} — 🏆 ${escH(se.champion || 'no champion recorded')}${se.by ? ' · reset by ' + escH(se.by) : ''}</summary>
+          <div class="table-wrap" style="margin-top:8px;"><table>
+            <thead><tr><th>#</th><th>Team</th><th>Group</th><th>W</th><th>L</th><th>Pts</th></tr></thead>
+            <tbody>${(se.standings || []).map(r=>`<tr><td>${escH(r.rank)}</td><td>${escH(r.team)}</td><td>${escH(r.group || 'A')}</td><td>${escH(r.w)}</td><td>${escH(r.l)}</td><td>${escH(r.pts)}</td></tr>`).join('')}</tbody>
+          </table></div>
+        </details>
+        ${canAct ? `<div style="display:flex;gap:6px;flex-wrap:wrap;">
+          ${idx === 0 && !x.hasData ? `<button class="btn btn-ghost btn-sm" onclick="undoStandingsReset(${t.id})">Undo reset</button>` : ''}
+          <button class="btn btn-danger btn-sm" onclick="deleteSeasonRecord(${t.id},${idx})">Delete</button>
+        </div>` : ''}
+      </div>`).join('');
+    return `<div style="padding:14px 0;border-top:1px solid var(--line);">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div><div style="font-weight:700;">${escH(t.name)}</div><div class="topbar-sub" style="text-transform:none;">${escH(t.sport)} · ${escH(t.format || '')}</div></div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">${state}</div>
+      </div>${hist}</div>`;
+  }).join('');
+}
+function seasonActor(){
+  return currentRole === 'official' ? (officialNameByEmail(currentOfficialEmail) || 'Official') : 'Administrator';
+}
+function seasonRefresh(){
+  renderStandings();
+  buildTourneyList(currentTourneyFilter);
+  buildDashboard();
+  if(typeof renderReportsIfOpen === 'function') renderReportsIfOpen();
+}
+function resetTournamentStandings(tid, force){
+  const t = tournaments.find(x=>x.id === tid);
+  if(!t) return;
+  if(!canResetStandings(t)){
+    showToast('Only the administrator or the official assigned to this tournament can reset its standings.');
+    return;
+  }
+  const rows = seasonRows(t);
+  if(!rows.length){ showToast('This tournament has no teams in the standings.'); return; }
+  const champ = getTournamentChampion(t);
+  const decided = !!(champ && champ.team);
+  if(!decided && !(force && currentRole === 'admin')){
+    showToast('The standings can only be reset once the tournament is finished and a champion is decided.');
+    return;
+  }
+  const saveNote = `The final standings and champion are saved to the season history first, the tournament is marked Completed, and all ${rows.length} team(s) of this tournament are REMOVED from the standings page (the teams themselves stay registered). Game results stay in the Schedule. Other tournaments are not touched.`;
+  const msg = decided
+    ? `Reset the standings of "${t.name}"?\n\n🏆 Champion: ${champ.team}\n\n${saveNote}`
+    : `"${t.name}" has no decided champion yet.\n\nReset it anyway?\n\n${saveNote}`;
+  if(!confirm(msg)) return;
+  const who = seasonActor();
+  const sorted = rows.slice().sort((a,b)=>b.pts - a.pts || b.w - a.w || a.l - b.l);
+  const champName = decided ? champ.team : '';
+  t.seasons = Array.isArray(t.seasons) ? t.seasons : [];
+  t.seasons.unshift({
+    champion: champName,
+    how: decided ? champ.how : 'Reset without a decided champion',
+    bracketSig: decided && champ.sig ? champ.sig : (/elim/i.test(t.format || '') ? bracketSig(bracketFinal(t)) : ''),
+    prevStatus: t.status || '',
+    closedAt: new Date().toISOString(),
+    date: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+    by: who,
+    standings: sorted.map((r,i)=>({rank:i+1, team:r.team, group:groupOf(r), w:r.w, l:r.l, pts:r.pts}))
+  });
+  if(t.seasons.length > 10) t.seasons.length = 10;
+  t.champion = champName;
+  rows.forEach(r=>{
+    const idx = standings.indexOf(r);
+    if(idx !== -1) standings.splice(idx, 1);
+    deleteFromFirestore('standings', r.id);
+  });
+  t.status = 'Completed';
+  logAudit('Standings Reset', `"${t.name}" standings reset by ${who}. Champion: ${champName || 'none decided'}. ${rows.length} team(s) removed from the standings; final standings saved to the season history.`, who);
+  if(champName){
+    announcements.unshift({id: fsIdCounter++, t:`🏆 ${champName} are the champions of ${t.name}!`, d:`${t.name} has finished. The final standings are saved in the season history.`});
+  }
+  seasonRefresh();
+  showToast(champName ? `Standings reset — ${champName} saved as champion of ${t.name}` : `Standings reset for ${t.name}`);
+}
+/* Safety net: puts the most recent reset back (only while the tournament has no teams in the standings). */
+function undoStandingsReset(tid){
+  const t = tournaments.find(x=>x.id === tid);
+  if(!t) return;
+  if(!canResetStandings(t)){ showToast('Only the administrator or the official assigned to this tournament can do that.'); return; }
+  const se = Array.isArray(t.seasons) && t.seasons.length ? t.seasons[0] : null;
+  if(!se){ showToast('There is no reset to undo.'); return; }
+  if(seasonRows(t).length){ showToast('This tournament already has teams in the standings — nothing to restore.'); return; }
+  if(!confirm(`Undo the reset of "${t.name}" (${se.date || ''})?\n\nThe ${(se.standings || []).length} team(s) come back with their old wins, losses and points, and this season record is removed from the history.`)) return;
+  (se.standings || []).forEach(r=>{
+    standingIdCounter += 1;
+    standings.push({id: standingIdCounter, rank: standings.length + 1, team: r.team, w: r.w, l: r.l, pts: r.pts, group: r.group === 'B' ? 'B' : 'A'});
+  });
+  t.seasons.shift();
+  t.champion = t.seasons.length ? (t.seasons[0].champion || '') : '';
+  if(se.prevStatus) t.status = se.prevStatus;
+  const who = seasonActor();
+  logAudit('Standings Restored', `"${t.name}" reset undone by ${who} — ${(se.standings || []).length} team(s) restored.`, who);
+  seasonRefresh();
+  showToast(`Standings restored for ${t.name}`);
+}
+/* Delete a saved season (champion + final standings) from the history. */
+function deleteSeasonRecord(tid, idx){
+  const t = tournaments.find(x=>x.id === tid);
+  if(!t) return;
+  if(!canResetStandings(t)){ showToast('Only the administrator or the official assigned to this tournament can delete season records.'); return; }
+  const se = Array.isArray(t.seasons) ? t.seasons[idx] : null;
+  if(!se){ showToast('That season record no longer exists.'); return; }
+  if(!confirm(`Delete this saved season of "${t.name}"?\n\nSeason closed ${se.date || ''} — champion: ${se.champion || 'none recorded'}.\n\nThe final standings stored in it are permanently removed. This can't be undone.`)) return;
+  t.seasons.splice(idx, 1);
+  t.champion = t.seasons.length ? (t.seasons[0].champion || '') : '';
+  const who = seasonActor();
+  logAudit('Season Record Deleted', `${who} deleted the ${se.date || ''} season record of "${t.name}" (champion: ${se.champion || 'none recorded'}).`, who);
+  seasonRefresh();
+  showToast('Season record deleted');
 }
 
 let sportFilter = 'all';
@@ -4028,6 +4935,1098 @@ function generateTourney(){
   showToast(`"${name}" created — coaches have been notified and can now register ✓`);
   nav('tournaments');
 }
+/* ====================================================================================
+   ADMIN REPORTS PAGE
+   Everything below is additive: it only READS the existing data arrays (tournaments, teams,
+   schedule, standings, registrations, auditLog, players, officialAccounts) to build the
+   reports. The few things it can change (postpone / forfeit / cancel a game, roster rules,
+   official assignment, disciplinary records) are done through the buttons on this page and
+   are written to the audit log. Non-admin roles never see it.
+   ==================================================================================== */
+const REP_SECTIONS = [
+  {id:'registration', label:'Registrations'},
+  {id:'teams',        label:'Teams & Players'},
+  {id:'matches',      label:'Matches & Schedule'},
+  {id:'results',      label:'Results & Standings'},
+  {id:'officials',    label:'Officials'},
+  {id:'venues',       label:'Venues'},
+  {id:'discipline',   label:'Disciplinary'},
+  {id:'audit',        label:'Activity & Audit'},
+  {id:'audience',     label:'Audience'},
+];
+const REP = {
+  tab:'registration',
+  f:{tournament:'', sport:'', team:'', status:'', from:'', to:''},
+  matchGroup:'date', auditQ:'', auditActor:'', auditType:'',
+  summary:[]
+};
+const REP_MATCH_CATS = ['Upcoming','Live','Final','Forfeit','Postponed','Cancelled'];
+const REP_REG_STATUS = ['Pending','Approved','Rejected'];
+/* Default roster size per sport — used only when a tournament has no min/max of its own. */
+const REP_DEFAULT_ROSTER = {Basketball:[5,15], Volleyball:[6,14], Football:[11,25], Futsal:[5,12], Badminton:[2,6],
+  Tennis:[1,4], 'Table Tennis':[1,4], Chess:[1,5], Esports:[5,8], Baseball:[9,25], Softball:[9,20]};
+
+/* ---- small helpers ---- */
+function repIso(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function repToIso(str){
+  if(!str) return '';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
+  const d = new Date(str);
+  return isNaN(d.getTime()) ? '' : repIso(d);
+}
+function repTodayIso(){ return repIso(new Date()); }
+function repFmtDate(iso){
+  if(!iso) return '—';
+  const d = new Date(iso + 'T00:00:00');
+  return isNaN(d.getTime()) ? String(iso) : d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+function repNowStr(){
+  return new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+}
+function repBadge(text, kind){ return {h:`<span class="rep-badge rb-${kind}">${escH(text)}</span>`, t:text}; }
+function repStatusBadge(s){
+  const kind = {Approved:'ok',Final:'ok',Complete:'ok',OK:'ok',Served:'ok',Upheld:'ok',Recorded:'mute',
+    Pending:'warn',Postponed:'warn',Open:'warn',Short:'warn',Active:'warn',Upcoming:'info',Live:'info',
+    Rejected:'bad',Cancelled:'bad',Over:'bad',Forfeit:'bad',Unassigned:'bad',Dismissed:'mute',Lifted:'mute'}[s] || 'mute';
+  return repBadge(s, kind);
+}
+function matchDate(m){
+  if(m.date) return m.date;
+  const t = new Date(); t.setHours(0,0,0,0);
+  if(m.day === 'today') return repIso(t);
+  if(m.day === 'tomorrow'){ t.setDate(t.getDate()+1); return repIso(t); }
+  return '';
+}
+function repMatchCat(m){
+  if(m.status === 'cancelled') return 'Cancelled';
+  if(m.status === 'postponed') return 'Postponed';
+  if(m.status === 'done') return m.outcome === 'forfeit' ? 'Forfeit' : 'Final';
+  if(m.status === 'live') return 'Live';
+  return 'Upcoming';
+}
+function repTeam(name){ return teams.find(t=>t.name === name); }
+function repTournamentOfMatch(m){
+  if(m.tournament) return m.tournament;
+  const tm = repTeam(m.a) || repTeam(m.b);
+  return (tm && tm.tournament && tm.tournament !== '—') ? tm.tournament : '';
+}
+function repSportOfMatch(m){
+  const t = tournaments.find(x=>x.name === m.tournament);
+  if(t) return t.sport;
+  const tm = repTeam(m.a) || repTeam(m.b);
+  return tm ? tm.sport : '';
+}
+function repOfficialOfMatch(m){
+  const t = tournaments.find(x=>x.name === repTournamentOfMatch(m));
+  return t && t.assignedOfficial ? t.assignedOfficial : null;
+}
+
+/* ---- filters ---- */
+function repOkMatch(m){
+  const f = REP.f;
+  if(f.tournament && repTournamentOfMatch(m) !== f.tournament) return false;
+  if(f.sport && repSportOfMatch(m) !== f.sport) return false;
+  if(f.team && m.a !== f.team && m.b !== f.team) return false;
+  if(f.status && REP_MATCH_CATS.includes(f.status) && repMatchCat(m) !== f.status) return false;
+  if(f.from || f.to){
+    const d = matchDate(m);
+    if(!d) return false;
+    if(f.from && d < f.from) return false;
+    if(f.to && d > f.to) return false;
+  }
+  return true;
+}
+function repOkTeam(t){
+  const f = REP.f;
+  if(f.tournament && t.tournament !== f.tournament) return false;
+  if(f.sport && t.sport !== f.sport) return false;
+  if(f.team && t.name !== f.team) return false;
+  if(f.status && REP_REG_STATUS.includes(f.status) && t.status !== f.status) return false;
+  return true;
+}
+function repOkReg(r){
+  const f = REP.f;
+  if(f.tournament){
+    const tm = repTeam(r.team);
+    if(!tm || tm.tournament !== f.tournament) return false;
+  }
+  if(f.sport && r.sport !== f.sport) return false;
+  if(f.team && r.team !== f.team) return false;
+  if(f.status && REP_REG_STATUS.includes(f.status) && r.status !== f.status) return false;
+  if(f.from || f.to){
+    const d = repToIso(r.date);
+    if(!d) return false;
+    if(f.from && d < f.from) return false;
+    if(f.to && d > f.to) return false;
+  }
+  return true;
+}
+function repOkIncident(i){
+  const f = REP.f;
+  if(f.tournament && i.tournament !== f.tournament) return false;
+  if(f.sport){ const tm = repTeam(i.team); if(!tm || tm.sport !== f.sport) return false; }
+  if(f.team && i.team !== f.team) return false;
+  if(f.from || f.to){
+    const d = repToIso(i.date);
+    if(!d) return false;
+    if(f.from && d < f.from) return false;
+    if(f.to && d > f.to) return false;
+  }
+  return true;
+}
+function repReadFilters(){
+  const g = id => { const e = document.getElementById(id); return e ? e.value : ''; };
+  REP.f = {tournament:g('rf-tournament'), sport:g('rf-sport'), team:g('rf-team'), status:g('rf-status'), from:g('rf-from'), to:g('rf-to')};
+}
+function repPopulateFilters(){
+  const cur = id => { const e = document.getElementById(id); return e ? e.value : ''; };
+  const fill = (id, html, keep)=>{
+    const e = document.getElementById(id); if(!e) return;
+    e.innerHTML = html;
+    e.value = keep;
+    if(e.value !== keep) e.value = '';
+  };
+  const keepT = cur('rf-tournament'), keepS = cur('rf-sport'), keepTeam = cur('rf-team'), keepSt = cur('rf-status');
+  fill('rf-tournament', `<option value="">All tournaments</option>` + tournaments.map(t=>`<option value="${escH(t.name)}">${escH(t.name)}</option>`).join(''), keepT);
+  const sports = [...new Set([...tournaments.map(t=>t.sport), ...teams.map(t=>t.sport), ...registrations.map(r=>r.sport)].filter(s=>s && s !== '—'))].sort();
+  fill('rf-sport', `<option value="">All sports</option>` + sports.map(s=>`<option value="${escH(s)}">${escH(s)}</option>`).join(''), keepS);
+  const tNow = cur('rf-tournament'), sNow = cur('rf-sport');
+  const teamList = teams.filter(t=>(!tNow || t.tournament === tNow) && (!sNow || t.sport === sNow)).map(t=>t.name).sort();
+  fill('rf-team', `<option value="">All teams</option>` + teamList.map(n=>`<option value="${escH(n)}">${escH(n)}</option>`).join(''), keepTeam);
+  fill('rf-status', `<option value="">Any status</option>
+    <optgroup label="Registrations &amp; teams">${REP_REG_STATUS.map(s=>`<option>${s}</option>`).join('')}</optgroup>
+    <optgroup label="Games">${REP_MATCH_CATS.map(s=>`<option>${s}</option>`).join('')}</optgroup>`, keepSt);
+}
+function repFilterChanged(){
+  repPopulateFilters();
+  renderReportsPage();
+}
+function repResetFilters(){
+  ['rf-tournament','rf-sport','rf-team','rf-status','rf-from','rf-to'].forEach(id=>{ const e = document.getElementById(id); if(e) e.value = ''; });
+  repFilterChanged();
+}
+function repFilterText(){
+  const f = REP.f, parts = [];
+  if(f.tournament) parts.push('Tournament: ' + f.tournament);
+  if(f.sport) parts.push('Sport: ' + f.sport);
+  if(f.team) parts.push('Team: ' + f.team);
+  if(f.status) parts.push('Status: ' + f.status);
+  if(f.from) parts.push('From: ' + repFmtDate(f.from));
+  if(f.to) parts.push('To: ' + repFmtDate(f.to));
+  return parts.length ? parts.join(' · ') : 'No filters (all data)';
+}
+
+/* ---- analysis shared by the summary, the attention panel and the sections ---- */
+function repConflicts(list){
+  const act = list.filter(m=>m.time && m.time !== 'TBA' && matchDate(m) && m.status !== 'cancelled' && m.status !== 'postponed');
+  const out = [];
+  for(let i=0;i<act.length;i++){
+    for(let j=i+1;j<act.length;j++){
+      const a = act[i], b = act[j];
+      if(matchDate(a) !== matchDate(b) || a.time !== b.time) continue;
+      if(a.venue && a.venue === b.venue) out.push({kind:'Same venue & time', detail:a.venue, a, b});
+      const shared = [a.a,a.b].filter(x=>x === b.a || x === b.b);
+      if(shared.length) out.push({kind:'Team double-booked', detail:shared.join(', '), a, b});
+    }
+  }
+  return out;
+}
+function repRosterRule(team){
+  const t = tournaments.find(x=>x.name === team.tournament);
+  const def = REP_DEFAULT_ROSTER[team.sport] || [1,30];
+  const min = (t && t.minPlayers > 0) ? t.minPlayers : def[0];
+  const max = (t && t.maxPlayers > 0) ? t.maxPlayers : def[1];
+  return {min, max};
+}
+function repRosterCheck(team){
+  const rule = repRosterRule(team), n = team.players.length;
+  if(n < rule.min) return {label:'Short', detail:`needs ${rule.min - n} more`, rule};
+  if(n > rule.max) return {label:'Over', detail:`${n - rule.max} over the limit`, rule};
+  return {label:'OK', detail:'', rule};
+}
+function repMissingDocs(r){
+  if(!hasPlayerDetails(r)) return ['All details & school ID (old registration)'];
+  const miss = [];
+  if(!r.idFront) miss.push('School ID');
+  if(!r.photo) miss.push('Photo');
+  if(!r.dob) miss.push('Date of birth');
+  if(!r.address) miss.push('Address');
+  if(!r.school || !r.studentId) miss.push('School info');
+  if(!r.emergencyName || !r.emergencyPhone) miss.push('Emergency contact');
+  if(!r.consent) miss.push('Consent');
+  return miss;
+}
+function repMaskEmail(e){ const s = String(e||''); const i = s.indexOf('@'); return i > 1 ? s[0] + '***' + s.slice(i) : '***'; }
+function repMaskPhone(p){ const d = String(p||'').replace(/\D/g,''); return d.length >= 4 ? '****' + d.slice(-4) : '****'; }
+/* Groups of registrations that look duplicated or suspicious. Contact details are masked so the
+   printed report doesn't leak them. */
+function repDuplicates(){
+  const out = [];
+  const live = registrations.filter(r=>r.status !== 'Rejected');
+  const group = (keyFn, kind, shownFn, onlyPlayers)=>{
+    const map = {};
+    live.forEach(r=>{
+      if(onlyPlayers && r.role !== 'Player') return;
+      const k = keyFn(r); if(!k) return;
+      (map[k] = map[k] || []).push(r);
+    });
+    Object.keys(map).forEach(k=>{
+      const arr = map[k];
+      if(arr.length < 2) return;
+      out.push({kind, shown: shownFn(arr[0]), recs: arr});
+    });
+  };
+  group(r=>String(r.email||'').trim().toLowerCase(), 'Same email on several registrations', r=>repMaskEmail(r.email));
+  group(r=>{ const d = String(r.phone||'').replace(/\D/g,''); return d.length >= 7 ? d : ''; }, 'Same phone number', r=>repMaskPhone(r.phone));
+  group(r=>(r.studentId && r.school) ? (String(r.school).toLowerCase() + '|' + String(r.studentId).toLowerCase()) : '', 'Same school ID number', r=>'ID ending ' + String(r.studentId).slice(-3), true);
+  group(r=>String(r.name||'').trim().toLowerCase(), 'Same player name (possible duplicate)', r=>r.name, true);
+  // A name that sits on more than one team roster
+  const onTeams = {};
+  teams.forEach(t=>t.players.forEach(p=>{ (onTeams[p] = onTeams[p] || []).push(t.name); }));
+  Object.keys(onTeams).forEach(p=>{
+    if(onTeams[p].length > 1) out.push({kind:'Player on more than one roster', shown:p, recs:[], teamsList:onTeams[p]});
+  });
+  return out;
+}
+
+/* ---- summary cards ---- */
+function repRenderSummary(){
+  const regs = registrations.filter(repOkReg);
+  const tms = teams.filter(repOkTeam);
+  const ms = schedule.filter(repOkMatch);
+  const cat = c => ms.filter(m=>repMatchCat(m) === c).length;
+  const completed = cat('Final') + cat('Forfeit');
+  const remaining = cat('Upcoming') + cat('Live') + cat('Postponed');
+  const pendingRegs = regs.filter(r=>r.status === 'Pending').length;
+  const pendingTeams = tms.filter(t=>t.status === 'Pending').length;
+  const rosterPlayers = tms.reduce((n,t)=>n + t.players.length, 0);
+  const acceptedPlayers = regs.filter(r=>r.role === 'Player' && r.status === 'Approved').length;
+  const conflicts = repConflicts(ms).length;
+  const openProtests = incidents.filter(i=>repOkIncident(i) && i.type === 'Protest' && i.status === 'Open').length;
+  const cards = [
+    ['Teams', tms.length, `${tms.filter(t=>t.status === 'Approved').length} approved · ${pendingTeams} pending`, ''],
+    ['Players', rosterPlayers, `${acceptedPlayers} accepted registrations`, ''],
+    ['Total games', ms.length, `${cat('Live')} live now`, ''],
+    ['Completed', completed, `${cat('Final')} final · ${cat('Forfeit')} forfeit`, ''],
+    ['Remaining', remaining, `${cat('Upcoming')} upcoming · ${cat('Postponed')} postponed`, ''],
+    ['Pending approvals', pendingRegs + pendingTeams, `${pendingRegs} registrations · ${pendingTeams} teams`, (pendingRegs + pendingTeams) ? 'warn' : ''],
+    ['Schedule conflicts', conflicts, conflicts ? 'Needs rescheduling' : 'None found', conflicts ? 'bad' : ''],
+    ['Open protests', openProtests, `${cat('Cancelled')} cancelled games`, openProtests ? 'warn' : ''],
+  ];
+  REP.summary = cards.map(c=>[c[0], c[1], c[2]]);
+  document.getElementById('rep-summary').innerHTML = cards.map(c=>`
+    <div class="rep-stat ${c[3]}"><div class="rep-stat-label">${escH(c[0])}</div><div class="rep-stat-value">${escH(c[1])}</div><div class="rep-stat-sub">${escH(c[2])}</div></div>`).join('');
+}
+
+/* ---- "needs attention" panel (always uses ALL data, ignores the filters) ---- */
+function repAttentionItems(){
+  const items = [];
+  const add = (level, count, text, label, js)=>{ if(count > 0) items.push({level, count, text, label, js}); };
+  const pend = registrations.filter(r=>r.status === 'Pending');
+  add('warn', pend.filter(r=>r.role === 'Official' || r.role === 'Spectator').length, 'Official / Spectator registrations are waiting for your approval', 'Review', "nav('registrations')");
+  add('info', pend.filter(r=>r.role === 'Coach').length, 'Coach registrations are waiting for an Official to approve them', 'View', "nav('registrations')");
+  add('info', pend.filter(r=>r.role === 'Player' && r.coachEmail).length, 'Player registrations are waiting for their coach to accept them', 'View', "repGoTab('registration')");
+  add('warn', teams.filter(t=>t.status === 'Pending').length, 'Teams are waiting for approval to join a tournament', 'Open Teams', "nav('teams')");
+  add('bad', repConflicts(schedule).length, 'Schedule conflicts (same venue & time, or a team booked twice)', 'Fix', "repGoTab('matches')");
+  add('warn', schedule.filter(m=>(m.status === 'upcoming' || m.status === 'live') && (!m.time || m.time === 'TBA')).length, 'Games still have no date/time (TBA)', 'Open', "repGoTab('matches')");
+  add('warn', schedule.filter(m=>m.status === 'postponed').length, 'Postponed games need a new date', 'Reschedule', "repGoTab('matches')");
+  const noOfficial = tournaments.filter(t=>!t.assignedOfficial && t.status !== 'Completed' && schedule.some(m=>m.tournament === t.name && m.status !== 'cancelled'));
+  add('warn', noOfficial.length, 'Tournaments have games but no assigned official', 'Assign', "repGoTab('officials')");
+  add('bad', incidents.filter(i=>i.type === 'Protest' && i.status === 'Open').length, 'Open protests need a decision', 'Decide', "repGoTab('discipline')");
+  add('info', incidents.filter(i=>i.status === 'Active').length, 'Players are currently suspended', 'View', "repGoTab('discipline')");
+  add('warn', teams.filter(t=>t.tournament && t.tournament !== '—' && repRosterCheck(t).label !== 'OK').length, 'Teams are short of (or over) the allowed number of players', 'Open', "repGoTab('teams')");
+  add('warn', registrations.filter(r=>r.role === 'Player' && r.status !== 'Rejected' && repMissingDocs(r).length).length, 'Player registrations have missing documents or details', 'Open', "repGoTab('registration')");
+  add('warn', repDuplicates().length, 'Duplicate or suspicious registrations found', 'Open', "repGoTab('registration')");
+  return items;
+}
+function repRenderAttention(){
+  const items = repAttentionItems();
+  const el = document.getElementById('rep-attention');
+  el.innerHTML = `<h3>Needs your attention</h3>` + (items.length
+    ? items.map(i=>`
+      <div class="rep-attn-item">
+        <span class="rep-dot ${i.level}"></span>
+        <span class="rep-attn-count">${i.count}</span>
+        <span class="rep-attn-text">${escH(i.text)}</span>
+        <button class="btn btn-ghost btn-sm" onclick="${i.js}">${escH(i.label)}</button>
+      </div>`).join('')
+    : `<p class="rep-note" style="margin:0;">✅ Nothing needs your attention right now.</p>`);
+}
+
+/* ---- tabs + page rendering ---- */
+function repGoTab(id){
+  REP.tab = id;
+  renderReportsPage();
+  const t = document.getElementById('rep-tabs');
+  if(t && t.scrollIntoView) t.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function repRenderTabs(){
+  document.getElementById('rep-tabs').innerHTML = REP_SECTIONS.map(s=>
+    `<button class="tab-btn ${s.id === REP.tab ? 'active' : ''}" onclick="repGoTab('${s.id}')">${escH(s.label)}</button>`).join('');
+}
+function repCell(c){ return (c && typeof c === 'object') ? (c.h != null ? c.h : escH(c.t)) : escH(c); }
+function repCellText(c){ return (c && typeof c === 'object') ? (c.t != null ? c.t : '') : (c == null ? '' : String(c)); }
+function repRenderBlocks(blocks){
+  return blocks.map(b=>{
+    if(b.t === 'html') return `<div class="rep-block">${b.html}</div>`;
+    if(b.t === 'text') return `<p class="rep-note">${escH(b.text)}</p>`;
+    const hasAct = !!(b.acts && b.acts.some(Boolean));
+    const head = `<tr>${b.headers.map(h=>`<th>${escH(h)}</th>`).join('')}${hasAct ? '<th class="rep-act">Action</th>' : ''}</tr>`;
+    const body = b.rows.length
+      ? b.rows.map((r,i)=>`<tr>${r.map(c=>`<td>${repCell(c)}</td>`).join('')}${hasAct ? `<td class="rep-act">${b.acts[i] || ''}</td>` : ''}</tr>`).join('')
+      : `<tr><td colspan="${b.headers.length + (hasAct ? 1 : 0)}" style="color:var(--muted);">${escH(b.empty || 'No records for the current filters.')}</td></tr>`;
+    return `<div class="rep-block"><h3>${escH(b.name)}</h3>${b.note ? `<div class="rep-note">${escH(b.note)}</div>` : ''}
+      <div class="rep-table-wrap"><table class="rep-table"><thead>${head}</thead><tbody>${body}</tbody></table></div></div>`;
+  }).join('');
+}
+function buildReportsPage(){
+  const isAdmin = currentRole === 'admin';
+  const a = document.getElementById('reports-admin'), c = document.getElementById('reports-coach');
+  if(a) a.style.display = isAdmin ? 'block' : 'none';
+  if(c) c.style.display = isAdmin ? 'none' : 'block';
+  if(!isAdmin) return;
+  repPopulateFilters();
+  renderReportsPage();
+}
+function renderReportsPage(){
+  if(currentRole !== 'admin') return;
+  repReadFilters();
+  repRenderSummary();
+  repRenderAttention();
+  repRenderTabs();
+  REP_SECTIONS.forEach(s=>{
+    const el = document.getElementById('rep-sec-' + s.id);
+    if(!el) return;
+    let html = '';
+    try{ html = repRenderBlocks(REP_BUILDERS[s.id]()); }
+    catch(err){ console.error('Report section failed:', s.id, err); html = `<p class="rep-note">This report could not be built (${escH(err.message)}).</p>`; }
+    el.innerHTML = `<h2 class="rep-sec-title">${escH(s.label)}</h2>` + html;
+    el.classList.toggle('active', s.id === REP.tab);
+  });
+}
+/* Called after every data refresh. Skips the redraw while the admin is typing in one of the report's
+   own forms, so a background Firestore update never wipes what they are typing. */
+function renderReportsIfOpen(){
+  if(currentRole !== 'admin' || currentScreen !== 'reports') return;
+  const a = document.activeElement;
+  if(a && a.closest && a.closest('#rep-sections') && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return;
+  renderReportsPage();
+}
+
+/* ---- export & print ---- */
+function repAllSections(){
+  return REP_SECTIONS.map(s=>({id:s.id, label:s.label, blocks:REP_BUILDERS[s.id]()}));
+}
+function repCsvRow(arr){
+  return arr.map(v=>{ const s = String(v == null ? '' : v); return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }).join(',');
+}
+function repCsvFor(sections){
+  const lines = [repCsvRow(['Tournament Report']), repCsvRow(['Generated', repNowStr()]), repCsvRow(['Filters', repFilterText()]), ''];
+  lines.push(repCsvRow(['Summary'])); REP.summary.forEach(r=>lines.push(repCsvRow(r))); lines.push('');
+  sections.forEach(sec=>{
+    lines.push(repCsvRow([sec.label.toUpperCase()]));
+    sec.blocks.filter(b=>b.t === 'table').forEach(b=>{
+      lines.push(repCsvRow([b.name]));
+      lines.push(repCsvRow(b.headers));
+      b.rows.forEach(r=>lines.push(repCsvRow(r.map(repCellText))));
+      lines.push('');
+    });
+  });
+  return '\ufeff' + lines.join('\r\n');
+}
+function repDownload(filename, mime, data){
+  const blob = new Blob([data], {type:mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1500);
+}
+function repExportCsv(all){
+  if(currentRole !== 'admin') return;
+  renderReportsPage(); // make sure summary/filters are current
+  const secs = repAllSections();
+  const chosen = all ? secs : secs.filter(s=>s.id === REP.tab);
+  const name = all ? 'tournament-report-all' : 'report-' + REP.tab;
+  repDownload(`${name}-${repTodayIso()}.csv`, 'text/csv;charset=utf-8', repCsvFor(chosen));
+  logAudit('Report Exported', `${all ? 'Full report' : REP_SECTIONS.find(s=>s.id === REP.tab).label + ' report'} exported as CSV.`, 'Administrator');
+  showToast('CSV downloaded ✓');
+}
+function repBuildWorkbook(){
+  const wb = XLSX.utils.book_new();
+  const used = new Set();
+  const sheetName = base => {
+    let n = String(base).replace(/[:\\\/?*\[\]]/g,' ').trim().slice(0,31) || 'Sheet', i = 2, cand = n;
+    while(used.has(cand.toLowerCase())){ const suf = ' ' + i++; cand = n.slice(0, 31 - suf.length) + suf; }
+    used.add(cand.toLowerCase());
+    return cand;
+  };
+  const addSheet = (name, aoa)=>{
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    const widths = [];
+    aoa.forEach(r=>r.forEach((v,i)=>{ widths[i] = Math.min(60, Math.max(widths[i] || 8, String(v == null ? '' : v).length + 2)); }));
+    ws['!cols'] = widths.map(w=>({wch:w}));
+    XLSX.utils.book_append_sheet(wb, ws, sheetName(name));
+  };
+  addSheet('Summary', [['Tournament Report'], ['Generated', repNowStr()], ['Filters', repFilterText()], [], ['Item','Value','Details'], ...REP.summary]);
+  repAllSections().forEach((sec, si)=>{
+    sec.blocks.filter(b=>b.t === 'table').forEach(b=>{
+      addSheet(`${si+1} ${sec.label} - ${b.name}`, [b.headers, ...b.rows.map(r=>r.map(repCellText))]);
+    });
+  });
+  return wb;
+}
+function repExportExcel(){
+  if(currentRole !== 'admin') return;
+  renderReportsPage();
+  const run = ()=>{
+    try{
+      XLSX.writeFile(repBuildWorkbook(), `tournament-report-${repTodayIso()}.xlsx`);
+      logAudit('Report Exported', 'Full report exported as an Excel workbook.', 'Administrator');
+      showToast('Excel file downloaded ✓');
+    }catch(err){
+      console.error(err);
+      showToast('Excel export failed — downloading CSV instead.');
+      repExportCsv(true);
+    }
+  };
+  if(window.XLSX){ run(); return; }
+  showToast('Preparing Excel export…');
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+  s.onload = run;
+  s.onerror = ()=>{ showToast("Couldn't load the Excel library (offline?) — downloading CSV instead."); repExportCsv(true); };
+  document.head.appendChild(s);
+}
+function repPrint(all){
+  if(currentRole !== 'admin') return;
+  renderReportsPage();
+  const label = all ? 'Full report (all sections)' : REP_SECTIONS.find(s=>s.id === REP.tab).label + ' report';
+  document.getElementById('rep-print-header').innerHTML = `
+    <h1>Tournament Report — ${escH(label)}</h1>
+    <p>Generated ${escH(repNowStr())} by the Administrator · ${escH(repFilterText())}</p>`;
+  document.body.classList.toggle('rep-print-all', !!all);
+  logAudit('Report Printed', `${label} sent to print / PDF.`, 'Administrator');
+  schedulePersist();
+  window.print();
+}
+window.addEventListener('afterprint', ()=>document.body.classList.remove('rep-print-all'));
+
+/* ====================== REPORT SECTIONS ====================== */
+const REP_BUILDERS = {
+  registration: repBuildRegistration, teams: repBuildTeams, matches: repBuildMatches, results: repBuildResults,
+  officials: repBuildOfficials, venues: repBuildVenues, discipline: repBuildDiscipline, audit: repBuildAudit, audience: repBuildAudience
+};
+
+/* 1 · REGISTRATION ----------------------------------------------------------------- */
+function repBuildRegistration(){
+  const regs = registrations.filter(repOkReg);
+  const cnt = (arr, s)=>arr.filter(r=>r.status === s).length;
+  const blocks = [];
+  blocks.push({t:'table', name:'Registration status', note:'Pending, approved and rejected registrations by role.',
+    headers:['Role','Pending','Approved','Rejected','Total'],
+    rows:['Player','Coach','Official','Spectator'].map(role=>{
+      const a = regs.filter(r=>r.role === role);
+      return [role, cnt(a,'Pending'), cnt(a,'Approved'), cnt(a,'Rejected'), a.length];
+    }).concat([['All roles', cnt(regs,'Pending'), cnt(regs,'Approved'), cnt(regs,'Rejected'), regs.length]])});
+
+  const sports = [...new Set(regs.map(r=>r.sport).filter(s=>s && s !== '—'))].sort();
+  const tmsF = teams.filter(repOkTeam);
+  blocks.push({t:'table', name:'Registrations by sport', headers:['Sport','Players pending','Players approved','Players rejected','Coaches','Teams'],
+    rows: sports.map(sp=>{
+      const pl = regs.filter(r=>r.role === 'Player' && r.sport === sp);
+      return [sp, cnt(pl,'Pending'), cnt(pl,'Approved'), cnt(pl,'Rejected'), regs.filter(r=>r.role === 'Coach' && r.sport === sp).length, tmsF.filter(t=>t.sport === sp).length];
+    })});
+
+  const players = regs.filter(r=>r.role === 'Player').sort((a,b)=>String(a.sport).localeCompare(String(b.sport)) || a.name.localeCompare(b.name));
+  blocks.push({t:'table', name:'Players by sport', note:'Contact details, addresses and ID photos are not included in this report.',
+    headers:['Sport','Player','Team','School','Year level','Coach','Status','Registered','Documents'],
+    rows: players.map(r=>{
+      const miss = r.status === 'Rejected' ? [] : repMissingDocs(r);
+      return [r.sport, r.name, r.team || '—', r.school || '—', r.yearLevel || '—', r.coachName || '—', repStatusBadge(r.status), r.date || '—',
+        r.status === 'Rejected' ? '—' : (miss.length ? repBadge('Missing: ' + miss.join(', '), 'warn') : repBadge('Complete','ok'))];
+    })});
+
+  blocks.push({t:'table', name:'Teams by sport', headers:['Sport','Team','Coach','Tournament','Status','Players'],
+    rows: tmsF.slice().sort((a,b)=>a.sport.localeCompare(b.sport) || a.name.localeCompare(b.name))
+      .map(t=>[t.sport, t.name, t.coach || '—', t.tournament || '—', repStatusBadge(t.status), t.players.length])});
+
+  const keep = g => g.recs.length ? g.recs.some(r=>repOkReg(r)) : true;
+  const dups = repDuplicates().filter(keep);
+  blocks.push({t:'table', name:'Duplicate or suspicious registrations', note:'Emails and phone numbers are masked. Review these before approving.',
+    headers:['Issue','Matching value','Records involved'],
+    rows: dups.map(g=>[g.kind, g.shown, g.recs.length ? g.recs.map(r=>`${r.name} (${r.role}, ${r.status})`).join('; ') : (g.teamsList || []).join(', ')]),
+    empty:'No duplicates or suspicious registrations found.'});
+
+  const incomplete = players.filter(r=>r.status !== 'Rejected' && repMissingDocs(r).length);
+  blocks.push({t:'table', name:'Players with incomplete documents', note:'Old registrations (made before the new form) have no ID or details on file.',
+    headers:['Player','Team','Status','Missing'],
+    rows: incomplete.map(r=>[r.name, r.team || '—', repStatusBadge(r.status), repMissingDocs(r).join(', ')]),
+    empty:'All players have complete documents.'});
+  return blocks;
+}
+
+/* 2 · TEAMS & PLAYERS ---------------------------------------------------------------- */
+function repRosterFor(team){
+  return team.players.map(p=>{
+    const reg = registrations.find(r=>r.role === 'Player' && r.name === p && r.status === 'Approved');
+    const stat = players.find(x=>x.name === p && x.team === team.name);
+    return [p, (reg && reg.jersey) || (stat ? stat.num : '—'), (reg && reg.position) || (stat ? stat.pos : '—'),
+      reg ? repBadge('Verified','ok') : repBadge('Roster only','mute')];
+  });
+}
+function repBuildTeams(){
+  const tmsF = teams.filter(repOkTeam);
+  const blocks = [];
+  const tList = tournaments.filter(t=>(!REP.f.tournament || t.name === REP.f.tournament) && (!REP.f.sport || t.sport === REP.f.sport));
+  blocks.push({t:'table', name:'Roster rules per tournament',
+    note:'The minimum and maximum number of players each team may have. Edit the numbers and press Save — the minimum is also used when coaches register their team.',
+    headers:['Tournament','Sport','Min players','Max players','Teams'],
+    rows: tList.map(t=>{
+      const r = repRosterRule({tournament:t.name, sport:t.sport});
+      return [t.name, t.sport,
+        {h:`<input type="number" min="0" id="rr-min-${t.id}" value="${r.min}" style="width:76px;">`, t:r.min},
+        {h:`<input type="number" min="0" id="rr-max-${t.id}" value="${r.max}" style="width:76px;">`, t:r.max},
+        teams.filter(x=>x.tournament === t.name).length];
+    }),
+    acts: tList.map(t=>`<button class="btn btn-ghost btn-sm" onclick="repSaveRosterRule(${t.id})">Save</button>`)});
+
+  blocks.push({t:'table', name:'Team summary', note:'"Short" means below the minimum, "Over" means above the maximum for that tournament.',
+    headers:['Team','Sport','Coach','Tournament','Status','Players','Allowed','Roster check'],
+    rows: tmsF.map(t=>{
+      const chk = repRosterCheck(t);
+      return [t.name, t.sport, t.coach || '—', t.tournament || '—', repStatusBadge(t.status), t.players.length,
+        `${chk.rule.min}–${chk.rule.max}`, chk.label === 'OK' ? repStatusBadge('OK') : repBadge(`${chk.label} · ${chk.detail}`, chk.label === 'Over' ? 'bad' : 'warn')];
+    }),
+    acts: tmsF.map(t=>t.status === 'Pending' ? `<button class="btn btn-ghost btn-sm" onclick="nav('teams')">Review</button>` : '')});
+
+  tmsF.forEach(t=>{
+    blocks.push({t:'table', name:`Roster — ${t.name} (${t.sport}) · ${t.players.length} player${t.players.length === 1 ? '' : 's'}`,
+      headers:['Player','Jersey #','Position','Registration'], rows: repRosterFor(t), empty:'No players on this roster yet.'});
+  });
+  return blocks;
+}
+
+/* 3 · MATCHES & SCHEDULE ------------------------------------------------------------- */
+function repScore(m){ return (m.scoreA != null && m.scoreB != null) ? `${m.scoreA} - ${m.scoreB}` : '—'; }
+function repBuildMatches(){
+  const ms = schedule.filter(repOkMatch);
+  const blocks = [];
+  blocks.push({t:'table', name:'Games by status', headers:['Status','Games'],
+    rows: REP_MATCH_CATS.map(c=>[repStatusBadge(c), ms.filter(m=>repMatchCat(m) === c).length]).concat([['Total', ms.length]])});
+
+  const conflicts = repConflicts(ms);
+  blocks.push({t:'table', name:'Schedule conflicts', note:'Two games at the same venue and time, or a team booked in two games at the same time.',
+    headers:['Issue','Date','Time','Game 1','Game 2','Detail'],
+    rows: conflicts.map(c=>[repBadge(c.kind,'bad'), repFmtDate(matchDate(c.a)), c.a.time, `${c.a.a} vs ${c.a.b}`, `${c.b.a} vs ${c.b.b}`, c.detail]),
+    acts: conflicts.map(c=>`<button class="btn btn-ghost btn-sm" onclick="repFixMatch(${c.a.id})">Fix</button>`),
+    empty:'No schedule conflicts found. ✅'});
+
+  const sorted = ms.slice().sort((a,b)=> REP.matchGroup === 'venue'
+    ? String(a.venue).localeCompare(String(b.venue)) || (matchDate(a)||'9999').localeCompare(matchDate(b)||'9999') || String(a.time).localeCompare(String(b.time))
+    : (matchDate(a)||'9999').localeCompare(matchDate(b)||'9999') || String(a.time).localeCompare(String(b.time)) || String(a.venue).localeCompare(String(b.venue)));
+  blocks.push({t:'html', html:`<div class="rep-no-print rep-inline" style="margin-bottom:6px;"><span class="rep-note" style="margin:0;">Schedule sorted by</span>
+    <select onchange="REP.matchGroup=this.value;renderReportsPage()"><option value="date" ${REP.matchGroup === 'date' ? 'selected' : ''}>Date, then time</option><option value="venue" ${REP.matchGroup === 'venue' ? 'selected' : ''}>Venue, then date</option></select></div>`});
+  blocks.push({t:'table', name:'Schedule', headers:['Date','Time','Tournament','Game','Venue','Status','Score','Official'],
+    rows: sorted.map(m=>{
+      const off = repOfficialOfMatch(m);
+      return [matchDate(m) ? repFmtDate(matchDate(m)) : 'Not set', m.time || 'TBA', repTournamentOfMatch(m) || '—', `${m.a} vs ${m.b}`, m.venue || '—',
+        repStatusBadge(repMatchCat(m)), repScore(m), off ? (officialNameByEmail(off) || off) : repBadge('Unassigned','bad')];
+    }),
+    acts: sorted.map(m=>`<button class="btn btn-ghost btn-sm" onclick="repOpenMatchAction(${m.id})">Manage</button>`)});
+
+  const special = ms.filter(m=>m.status === 'postponed' || m.status === 'cancelled' || m.outcome === 'forfeit' || m.postponedCount > 0);
+  blocks.push({t:'table', name:'Postponed, forfeited & cancelled games',
+    headers:['Game','Tournament','Outcome','Reason / note','Date'],
+    rows: special.map(m=>{
+      const out = m.status === 'cancelled' ? repStatusBadge('Cancelled') : m.status === 'postponed' ? repStatusBadge('Postponed')
+        : m.outcome === 'forfeit' ? repBadge('Forfeit · ' + (m.forfeitBy || '?') + ' forfeited', 'bad') : repBadge('Rescheduled ×' + m.postponedCount, 'info');
+      return [`${m.a} vs ${m.b}`, repTournamentOfMatch(m) || '—', out, m.cancelReason || m.postponeReason || m.outcomeReason || '—', matchDate(m) ? repFmtDate(matchDate(m)) : '—'];
+    }),
+    empty:'No postponed, forfeited or cancelled games.'});
+  return blocks;
+}
+
+/* 4 · RESULTS & STANDINGS ------------------------------------------------------------ */
+function repBuildResults(){
+  const ms = schedule.filter(repOkMatch);
+  const blocks = [];
+  const finals = ms.filter(m=>m.status === 'done').sort((a,b)=>(matchDate(b)||'').localeCompare(matchDate(a)||''));
+  blocks.push({t:'table', name:'Final scores', headers:['Date','Tournament','Game','Score','Winner','Note'],
+    rows: finals.map(m=>{
+      const w = (m.scoreA != null && m.scoreB != null && m.scoreA !== m.scoreB) ? (m.scoreA > m.scoreB ? m.a : m.b) : '—';
+      return [matchDate(m) ? repFmtDate(matchDate(m)) : '—', repTournamentOfMatch(m) || '—', `${m.a} vs ${m.b}`, repScore(m), w, m.outcome === 'forfeit' ? `Forfeit by ${m.forfeitBy || '?'}` : ''];
+    }), empty:'No finished games yet.'});
+
+  const st = standings.filter(s=>{
+    const tm = repTeam(s.team), f = REP.f;
+    if(f.team && s.team !== f.team) return false;
+    if(f.tournament && (!tm || tm.tournament !== f.tournament)) return false;
+    if(f.sport && (!tm || tm.sport !== f.sport)) return false;
+    return true;
+  }).slice().sort((a,b)=>b.pts - a.pts || b.w - a.w || a.l - b.l);
+  blocks.push({t:'table', name:'Standings', note:'As recorded on the Standings page (a win adds 1 point).',
+    headers:['Rank','Team','Sport','Played','Wins','Losses','Points'],
+    rows: st.map((s,i)=>[i+1, s.team, (repTeam(s.team) || {}).sport || '—', s.w + s.l, s.w, s.l, s.pts]), empty:'No standings recorded.'});
+
+  const showBracket = currentBracket && currentBracket.length && (!REP.f.tournament || REP.f.tournament === currentBracketTournament);
+  if(showBracket){
+    const rows = currentBracket.map(r=>{
+      const total = r.matches.length, played = r.matches.filter(m=>m.winner).length;
+      return [r.round, total, played, total - played];
+    });
+    const last = currentBracket[currentBracket.length - 1];
+    const fin = last && last.matches.length === 1 ? last.matches[0] : null;
+    blocks.push({t:'table', name:`Bracket progress${currentBracketTournament ? ' — ' + currentBracketTournament : ''}`,
+      note: fin && fin.winner ? `🏆 Champion: ${fin.winner === 'a' ? fin.a : fin.b}` : 'Champion not decided yet.',
+      headers:['Round','Games','Played','Remaining'], rows});
+  } else {
+    blocks.push({t:'text', text:'Bracket progress: no bracket matches the current filters.'});
+  }
+
+  const seasonRowsR = [];
+  tournaments.filter(t=>(!REP.f.tournament || t.name === REP.f.tournament) && (!REP.f.sport || t.sport === REP.f.sport)).forEach(t=>{
+    (Array.isArray(t.seasons) ? t.seasons : []).forEach(se=>(se.standings || []).forEach(r=>
+      seasonRowsR.push([t.name, se.date || repFmtDate(repToIso(se.closedAt)), se.champion || '—', r.rank, r.team, r.w, r.l, r.pts])));
+  });
+  blocks.push({t:'table', name:'Champions & past seasons', note:'Saved automatically whenever the standings of a tournament are reset for a new season.',
+    headers:['Tournament','Closed on','Champion','Rank','Team','Wins','Losses','Points'], rows:seasonRowsR, empty:'No season has been closed yet.'});
+
+  const top = players.filter(p=>{
+    const tm = repTeam(p.team), f = REP.f;
+    if(f.team && p.team !== f.team) return false;
+    if(f.sport && p.sport !== f.sport) return false;
+    if(f.tournament && (!tm || tm.tournament !== f.tournament)) return false;
+    return true;
+  });
+  blocks.push({t:'table', name:'Top players (recorded stats)', note:'Only the stats already recorded on the Player Stats page are shown.',
+    headers:['Player','Team','Sport','#','Position','Stats'],
+    rows: top.map(p=>[p.name, p.team, p.sport, p.num, p.pos, [p.pts, p.ast, p.reb].filter(x=>x != null && x !== '').join(' · ')]), empty:'No player stats recorded.'});
+  return blocks;
+}
+
+/* 5 · OFFICIALS ---------------------------------------------------------------------- */
+function repBuildOfficials(){
+  const ms = schedule.filter(repOkMatch);
+  const blocks = [];
+  const tList = tournaments.filter(t=>(!REP.f.tournament || t.name === REP.f.tournament) && (!REP.f.sport || t.sport === REP.f.sport));
+  blocks.push({t:'table', name:'Games handled per official', note:'Games count toward the official assigned to that game\'s tournament.',
+    headers:['Official','Email','Tournaments','Games','Final','Upcoming / live'],
+    rows: officialAccounts.map(o=>{
+      const mine = ms.filter(m=>repOfficialOfMatch(m) === o.email);
+      return [o.name, o.email, tournaments.filter(t=>t.assignedOfficial === o.email).map(t=>t.name).join('; ') || 'None yet', mine.length,
+        mine.filter(m=>m.status === 'done').length, mine.filter(m=>m.status === 'upcoming' || m.status === 'live').length];
+    }), empty:'No official accounts yet.'});
+
+  const sorted = ms.slice().sort((a,b)=>(matchDate(a)||'9999').localeCompare(matchDate(b)||'9999') || String(a.time).localeCompare(String(b.time)));
+  blocks.push({t:'table', name:'Game assignments', headers:['Date','Time','Game','Tournament','Status','Official'],
+    rows: sorted.map(m=>{
+      const off = repOfficialOfMatch(m);
+      return [matchDate(m) ? repFmtDate(matchDate(m)) : 'Not set', m.time || 'TBA', `${m.a} vs ${m.b}`, repTournamentOfMatch(m) || '—', repStatusBadge(repMatchCat(m)),
+        off ? (officialNameByEmail(off) || off) : repBadge('Unassigned','bad')];
+    }), empty:'No games for the current filters.'});
+
+  const noOff = tList.filter(t=>!t.assignedOfficial);
+  blocks.push({t:'table', name:'Tournaments with no assigned official', note:'Pick an official and press Assign.',
+    headers:['Tournament','Sport','Status','Games on schedule'],
+    rows: noOff.map(t=>[t.name, t.sport, t.status, schedule.filter(m=>m.tournament === t.name).length]),
+    acts: noOff.map(t=>`<span class="rep-inline"><select id="rao-${t.id}"><option value="">Choose official…</option>${officialAccounts.map(o=>`<option value="${escH(o.email)}">${escH(o.name)}</option>`).join('')}</select>
+      <button class="btn btn-ghost btn-sm" onclick="repAssignOfficial(${t.id})">Assign</button></span>`),
+    empty:'Every tournament has an assigned official. ✅'});
+  return blocks;
+}
+
+/* 6 · VENUES -------------------------------------------------------------------------- */
+function repBuildVenues(){
+  const ms = schedule.filter(repOkMatch);
+  const blocks = [];
+  const venues = [...new Set([...ms.map(m=>m.venue), ...tournaments.filter(t=>(!REP.f.tournament || t.name === REP.f.tournament) && (!REP.f.sport || t.sport === REP.f.sport)).map(t=>t.venue)].filter(Boolean))].sort();
+  blocks.push({t:'table', name:'Venue usage', headers:['Venue','Games','Final','Upcoming','Live','Days used','Busiest day','Share of games'],
+    rows: venues.map(v=>{
+      const mv = ms.filter(m=>m.venue === v);
+      const perDay = {}; mv.forEach(m=>{ const d = matchDate(m); if(d) perDay[d] = (perDay[d] || 0) + 1; });
+      const days = Object.keys(perDay), busiest = days.sort((a,b)=>perDay[b] - perDay[a])[0];
+      return [v, mv.length, mv.filter(m=>m.status === 'done').length, mv.filter(m=>m.status === 'upcoming').length, mv.filter(m=>m.status === 'live').length,
+        days.length, busiest ? `${repFmtDate(busiest)} (${perDay[busiest]})` : '—', ms.length ? Math.round(mv.length / ms.length * 100) + '%' : '0%'];
+    }), empty:'No venues recorded yet.'});
+
+  // Open slots: from/to filter (max 14 days) or the next 7 days
+  let start = REP.f.from || repTodayIso();
+  let end = REP.f.to || repIso(new Date(new Date(start + 'T00:00:00').getTime() + 6 * 86400000));
+  const spanDays = Math.round((new Date(end + 'T00:00:00') - new Date(start + 'T00:00:00')) / 86400000);
+  let capped = false;
+  if(spanDays > 13){ end = repIso(new Date(new Date(start + 'T00:00:00').getTime() + 13 * 86400000)); capped = true; }
+  const days = [];
+  for(let d = new Date(start + 'T00:00:00'); repIso(d) <= end && days.length < 14; d.setDate(d.getDate() + 1)) days.push(repIso(d));
+  const rows = [];
+  venues.forEach(v=>{
+    days.forEach(d=>{
+      const booked = schedule.filter(m=>m.venue === v && matchDate(m) === d && m.status !== 'cancelled' && m.status !== 'postponed').map(m=>m.time);
+      const free = SCHEDULE_TIME_SLOTS.filter(s=>!booked.includes(s));
+      rows.push([v, repFmtDate(d), booked.length, free.length ? free.join(', ') : repBadge('Fully booked','bad')]);
+    });
+  });
+  blocks.push({t:'table', name:`Open slots · ${repFmtDate(start)} to ${repFmtDate(end)}`,
+    note:`Standard slots: ${SCHEDULE_TIME_SLOTS.join(', ')}. Use the From/To filters to look at another period (up to 14 days).${capped ? ' Range was limited to 14 days.' : ''}`,
+    headers:['Venue','Date','Booked slots','Free slots'], rows, empty:'No venues to show.'});
+  return blocks;
+}
+
+/* 7 · DISCIPLINARY -------------------------------------------------------------------- */
+function repNextGame(team){
+  const c = schedule.filter(m=>(m.a === team || m.b === team) && (m.status === 'upcoming' || m.status === 'live'));
+  c.sort((x,y)=>(matchDate(x)||'9999').localeCompare(matchDate(y)||'9999') || String(x.time).localeCompare(String(y.time)));
+  return c[0] || null;
+}
+function repIncidentFormHtml(){
+  const tOpts = tournaments.map(t=>`<option value="${escH(t.name)}">${escH(t.name)}</option>`).join('');
+  const teamOpts = teams.map(t=>`<option value="${escH(t.name)}">${escH(t.name)} (${escH(t.sport)})</option>`).join('');
+  return `
+  <div class="card rep-no-print">
+    <h3 style="font-size:14px;margin-bottom:10px;">Record an incident</h3>
+    <div class="rep-form">
+      <div><label>Type</label><select id="inc-type" onchange="repIncTypeChanged()"><option>Yellow Card</option><option>Red Card</option><option>Suspension</option><option>Protest</option></select></div>
+      <div><label>Tournament</label><select id="inc-tournament" onchange="repIncRefresh()"><option value="">— Select —</option>${tOpts}</select></div>
+      <div><label>Team</label><select id="inc-team" onchange="repIncRefresh()"><option value="">— Select —</option>${teamOpts}</select></div>
+      <div><label id="inc-player-label">Player</label><input type="text" id="inc-player" list="inc-player-list" placeholder="Player name"><datalist id="inc-player-list"></datalist></div>
+      <div><label>Related game (optional)</label><select id="inc-match"><option value="">— None —</option></select></div>
+      <div id="inc-games-wrap" style="display:none;"><label>Games suspended</label><input type="number" id="inc-games" min="1" value="1"></div>
+      <div class="wide"><label id="inc-details-label">Details</label><textarea id="inc-details" placeholder="What happened? (required for protests)"></textarea></div>
+      <div><button class="btn btn-primary btn-sm" onclick="repAddIncident()">Save record</button></div>
+    </div>
+  </div>`;
+}
+function repBuildDiscipline(){
+  const inc = incidents.filter(repOkIncident).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)) || (b.id - a.id));
+  const blocks = [{t:'html', html: repIncidentFormHtml()}];
+  const cnt = t=>inc.filter(i=>i.type === t).length;
+  blocks.push({t:'table', name:'Disciplinary summary', headers:['Yellow cards','Red cards','Suspensions','Protests','Active suspensions','Open protests'],
+    rows:[[cnt('Yellow Card'), cnt('Red Card'), cnt('Suspension'), cnt('Protest'), inc.filter(i=>i.status === 'Active').length, inc.filter(i=>i.type === 'Protest' && i.status === 'Open').length]]});
+
+  const active = inc.filter(i=>i.status === 'Active');
+  blocks.push({t:'table', name:'Players barred from their next game', note:'Each finished game of the suspended player\'s team counts one game served automatically; you can also adjust it by hand.',
+    headers:['Player','Team','Reason','Games left','Next game'],
+    rows: active.map(i=>{
+      const g = repNextGame(i.team);
+      return [i.player, i.team, i.type, i.gamesLeft, g ? `${g.a} vs ${g.b} · ${matchDate(g) ? repFmtDate(matchDate(g)) : 'date not set'} ${g.time || ''}` : 'No upcoming game'];
+    }), empty:'No players are currently suspended.'});
+
+  const yc = {};
+  inc.filter(i=>i.type === 'Yellow Card').forEach(i=>{ const k = i.player + '|' + i.team; yc[k] = (yc[k] || {player:i.player, team:i.team, n:0}); yc[k].n++; });
+  const watch = Object.values(yc).filter(x=>x.n >= 2).sort((a,b)=>b.n - a.n);
+  blocks.push({t:'table', name:'Yellow card watch', note:'Players with two or more yellow cards.', headers:['Player','Team','Yellow cards'],
+    rows: watch.map(x=>[x.player, x.team, repBadge(String(x.n), 'warn')]), empty:'No player has 2 or more yellow cards.'});
+
+  blocks.push({t:'table', name:'All incidents', headers:['Date','Type','Player / filed by','Team','Tournament','Game','Details','Status'],
+    rows: inc.map(i=>[repFmtDate(i.date), i.type, i.player || '—', i.team || '—', i.tournament || '—', i.matchLabel || '—', i.details || '—',
+      repBadge(i.status + (i.status === 'Active' ? ` (${i.gamesLeft} left)` : ''), i.status === 'Active' || i.status === 'Open' ? 'warn' : i.status === 'Upheld' ? 'ok' : 'mute')]),
+    acts: inc.map(i=>{
+      let b = '';
+      if(i.status === 'Active') b += `<button class="btn btn-ghost btn-sm" onclick="repIncidentAction(${i.id},'serve')">Served 1 game</button> <button class="btn btn-ghost btn-sm" onclick="repIncidentAction(${i.id},'lift')">Lift</button> `;
+      if(i.status === 'Open') b += `<button class="btn btn-ghost btn-sm" onclick="repIncidentAction(${i.id},'uphold')">Uphold</button> <button class="btn btn-ghost btn-sm" onclick="repIncidentAction(${i.id},'dismiss')">Dismiss</button> `;
+      return b + `<button class="btn btn-danger btn-sm" onclick="repIncidentAction(${i.id},'delete')">Delete</button>`;
+    }), empty:'No incidents recorded yet.'});
+  return blocks;
+}
+
+/* 8 · ACTIVITY & AUDIT ---------------------------------------------------------------- */
+function repAuditCat(title){
+  const t = String(title);
+  if(/^Login/.test(t)) return 'Logins';
+  if(/Registration|Player Accepted|Coach Account|Official Account/.test(t)) return 'Registrations';
+  if(/Score|Match|Schedule|Bracket|Standings/.test(t)) return 'Scores & schedule';
+  if(/Incident|Protest|Suspension/.test(t)) return 'Discipline';
+  if(/Report/.test(t)) return 'Reports';
+  if(/Team|Tournament|Official Assigned|Roster/.test(t)) return 'Teams & tournaments';
+  return 'Other';
+}
+function repBuildAudit(){
+  const f = REP.f, q = REP.auditQ.toLowerCase();
+  const all = auditLog.slice();
+  const list = all.filter(e=>{
+    const d = repToIso(e.when);
+    if(f.from && (!d || d < f.from)) return false;
+    if(f.to && (!d || d > f.to)) return false;
+    if(REP.auditActor && e.who !== REP.auditActor) return false;
+    if(REP.auditType && repAuditCat(e.t) !== REP.auditType) return false;
+    if(q && !(String(e.t) + ' ' + String(e.d) + ' ' + String(e.who)).toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const actors = [...new Set(all.map(e=>e.who).filter(Boolean))].sort();
+  const cats = [...new Set(all.map(e=>repAuditCat(e.t)))].sort();
+  const blocks = [];
+  blocks.push({t:'html', html:`<div class="rep-no-print rep-inline">
+      <input type="text" id="rep-audit-q" value="${escH(REP.auditQ)}" placeholder="Search actions…" style="width:190px;" onchange="REP.auditQ=this.value.trim();renderReportsPage()">
+      <select onchange="REP.auditActor=this.value;renderReportsPage()"><option value="">All people</option>${actors.map(a=>`<option ${a === REP.auditActor ? 'selected' : ''}>${escH(a)}</option>`).join('')}</select>
+      <select onchange="REP.auditType=this.value;renderReportsPage()"><option value="">All actions</option>${cats.map(c=>`<option ${c === REP.auditType ? 'selected' : ''}>${escH(c)}</option>`).join('')}</select>
+    </div>`});
+  const byCat = {}, byWho = {};
+  list.forEach(e=>{ const c = repAuditCat(e.t); byCat[c] = (byCat[c] || 0) + 1; byWho[e.who] = (byWho[e.who] || 0) + 1; });
+  blocks.push({t:'table', name:'Activity summary', note:`Based on the ${all.length} most recent actions the system keeps. Export to CSV regularly if you need a longer history.`,
+    headers:['Type of action','Count'], rows:Object.keys(byCat).sort().map(c=>[c, byCat[c]]).concat([['Total', list.length]])});
+  blocks.push({t:'table', name:'Who did how much', headers:['Person / role','Actions'], rows:Object.keys(byWho).sort((a,b)=>byWho[b] - byWho[a]).map(w=>[w, byWho[w]]), empty:'No activity.'});
+  blocks.push({t:'table', name:'Audit trail', headers:['When','Action','Details','By'],
+    rows: list.map(e=>[e.when + (e.time ? ' · ' + e.time : ''), e.t, e.d, e.who]), empty:'No activity matches the filters.'});
+  const decided = registrations.filter(r=>r.reviewedBy && repOkReg(r));
+  blocks.push({t:'table', name:'Registration decisions', headers:['Name','Role','Decision','Decided by','Date'],
+    rows: decided.map(r=>[r.name, r.role, repStatusBadge(r.status), r.reviewedBy, r.reviewedAt || '—']),
+    empty:'No registration decisions recorded yet.'});
+  return blocks;
+}
+
+/* 9 · AUDIENCE ------------------------------------------------------------------------ */
+function repBuildAudience(){
+  const live = schedule.filter(m=>m.status === 'live' && repOkMatch(m));
+  const chatCount = id => (liveChatByMatch[id] || []).length;
+  const blocks = [];
+  blocks.push({t:'table', name:'Live games right now', headers:['Game','Tournament','Venue','Score','Chat messages (this session)'],
+    rows: live.map(m=>[`${m.a} vs ${m.b}`, repTournamentOfMatch(m) || '—', m.venue || '—', repScore(m), chatCount(m.id)]), empty:'No game is live right now.'});
+  const chatted = schedule.filter(m=>chatCount(m.id) > 0);
+  blocks.push({t:'table', name:'Live chat activity', headers:['Game','Status','Messages'],
+    rows: chatted.map(m=>[`${m.a} vs ${m.b}`, repStatusBadge(repMatchCat(m)), chatCount(m.id)]), empty:'No live chat messages in this session.'});
+  blocks.push({t:'text', text:'Note: the system does not store viewer counts or moderate chat messages yet. The numbers above only count chat messages sent in this browser session and reset when the page is reloaded.'});
+  return blocks;
+}
+
+/* ====================== REPORT ACTIONS (admin only) ====================== */
+function repSaveRosterRule(tid){
+  const t = tournaments.find(x=>x.id === tid);
+  if(!t || currentRole !== 'admin') return;
+  const min = parseInt(document.getElementById('rr-min-' + tid).value, 10);
+  const max = parseInt(document.getElementById('rr-max-' + tid).value, 10);
+  if(isNaN(min) || isNaN(max) || min < 0 || max < 0 || (max > 0 && max < min)){
+    showToast('Enter valid numbers — the maximum cannot be lower than the minimum.');
+    return;
+  }
+  t.minPlayers = min;
+  t.maxPlayers = max;
+  logAudit('Roster Rules Updated', `"${t.name}": teams need ${min}–${max} players.`, 'Administrator');
+  renderReportsPage();
+  showToast(`Roster rules saved for ${t.name}`);
+}
+function repAssignOfficial(tid){
+  const t = tournaments.find(x=>x.id === tid);
+  if(!t || currentRole !== 'admin') return;
+  const email = document.getElementById('rao-' + tid).value;
+  if(!email){ showToast('Choose an official first.'); return; }
+  t.assignedOfficial = email;
+  const name = officialNameByEmail(email);
+  logAudit('Official Assigned', `"${name}" assigned to manage "${t.name}".`, 'Administrator');
+  buildTourneyList(document.querySelector('#tourney-tabs .tab-btn.active')?.dataset.filter || 'all');
+  populateBracketTournamentSelect();
+  populateScheduleTournamentSelect();
+  populateNewMatchTournamentSelect();
+  renderReportsPage();
+  showToast(`${name} assigned to "${t.name}"`);
+}
+/* Jump to the Schedule page with the clashing game open for editing. */
+function repFixMatch(id){
+  const m = schedule.find(x=>x.id === id);
+  if(!m) return;
+  nav('schedule');
+  const day = m.day || 'today';
+  currentScheduleTab = day;
+  document.querySelectorAll('#schedule-tabs .tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.day === day));
+  editMatch(id);
+}
+
+/* ---- manage a game: postpone / forfeit / cancel / restore ---- */
+function repOpenMatchAction(id){
+  const m = schedule.find(x=>x.id === id);
+  if(!m || currentRole !== 'admin') return;
+  const cat = repMatchCat(m);
+  const opts = [];
+  if(cat === 'Upcoming' || cat === 'Live'){ opts.push(['postpone','Postpone']); opts.push(['forfeit','Forfeit (a team did not play)']); opts.push(['cancel','Cancel game']); }
+  else if(cat === 'Postponed'){ opts.push(['postpone','Reschedule to a new date']); opts.push(['forfeit','Forfeit']); opts.push(['cancel','Cancel game']); opts.push(['restore','Back to upcoming']); }
+  else if(cat === 'Cancelled'){ opts.push(['restore','Restore game']); }
+  const body = document.getElementById('rep-action-body');
+  if(!opts.length){
+    body.innerHTML = `<h2 style="font-size:17px;margin-bottom:8px;">${escH(m.a)} vs ${escH(m.b)}</h2>
+      <p class="rep-note">This game is already finished (${escH(cat)}). To correct a score, open it on the Schedule page.</p>
+      <button class="btn btn-ghost btn-sm" onclick="repCloseMatchAction()">Close</button>`;
+  } else {
+    body.innerHTML = `
+      <h2 style="font-size:17px;margin-bottom:4px;padding-right:34px;">${escH(m.a)} vs ${escH(m.b)}</h2>
+      <p class="rep-note">${escH(repTournamentOfMatch(m) || '')} · ${m.date ? escH(repFmtDate(m.date)) : escH(m.day || '')} ${escH(m.time || '')} · ${escH(m.venue || '')} · Now: <b>${escH(cat)}</b></p>
+      <div class="rep-form" style="grid-template-columns:1fr;">
+        <div><label>Action</label><select id="rma-action" onchange="repMatchActionChanged()">${opts.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('')}</select></div>
+        <div id="rma-date-wrap" style="display:none;"><label>New date &amp; time (optional — leave empty to mark as postponed)</label>
+          <div class="rep-inline"><input type="date" id="rma-date" style="width:auto;"><select id="rma-time"><option value="">Time…</option>${SCHEDULE_TIME_SLOTS.map(s=>`<option>${s}</option>`).join('')}</select></div></div>
+        <div id="rma-forfeit-wrap" style="display:none;"><label>Team that forfeits</label>
+          <select id="rma-team"><option value="${escH(m.a)}">${escH(m.a)}</option><option value="${escH(m.b)}">${escH(m.b)}</option></select>
+          <label style="margin-top:8px;">Score given to the winner (the forfeiting team gets 0)</label><input type="number" id="rma-score" min="1" value="1"></div>
+        <div id="rma-reason-wrap"><label>Reason / note</label><textarea id="rma-reason" placeholder="e.g. Heavy rain, team did not show up…"></textarea></div>
+        <div style="display:flex;gap:8px;"><button class="btn btn-primary btn-sm" onclick="repApplyMatchAction(${m.id})">Confirm</button>
+          <button class="btn btn-ghost btn-sm" onclick="repCloseMatchAction()">Cancel</button></div>
+      </div>`;
+    repMatchActionChanged();
+  }
+  document.getElementById('rep-action-overlay').classList.add('open');
+}
+function repMatchActionChanged(){
+  const a = document.getElementById('rma-action'); if(!a) return;
+  document.getElementById('rma-date-wrap').style.display = a.value === 'postpone' ? 'block' : 'none';
+  document.getElementById('rma-forfeit-wrap').style.display = a.value === 'forfeit' ? 'block' : 'none';
+  document.getElementById('rma-reason-wrap').style.display = a.value === 'restore' ? 'none' : 'block';
+}
+function repCloseMatchAction(){
+  const el = document.getElementById('rep-action-overlay');
+  if(el) el.classList.remove('open');
+}
+function repApplyMatchAction(id){
+  const m = schedule.find(x=>x.id === id);
+  if(!m || currentRole !== 'admin') return;
+  const act = document.getElementById('rma-action').value;
+  const reasonEl = document.getElementById('rma-reason');
+  const reason = reasonEl ? reasonEl.value.trim() : '';
+  const label = `${m.a} vs ${m.b}${m.tournament ? ' (' + m.tournament + ')' : ''}`;
+  let msg = '';
+  if(act === 'postpone'){
+    const nd = document.getElementById('rma-date').value, nt = document.getElementById('rma-time').value;
+    if(!!nd !== !!nt){ showToast('Pick both a new date and a time, or leave both empty.'); return; }
+    if(nd){
+      if(isScheduleSlotTaken(nd, nt, m.venue, m.a, m.b, m.id)){ showToast('That date/time clashes with another game at the same venue or for one of the teams.'); return; }
+      const old = `${m.date ? repFmtDate(m.date) : (m.day || '')} ${m.time || ''}`.trim();
+      m.date = nd; m.time = nt; m.day = dayBucketForDate(nd);
+      if(m.status !== 'postponed') m.postponedCount = (m.postponedCount || 0) + 1; // a game already marked postponed was counted then
+      m.status = 'upcoming';
+      m.postponeReason = reason;
+      logAudit('Match Rescheduled', `${label} moved from ${old} to ${repFmtDate(nd)} ${nt}.${reason ? ' Reason: ' + reason : ''}`, 'Administrator');
+      msg = 'Game rescheduled';
+    } else {
+      if(m.status !== 'postponed') m.postponedCount = (m.postponedCount || 0) + 1;
+      m.status = 'postponed';
+      m.postponeReason = reason;
+      logAudit('Match Postponed', `${label} postponed.${reason ? ' Reason: ' + reason : ''}`, 'Administrator');
+      msg = 'Game postponed';
+    }
+  } else if(act === 'cancel'){
+    if(!confirm(`Cancel ${m.a} vs ${m.b}? It will not be counted as played and the bracket will not advance from it.`)) return;
+    m.status = 'cancelled';
+    m.cancelReason = reason;
+    logAudit('Match Cancelled', `${label} cancelled.${reason ? ' Reason: ' + reason : ''}`, 'Administrator');
+    msg = 'Game cancelled';
+  } else if(act === 'restore'){
+    m.status = 'upcoming';
+    m.cancelReason = ''; m.postponeReason = '';
+    logAudit('Match Restored', `${label} set back to upcoming.`, 'Administrator');
+    msg = 'Game restored';
+  } else if(act === 'forfeit'){
+    const loser = document.getElementById('rma-team').value;
+    const win = parseInt(document.getElementById('rma-score').value, 10);
+    if(!win || win < 1){ showToast('The winner needs a score of at least 1.'); return; }
+    if(!confirm(`Record ${loser} as forfeiting? The other team wins ${win}–0 and this is final.`)) return;
+    const aLoses = loser === m.a;
+    m.scoreA = aLoses ? 0 : win;
+    m.scoreB = aLoses ? win : 0;
+    m.status = 'done';
+    m.outcome = 'forfeit';
+    m.forfeitBy = loser;
+    m.outcomeReason = reason;
+    syncScoreToBracket(m);
+    syncStandingsForMatch(m);
+    repServeSuspensionsForMatch(m);
+    logAudit('Match Forfeited', `${label}: ${loser} forfeited (${m.scoreA}-${m.scoreB}).${reason ? ' Reason: ' + reason : ''}`, 'Administrator');
+    msg = `${loser} forfeited — recorded as final`;
+  } else { return; }
+  if(m.status !== 'done') syncScoreToBracket(m); // clears a stale "live" flag on the bracket
+  schedule.sort((x,y)=>String(x.time).localeCompare(String(y.time)));
+  repCloseMatchAction();
+  buildSchedule();
+  buildDashboard();
+  renderReportsPage();
+  showToast(msg + ' ✓');
+}
+
+/* ---- disciplinary records ---- */
+function repIncTypeChanged(){
+  const t = document.getElementById('inc-type').value;
+  document.getElementById('inc-games-wrap').style.display = (t === 'Red Card' || t === 'Suspension') ? 'block' : 'none';
+  document.getElementById('inc-player-label').textContent = t === 'Protest' ? 'Filed by (person)' : 'Player';
+  document.getElementById('inc-details-label').textContent = t === 'Protest' ? 'Details of the protest (required)' : 'Details';
+}
+function repIncRefresh(){
+  const tName = document.getElementById('inc-tournament').value, team = document.getElementById('inc-team').value;
+  const tm = repTeam(team);
+  document.getElementById('inc-player-list').innerHTML = tm ? tm.players.map(p=>`<option value="${escH(p)}"></option>`).join('') : '';
+  const ms = schedule.filter(m=>(!tName || m.tournament === tName) && (!team || m.a === team || m.b === team));
+  document.getElementById('inc-match').innerHTML = `<option value="">— None —</option>` + ms.map(m=>`<option value="${m.id}">${escH(m.a)} vs ${escH(m.b)} · ${m.date ? escH(repFmtDate(m.date)) : escH(m.day || '')} ${escH(m.time || '')}</option>`).join('');
+}
+function repAddIncident(){
+  if(currentRole !== 'admin') return;
+  const v = id => document.getElementById(id).value.trim();
+  const type = v('inc-type'), team = v('inc-team'), player = v('inc-player'), details = v('inc-details');
+  let tournament = v('inc-tournament');
+  if(!team){ showToast('Select the team involved.'); return; }
+  if(!player){ showToast(type === 'Protest' ? 'Enter who filed the protest.' : 'Enter the player.'); return; }
+  if(type === 'Protest' && !details){ showToast('Describe the protest first.'); return; }
+  const tm = repTeam(team);
+  if(!tournament && tm && tm.tournament !== '—') tournament = tm.tournament;
+  const mid = v('inc-match') ? Number(v('inc-match')) : null;
+  const mt = mid ? schedule.find(m=>m.id === mid) : null;
+  let games = 0;
+  if(type === 'Red Card' || type === 'Suspension'){
+    games = parseInt(document.getElementById('inc-games').value, 10);
+    if(!games || games < 1){ showToast('Enter how many games the suspension lasts.'); return; }
+  }
+  const rec = {
+    id: fsIdCounter++, type, team, player, tournament: tournament || '', details,
+    matchId: mt ? mt.id : null, matchLabel: mt ? `${mt.a} vs ${mt.b}` : '',
+    games, gamesLeft: games,
+    status: type === 'Protest' ? 'Open' : (games ? 'Active' : 'Recorded'),
+    date: repTodayIso(), createdAt: new Date().toISOString()
+  };
+  incidents.unshift(rec);
+  logAudit('Incident Recorded', `${type}: ${player} (${team})${games ? ', ' + games + ' game(s)' : ''}${tournament ? ' — ' + tournament : ''}.`, 'Administrator');
+  renderReportsPage();
+  showToast(`${type} recorded`);
+}
+function repIncidentAction(id, action){
+  const i = incidents.find(x=>x.id === id);
+  if(!i || currentRole !== 'admin') return;
+  const what = `${i.type}: ${i.player} (${i.team})`;
+  if(action === 'delete'){
+    if(!confirm(`Delete this record? (${what})`)) return;
+    incidents.splice(incidents.indexOf(i), 1);
+    deleteFromFirestore('incidents', id);
+    logAudit('Incident Deleted', what + '.', 'Administrator');
+  } else if(action === 'serve'){
+    i.gamesLeft = Math.max(0, i.gamesLeft - 1);
+    if(i.gamesLeft === 0) i.status = 'Served';
+    logAudit('Suspension Updated', `${what}: 1 game served, ${i.gamesLeft} left.`, 'Administrator');
+  } else if(action === 'lift'){
+    i.status = 'Lifted'; i.gamesLeft = 0;
+    logAudit('Suspension Lifted', what + '.', 'Administrator');
+  } else if(action === 'uphold' || action === 'dismiss'){
+    i.status = action === 'uphold' ? 'Upheld' : 'Dismissed';
+    logAudit('Protest Decided', `${what} — ${i.status.toLowerCase()}.`, 'Administrator');
+  }
+  renderReportsPage();
+  showToast('Record updated ✓');
+}
+/* When a game ends, every active suspension for a team in that game counts one game as served. */
+function repServeSuspensionsForMatch(m){
+  let changed = false;
+  incidents.forEach(i=>{
+    if(i.status !== 'Active' || i.matchId === m.id || i.lastServedMatch === m.id) return;
+    if(i.team !== m.a && i.team !== m.b) return;
+    if(i.tournament && m.tournament && i.tournament !== m.tournament) return;
+    i.gamesLeft = Math.max(0, i.gamesLeft - 1);
+    i.lastServedMatch = m.id;
+    if(i.gamesLeft === 0) i.status = 'Served';
+    changed = true;
+  });
+  if(changed && typeof renderReportsIfOpen === 'function') renderReportsIfOpen();
+}
+
+function matchPillHtml(m){
+  if(m.status==='postponed') return '<span class="pill" style="background:rgba(255,184,77,0.16);color:#FFB84D;">Postponed</span>';
+  if(m.status==='cancelled') return '<span class="pill" style="background:rgba(255,77,109,0.14);color:var(--danger);">Cancelled</span>';
+  return `<span class="pill ${m.status==='live'?'pill-live':m.status==='done'?'pill-done':'pill-upcoming'}">${m.status==='live'?'Live':m.status==='done'?(m.outcome==='forfeit'?'Forfeit':'Accomplish'):'Upcoming'}</span>`;
+}
+
 function exportToast(type){
   showToast(`${type} export ready for download`);
 }
@@ -4184,7 +6183,7 @@ function renderPublicLiveMatch(){
   if(document.activeElement !== scoreAInput) scoreAInput.value = m.scoreA ?? '';
   if(document.activeElement !== scoreBInput) scoreBInput.value = m.scoreB ?? '';
   statusEl.style.display = 'inline-block';
-  statusEl.textContent = m.status==='live' ? 'LIVE' : m.status==='done' ? 'ACCOMPLISHED' : 'UPCOMING';
+  statusEl.textContent = m.status==='live' ? 'LIVE' : m.status==='done' ? 'ACCOMPLISHED' : m.status==='postponed' ? 'POSTPONED' : m.status==='cancelled' ? 'CANCELLED' : 'UPCOMING';
   statusEl.className = `pill ${m.status==='live'?'pill-live':m.status==='done'?'pill-done':'pill-upcoming'}`;
   venueEl.textContent = `${m.venue} · ${m.time}${m.date ? ' · '+fmtShortDate(m.date) : ''}`;
 
@@ -4255,6 +6254,7 @@ function endPublicLiveMatch(){
   m.status = 'done';
   syncScoreToBracket(m); // determines the higher-score winner and advances them into the bracket's TBA slot
   syncStandingsForMatch(m); // credits the win/loss (and the winner's point) to Standings
+  repServeSuspensionsForMatch(m); // counts one game served for any suspended player on these teams
   const winnerName = scoreA > scoreB ? m.a : m.b;
   logAudit('Match Ended', `${m.a} ${scoreA} - ${scoreB} ${m.b}${m.tournament ? ' ('+m.tournament+')' : ''} — ${winnerName} advances.`, liveScoreActorLabel());
   buildSchedule();
