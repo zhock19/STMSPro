@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>TournamentPro — Sports Tournament Management</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -680,7 +680,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   position:relative;overflow:hidden;
 }
-.live-stage-badge{position:absolute;top:16px;left:16px;}
+.live-stage-badge{position:absolute;top:16px;left:16px;z-index:3;}
 .live-stage-play{
   width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.08);
   border:1.5px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;
@@ -690,7 +690,39 @@ tr:hover td{background:rgba(76,141,255,0.03);}
 .live-stage-teams{margin-top:6px;text-align:center;}
 .live-stage-team{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:.02em;}
 .live-stage-score{font-family:var(--font-mono);font-size:34px;color:var(--lime);font-weight:700;margin:4px 0;}
-.live-stage-preview{color:var(--muted-2);font-size:11.5px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;}
+.live-stage-preview{color:var(--muted-2);font-size:11.5px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;text-align:center;padding:0 18px;line-height:1.5;}
+/* Real YouTube/Facebook live player fills the stage; teams + score become a bottom overlay. */
+.live-video-slot{position:absolute;inset:0;z-index:1;background:#000;display:none;}
+.live-video-slot.has-video{display:block;}
+.live-video-slot iframe{width:100%;height:100%;border:0;display:block;}
+.live-stage.has-video .live-stage-play,
+.live-stage.has-video .live-stage-label,
+.live-stage.has-video .live-stage-preview{display:none;}
+.live-stage.has-video .live-stage-teams{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;margin:0;
+  display:flex;align-items:center;justify-content:center;gap:20px;pointer-events:none;
+  padding:54px 20px 16px;background:linear-gradient(0deg,rgba(4,7,14,.94),transparent);
+}
+.live-stage.has-video .live-stage-team{font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,.7);}
+.live-stage.has-video .live-stage-score{font-size:26px;margin:0;text-shadow:0 2px 8px rgba(0,0,0,.7);}
+.live-video-fallback{
+  height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:22px;text-align:center;background:linear-gradient(160deg,#0B1224,#141D38);
+}
+.live-video-fallback-icon{font-size:34px;line-height:1;}
+.live-video-fallback p{font-size:13px;color:var(--muted);line-height:1.5;max-width:360px;}
+/* Public QR live page: video sits above the score */
+#gate-public-live .gate-inner{max-width:720px;}
+.public-live-video{
+  margin-top:16px;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+  background:#000;aspect-ratio:16/9;box-shadow:0 12px 34px rgba(0,0,0,.35);
+}
+.public-live-video iframe{width:100%;height:100%;border:0;display:block;}
+/* Live-video link modal */
+.live-link-preview{font-size:12px;line-height:1.5;margin-top:8px;color:var(--muted);min-height:18px;}
+.live-link-preview.ok{color:var(--mint);}
+.live-link-preview.bad{color:var(--danger);}
+.live-link-actions{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
 .live-meta-row{display:flex;align-items:center;gap:14px;margin-top:18px;color:var(--muted);font-size:13px;font-family:var(--font-mono);flex-wrap:wrap;justify-content:center;}
 
 .live-chat{
@@ -713,6 +745,24 @@ tr:hover td{background:rgba(76,141,255,0.03);}
 .live-chat-send{
   background:var(--lime);color:#070B16;border-radius:10px;padding:0 16px;font-weight:700;font-size:13px;
 }
+/* Live chat v2 — shared (Firestore) chat: join-with-name gate, cheers, name badge */
+.live-chat-head{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.live-chat-namebtn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:4px 10px;font-size:11px;font-family:var(--font-mono);text-transform:none;letter-spacing:0;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;}
+.live-chat-namebtn:hover{border-color:var(--lime);color:var(--text);}
+.live-chat-empty{color:var(--muted);font-size:13px;text-align:center;padding:20px 6px;line-height:1.5;}
+.live-chat-msg.cheer{background:rgba(76,141,255,0.10);border:1px solid rgba(76,141,255,0.28);border-radius:10px;padding:8px 10px;}
+.live-chat-msg .team-tag{display:inline-block;margin-left:6px;font-size:10.5px;font-family:var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+.live-chat-join{padding:16px 18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
+.live-chat-join p{font-size:13px;color:var(--text);line-height:1.4;}
+.live-chat-join p span{color:var(--muted);}
+.live-chat-join input{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);font-size:13.5px;outline:none;}
+.live-chat-join input:focus{border-color:var(--lime);}
+.live-chat-join .live-chat-send{padding:10px 16px;}
+.live-chat-skip{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:9px 16px;font-size:13px;cursor:pointer;}
+.live-chat-skip:hover{border-color:var(--lime);color:var(--text);}
+.live-chat-cheers{display:flex;gap:8px;padding:10px 18px 0;border-top:1px solid var(--line);}
+.live-chat-cheer-btn{flex:1;min-width:0;background:rgba(76,141,255,0.12);border:1px solid rgba(76,141,255,0.35);color:var(--text);border-radius:10px;padding:8px 8px;font-size:12.5px;font-weight:700;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.live-chat-cheer-btn:hover{border-color:var(--lime);background:rgba(76,141,255,0.22);}
 
 /* ---------- TEAM ROSTER MODAL (new — opened by clicking a team card in Participating Teams / Teams) ---------- */
 .team-card-clickable{cursor:pointer;transition:border-color .15s, transform .15s;}
@@ -806,6 +856,127 @@ tr:hover td{background:rgba(76,141,255,0.03);}
 }
 .qr-copy-btn:hover{border-color:var(--lime);color:var(--lime);}
 .qr-copy-btn svg{width:14px;height:14px;flex-shrink:0;}
+
+/* =====================================================================
+   MOBILE RESPONSIVE LAYER  (added) — only applies on small screens.
+   Pure CSS + one tiny menu-drawer toggle; no existing function changed.
+   ===================================================================== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+.mnav-menu-backdrop{display:none;}
+
+@media(max-width:880px){
+  /* Sidebar becomes a slide-in drawer so Admin / Coach / Official pages + Log Out are reachable on phones */
+  body.app-entered .sidebar{
+    display:flex;position:fixed;top:0;left:0;bottom:0;height:100vh;height:100dvh;
+    width:280px;max-width:86vw;z-index:700;overflow-y:auto;overscroll-behavior:contain;
+    transform:translateX(-105%);visibility:hidden;
+    transition:transform .25s ease,visibility 0s linear .25s;
+    box-shadow:none;padding-top:calc(22px + env(safe-area-inset-top));padding-bottom:calc(22px + env(safe-area-inset-bottom));
+  }
+  body.app-entered.menu-open .sidebar{
+    transform:translateX(0);visibility:visible;transition:transform .25s ease,visibility 0s;
+    box-shadow:0 0 60px rgba(0,0,0,.6);
+  }
+  body.app-entered .mnav-menu-backdrop{
+    display:block;position:fixed;inset:0;z-index:690;background:rgba(4,7,14,.62);backdrop-filter:blur(2px);
+    opacity:0;pointer-events:none;transition:opacity .25s;
+  }
+  body.app-entered.menu-open .mnav-menu-backdrop{opacity:1;pointer-events:auto;}
+  body.menu-open{overflow:hidden;}
+  .navlink{padding:12px 12px;}
+
+  /* Layout polish */
+  .content{padding:18px 16px 60px;}
+  .topbar{padding:12px 16px;gap:10px;padding-top:calc(12px + env(safe-area-inset-top));}
+  .topbar > div:first-child{min-width:0;}
+  .topbar h1{overflow-wrap:anywhere;}
+  .topbar-sub{overflow-wrap:anywhere;}
+  .section-head{flex-wrap:wrap;gap:8px 12px;margin:24px 0 12px;}
+  .section-head > *{min-width:0;}
+  .card{padding:16px;}
+  .mobile-nav{padding-left:max(6px,env(safe-area-inset-left));padding-right:max(6px,env(safe-area-inset-right));}
+  .mnav-item{min-width:0;}
+  .toast{max-width:calc(100vw - 28px);}
+  .tabs{gap:6px;}
+  .tab-btn{padding:9px 14px;}
+  .btn-sm{min-height:36px;}
+
+  /* Wide content scrolls inside itself instead of stretching the page */
+  .table-wrap,.rep-table-wrap,.bracket-scroll{-webkit-overflow-scrolling:touch;max-width:100%;}
+  .card{min-width:0;}
+
+  /* Schedule rows */
+  .sched-item{gap:10px 12px;}
+  .sched-vs{min-width:0;flex:1 1 100%;order:3;}
+  .sched-venue{width:auto;flex:1 1 auto;}
+  .sched-result-row{padding-left:0;}
+  .sched-actions{flex-wrap:wrap;}
+  .sched-edit-row input,.sched-edit-row select{min-height:38px;}
+
+  /* Rows with name + buttons wrap instead of squeezing */
+  .reg-row{flex-wrap:wrap;}
+  .reg-row > *{min-width:0;}
+
+  /* Modals / overlays */
+  .team-roster-overlay,.qr-modal-overlay{padding:12px;align-items:flex-end;}
+  .team-roster-modal,.qr-modal{max-height:92vh;max-height:92dvh;}
+  .team-roster-modal{padding:22px 18px;}
+  .qr-modal{padding:24px 18px 20px;border-radius:20px;}
+  .qr-frame{width:min(228px,70vw);height:min(228px,70vw);}
+  .cal-popup{max-width:calc(100vw - 32px);}
+  .live-viewer-top{padding:12px 14px;padding-top:calc(12px + env(safe-area-inset-top));}
+  .live-viewer-main{padding:18px 12px;justify-content:flex-start;}
+  .live-stage{border-radius:14px;}
+  .live-stage-team{font-size:18px;}
+  .live-stage-score{font-size:28px;}
+  .live-stage-play{width:56px;height:56px;font-size:22px;}
+  .live-chat{max-height:70vh;}
+  .live-meta-row{gap:8px 12px;}
+}
+
+@media(max-width:640px){
+  /* 16px inputs stop iOS Safari from zooming the page when a field is tapped */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),select,textarea{font-size:16px !important;}
+  .gate{padding:16px;}
+  .gate-title{font-size:32px;}
+  .auth-card{padding:24px 18px;}
+  .auth-card.auth-card-wide{margin:12px auto;}
+  .landing-header .gate-title{font-size:30px;}
+  .stat-value{font-size:26px;}
+  .field-row{grid-template-columns:1fr;}
+  .rep-toolbar,.rep-summary{grid-template-columns:repeat(2,1fr);}
+  .rep-form{grid-template-columns:1fr;}
+  .rep-inline{width:100%;}
+  .rep-inline select,.rep-inline input{flex:1 1 140px;width:auto;}
+  .rep-attn-text{min-width:0;flex:1 1 100%;}
+  .rep-actions .btn{flex:1 1 calc(50% - 8px);}
+  .search-mini{width:100%;}
+  .sync-status{padding:7px 9px;}
+  .player-stats-row{gap:12px;flex-wrap:wrap;}
+  .format-opt{padding:14px;}
+  .gen-steps{gap:6px;}
+  .live-chat-cheers{flex-wrap:wrap;}
+  .qr-share-row{flex-wrap:wrap;}
+  .qr-modal-link{flex:1 1 100%;}
+  .qr-copy-btn{flex:1 1 auto;justify-content:center;}
+  th,td{padding:10px 10px;}
+  .standings-team-input{min-width:120px;}
+  .bracket{gap:32px;}
+}
+
+@media(max-width:380px){
+  .content{padding:14px 12px 60px;}
+  .topbar{padding-left:12px;padding-right:12px;}
+  .rep-toolbar,.rep-summary{grid-template-columns:1fr;}
+  .gate-title{font-size:28px;}
+  .mnav-item{font-size:9.5px;}
+}
+
+/* Phones turned sideways: keep the drawer + bottom bar compact */
+@media(max-width:900px) and (max-height:480px){
+  .live-stage{max-height:70vh;}
+  .qr-modal,.team-roster-modal{max-height:96vh;}
+}
 </style>
 </head>
 <body>
@@ -929,7 +1100,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
     </div>
     <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" id="reg-name" placeholder="Juan Dela Cruz" autocomplete="off" oninput="checkRegName()"><div class="reg-hint" id="reg-name-hint" style="color:var(--danger);display:none;"></div></div>
     <div class="field-row">
-      <div class="field"><label>Email <span class="req">*</span></label><input type="email" id="reg-email" placeholder="you@email.com"></div>
+      <div class="field"><label>Email <span class="req">*</span></label><input type="email" id="reg-email" placeholder="you@email.com"><div class="reg-hint" id="reg-email-hint"></div></div>
       <div class="field"><label>Phone <span class="req" id="reg-phone-req">*</span></label><input type="tel" id="reg-phone" placeholder="09XXXXXXXXX" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" autocomplete="off" oninput="this.value=this.value.replace(/\D/g,'').slice(0,11)"></div>
     </div>
 
@@ -1039,7 +1210,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
         <input type="file" accept="image/*" onchange="handleRegImage(this,'photo','reg-photo')">
       </label>
     </div>
-    <button class="btn btn-primary btn-block" onclick="registerSubmit()">Submit Registration</button>
+    <button class="btn btn-primary btn-block" id="reg-submit-btn" onclick="registerSubmit()">Submit Registration</button>
     <div class="auth-switch">Already registered? <button onclick="showGate('gate-welcome')">Back to live scores</button></div>
   </div>
 </div>
@@ -1051,6 +1222,8 @@ tr:hover td{background:rgba(76,141,255,0.03);}
     <div class="gate-badge"><img src="assets/logo.jpg" alt="Tangub City Global College logo"></div>
     <p class="topbar-sub" id="public-live-tournament" style="text-transform:none;margin-top:10px;"></p>
     <span class="pill pill-live" id="public-live-status" style="margin-top:8px;display:inline-block;">LIVE</span>
+
+    <div class="public-live-video" id="public-live-video" style="display:none;"></div>
 
     <div class="qr-score-row" id="public-live-score-row" style="margin-top:20px;">
       <div class="qr-score-team">
@@ -1380,6 +1553,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
 
       <!-- ===== REGISTRATIONS (Admin) ===== -->
       <section class="screen" id="screen-registrations">
+        <div class="card" id="email-status-card" style="display:none;margin-bottom:16px;"></div>
         <div class="card">
           <div class="section-head" style="margin-top:0;flex-wrap:wrap;gap:10px;">
             <h2>All Registrations</h2>
@@ -1664,7 +1838,12 @@ tr:hover td{background:rgba(76,141,255,0.03);}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
     Search
   </button>
+  <button class="mnav-item mnav-menu" id="mnav-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    Menu
+  </button>
 </nav>
+<div class="mnav-menu-backdrop" id="mnav-menu-backdrop" onclick="closeMobileMenu()"></div>
 
 <!-- ================= LIVE VIEWER (new — separate full-screen screen, opened only by clicking a LIVE match card) ================= -->
 <div class="live-viewer-overlay" id="live-viewer-overlay">
@@ -1677,16 +1856,17 @@ tr:hover td{background:rgba(76,141,255,0.03);}
   </div>
   <div class="live-viewer-body">
     <div class="live-viewer-main">
-      <div class="live-stage">
-        <span class="pill pill-live live-stage-badge">Live</span>
-        <div class="live-stage-label">Live Match</div>
+      <div class="live-stage" id="live-stage">
+        <span class="pill pill-live live-stage-badge" id="live-viewer-badge">Live</span>
+        <div class="live-video-slot" id="live-viewer-video"></div>
+        <div class="live-stage-label" id="live-stage-label">Live Match</div>
         <div class="live-stage-teams">
           <div class="live-stage-team" id="live-viewer-team-a">Team A</div>
           <div class="live-stage-score" id="live-viewer-score">-</div>
           <div class="live-stage-team" id="live-viewer-team-b">Team B</div>
         </div>
-        <div class="live-stage-play">▶</div>
-        <div class="live-stage-preview">Stream Preview</div>
+        <div class="live-stage-play" id="live-stage-play">▶</div>
+        <div class="live-stage-preview" id="live-stage-preview">Stream Preview</div>
       </div>
       <div class="live-meta-row">
         <span id="live-viewer-time"></span>
@@ -1695,10 +1875,19 @@ tr:hover td{background:rgba(76,141,255,0.03);}
       </div>
     </div>
     <div class="live-chat">
-      <div class="live-chat-head">Live Chat</div>
+      <div class="live-chat-head"><span>Live Chat</span><button class="live-chat-namebtn" id="live-chat-namebtn" style="display:none;" onclick="changeLiveChatName()" title="Change your chat name"></button></div>
       <div class="live-chat-messages" id="live-chat-messages"></div>
-      <div class="live-chat-input-row">
-        <input type="text" id="live-chat-input" placeholder="Say something…" onkeydown="if(event.key==='Enter')postLiveComment()">
+      <!-- Step 1: pick a name (optional — blank / "Join as Guest" posts as Guest) before chatting -->
+      <div class="live-chat-join" id="live-chat-join" style="display:none;">
+        <p>Enter a name to join the chat <span>(optional)</span></p>
+        <input type="text" id="live-chat-name-input" maxlength="20" placeholder="Your name (optional)" onkeydown="if(event.key==='Enter')joinLiveChat()">
+        <button class="live-chat-send" onclick="joinLiveChat()">Join Chat</button>
+        <button class="live-chat-skip" onclick="joinLiveChat(true)">Join as Guest</button>
+      </div>
+      <!-- Step 2: cheer buttons + message box (shown once joined) -->
+      <div class="live-chat-cheers" id="live-chat-cheers" style="display:none;"></div>
+      <div class="live-chat-input-row" id="live-chat-input-row" style="display:none;">
+        <input type="text" id="live-chat-input" maxlength="200" placeholder="Say something…" onkeydown="if(event.key==='Enter')postLiveComment()">
         <button class="live-chat-send" onclick="postLiveComment()">Send</button>
       </div>
     </div>
@@ -1718,6 +1907,25 @@ tr:hover td{background:rgba(76,141,255,0.03);}
   <div class="team-roster-modal" style="max-width:520px;">
     <button class="team-roster-close" onclick="repCloseMatchAction()" aria-label="Close">✕</button>
     <div id="rep-action-body"></div>
+  </div>
+</div>
+
+<!-- ================= REGISTRATION: EMAIL VERIFICATION CODE ================= -->
+<div class="team-roster-overlay" id="reg-verify-overlay" style="z-index:900;">
+  <div class="team-roster-modal" style="max-width:420px;">
+    <h2 style="font-size:18px;margin-bottom:6px;">Verify your email</h2>
+    <p class="rep-note" id="reg-verify-msg"></p>
+    <div class="field"><label>6-digit code</label>
+      <input type="text" id="reg-verify-code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"
+        style="letter-spacing:8px;font-size:22px;text-align:center;"
+        oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)" onkeydown="if(event.key==='Enter')submitVerifyCode()">
+    </div>
+    <div id="reg-verify-error" class="error-msg" style="display:none;"></div>
+    <button class="btn btn-primary btn-block" onclick="submitVerifyCode()">Verify &amp; submit registration</button>
+    <div style="display:flex;justify-content:space-between;margin-top:12px;">
+      <button class="back-link" id="reg-verify-resend" onclick="resendVerifyCode()" style="margin:0;">Resend code</button>
+      <button class="back-link" onclick="cancelEmailVerify()" style="margin:0;">Change email</button>
+    </div>
   </div>
 </div>
 
@@ -1746,7 +1954,7 @@ tr:hover td{background:rgba(76,141,255,0.03);}
         <span class="qr-corner br"></span>
       </div>
     </div>
-    <p class="qr-modal-hint">📷 Scan to open and update this match's live score on another device — it syncs to the schedule and bracket automatically.</p>
+    <p class="qr-modal-hint">📷 Scan to open and update this match's live score on another device — it syncs to the schedule and bracket automatically. If a live video link is set, the player appears above the score automatically while the match is Live.</p>
 
     <div class="qr-share-row">
       <a class="qr-modal-link" id="qr-modal-link" target="_blank" rel="noopener"></a>
@@ -1754,6 +1962,37 @@ tr:hover td{background:rgba(76,141,255,0.03);}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 01-1-1V4a1 1 0 011-1h10a1 1 0 011 1v1"/></svg>
         Copy
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= LIVE VIDEO LINK MODAL (admin / assigned official only) ================= -->
+<div class="team-roster-overlay" id="live-link-overlay" onclick="if(event.target===this) closeLiveLinkModal()">
+  <div class="team-roster-modal" style="max-width:520px;">
+    <button class="team-roster-close" onclick="closeLiveLinkModal()" aria-label="Close">✕</button>
+    <span class="qr-modal-badge">Live Video</span>
+    <h2 style="font-size:17px;margin-top:10px;" id="live-link-title">Team A vs Team B</h2>
+    <p class="topbar-sub" id="live-link-sub" style="text-transform:none;margin-top:4px;"></p>
+
+    <div class="field" style="margin-top:18px;">
+      <label>YouTube or Facebook live link</label>
+      <input type="url" id="live-link-input" placeholder="https://youtube.com/live/… or https://facebook.com/…/live"
+        oninput="updateLiveLinkPreview()" onkeydown="if(event.key==='Enter') saveLiveLink(true)">
+    </div>
+    <div class="live-link-preview" id="live-link-preview"></div>
+    <p class="gate-sub" style="text-align:left;margin-top:8px;">
+      The video player appears on this match's live page only while the match status is <b>Live</b>.
+      Ending the match or removing the link hides it for everyone. YouTube/Facebook streams have a
+      short delay (usually 5–30 seconds), so the score can be ahead of the video.<br><br>
+      Accepted links: <b>youtube.com/live/…</b>, <b>youtube.com/watch?v=…</b>, <b>youtu.be/…</b>,
+      or a Facebook video/live link. A channel page link such as <b>youtube.com/@channel/live</b>
+      opens in a new tab instead of playing inside the page.
+    </p>
+
+    <div class="live-link-actions">
+      <button class="btn btn-primary btn-block" id="live-link-go-live" onclick="saveLiveLink(true)">Save &amp; Go Live</button>
+      <button class="btn btn-ghost btn-block" onclick="saveLiveLink(false)">Save link only</button>
+      <button class="btn btn-danger btn-block" id="live-link-remove" style="display:none;" onclick="removeLiveLink()">Remove video</button>
     </div>
   </div>
 </div>
@@ -2190,6 +2429,7 @@ function scheduleRebuild(){
     buildLandingLive();
     if(viewingTourneyId) openTourneyDetail(viewingTourneyId);
     if(publicLiveMatchId) renderPublicLiveMatch();
+    if(liveViewerMatchId) renderLiveViewer();
     if(qrModalMatchId) renderMatchQrModal();
   }, 150);
 }
@@ -2256,7 +2496,7 @@ async function attachRealtimeListeners(){
   // so nothing already in Firestore gets mistaken for a brand-new registration.
   firestoreUnsubs.forEach(u=>{ try{ u(); }catch(e){} });
   firestoreUnsubs = [];
-  await Promise.all([...Object.keys(FS_COLLECTIONS).map(listenToCollection), listenToBracketDoc()]);
+  await Promise.all([...Object.keys(FS_COLLECTIONS).map(listenToCollection), listenToBracketDoc(), listenToEmailConfigDoc()]);
   bumpIdCounters();
   knownRegistrationIds = new Set(registrations.map(r=>r.id));
   regNotificationsArmed = true;
@@ -2386,6 +2626,7 @@ function pickRole(el){
 }
 /* Shows only the form sections that belong to the chosen role. */
 function applyRoleUI(role){
+  refreshEmailHint();
   const isPlayer = role === 'Player', isCoach = role === 'Coach', isOfficial = role === 'Official';
   const show = (id, disp)=>{ const e = document.getElementById(id); if(e) e.style.display = disp; };
   show('reg-password-wrap', (isCoach || isOfficial) ? 'block' : 'none');
@@ -2527,6 +2768,445 @@ function ageFromDob(iso){
   return a;
 }
 
+/* ====================================================================================
+   EMAIL — "real email" check + acceptance / rejection notifications
+   Mail is sent through EmailJS (https://www.emailjs.com — free plan, no server needed).
+
+   ONE-TIME SETUP (about 5 minutes):
+     1. Create a free EmailJS account → Email Services → Add Service (e.g. Gmail) → copy its Service ID.
+     2. Email Templates → Create New Template, set:
+            To email : {{to_email}}
+            Subject  : {{subject}}
+            Content  : <div style="white-space:pre-line;font-family:Arial,sans-serif;font-size:15px;">{{message}}</div>
+        Save it and copy the Template ID.
+     3. Account → General → copy your Public Key. (Under Security you can also restrict it to your website.)
+     4. Paste the three values below.
+
+   Until all three values are filled in the app behaves exactly as before: registrations only get the
+   basic email checks (typos, throw-away addresses, domain exists) and nobody is emailed.
+   ==================================================================================== */
+const EMAIL_CONFIG = {
+  serviceId: '',               // e.g. 'service_abc123'
+  templateId: '',              // e.g. 'template_xyz789'
+  publicKey: '',               // e.g. 'AbCdEf123456'
+  requireVerification: true,   // true  = registrants must enter a 6-digit code sent to their email
+                               // false = no code step (the address is still checked, and still emailed on acceptance)
+  appName: 'TournamentPro'
+};
+function emailEnabled(){ return !!(EMAIL_CONFIG.serviceId && EMAIL_CONFIG.templateId && EMAIL_CONFIG.publicKey); }
+
+async function sendEmail(to, toName, subject, message){
+  if(!emailEnabled()) throw new Error('Email service is not set up.');
+  const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(()=>ctrl.abort(), 15000) : null;
+  try{
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      signal: ctrl ? ctrl.signal : undefined,
+      body: JSON.stringify({
+        service_id: EMAIL_CONFIG.serviceId, template_id: EMAIL_CONFIG.templateId, user_id: EMAIL_CONFIG.publicKey,
+        template_params: {to_email: to, to_name: toName, subject, message, app_name: EMAIL_CONFIG.appName}
+      })
+    });
+    if(!res.ok){
+      const body = await res.text().catch(()=>'');
+      throw new Error(`EmailJS ${res.status}${body ? ': ' + body : ''}`.slice(0, 200));
+    }
+  } finally { if(timer) clearTimeout(timer); }
+}
+function appLink(){ return /^https?:$/.test(location.protocol) ? location.origin + location.pathname : ''; }
+function firstName(n){ return String(n || '').trim().split(/\s+/)[0] || 'there'; }
+
+/* ---- the emails people receive ---- */
+function buildRegistrationEmail(reg, decision){
+  const app = EMAIL_CONFIG.appName, hi = `Hi ${firstName(reg.name)},`, link = appLink();
+  const where = link ? `\n\nOpen the system here: ${link}` : '';
+  if(decision === 'Approved'){
+    if(reg.role === 'Player'){
+      return {
+        subject: `You're in! Your ${app} player registration was accepted`,
+        message: `${hi}\n\nGreat news — Coach ${reg.coachName || 'your coach'} has accepted your registration. You are now a qualified player of ${reg.team || 'your team'}${reg.sport && reg.sport !== '—' ? ' (' + reg.sport + ')' : ''}.\n\nWhat's next:\n- Your coach will share the practice and game schedule with you.\n- Bring your school ID on game days.\n- You can follow the schedule, live scores and standings on ${app}.${where}\n\nCongratulations and good luck!\n— ${app}`
+      };
+    }
+    if(reg.role === 'Coach'){
+      return {
+        subject: `Your ${app} coach registration was approved`,
+        message: `${hi}\n\nGood news — an Official has approved your registration. You are now a qualified coach in ${app}.\n\nYou can log in using this email address (${reg.email}) and the password you created when you registered. After logging in, create your team so players can register under you.${where}\n\n— ${app}`
+      };
+    }
+    if(reg.role === 'Official'){
+      return {
+        subject: `Your ${app} official registration was approved`,
+        message: `${hi}\n\nGood news — the Administrator has approved your registration. You are now a qualified official in ${app}.\n\nYou can log in using this email address (${reg.email}) and the password you created when you registered. You will be able to manage the tournaments, schedules and live scores assigned to you.${where}\n\n— ${app}`
+      };
+    }
+    return {
+      subject: `Your ${app} registration was approved`,
+      message: `${hi}\n\nYour ${reg.role} registration in ${app} was approved.${where}\n\n— ${app}`
+    };
+  }
+  const contact = reg.role === 'Player' ? `your coach${reg.coachName ? ' (Coach ' + reg.coachName + ')' : ''}` : 'the tournament organizers';
+  return {
+    subject: `Update on your ${app} registration`,
+    message: `${hi}\n\nThank you for registering. Unfortunately, your ${reg.role} registration was not approved this time.\n\nIf you think this is a mistake, please contact ${contact}. You are welcome to register again with complete and correct details.\n\n— ${app}`
+  };
+}
+
+/* ---- is this a real email? (instant checks + a DNS lookup) ---- */
+const EMAIL_TYPOS = {'gmial.com':'gmail.com','gmai.com':'gmail.com','gmail.co':'gmail.com','gamil.com':'gmail.com','gmal.com':'gmail.com','gmail.con':'gmail.com','gmail.comm':'gmail.com','gmaill.com':'gmail.com','yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.con':'yahoo.com','hotmial.com':'hotmail.com','hotmal.com':'hotmail.com','outlok.com':'outlook.com','outloo.com':'outlook.com'};
+const EMAIL_DISPOSABLE = ['mailinator.com','10minutemail.com','guerrillamail.com','tempmail.com','temp-mail.org','yopmail.com','trashmail.com','sharklasers.com','getnada.com','dispostable.com','maildrop.cc','throwawaymail.com','fakeinbox.com'];
+const emailDomainCache = {};
+function emailQuickCheck(email){
+  const at = email.lastIndexOf('@');
+  const local = email.slice(0, at), domain = email.slice(at + 1).toLowerCase();
+  if(EMAIL_TYPOS[domain]) return `Did you mean ${local}@${EMAIL_TYPOS[domain]}? Please check your email address.`;
+  if(EMAIL_DISPOSABLE.includes(domain)) return 'Temporary / disposable email addresses are not allowed. Please use your real email address.';
+  if(!/\.[a-z]{2,}$/i.test(domain)) return 'Please enter a complete email address (for example name@gmail.com).';
+  return '';
+}
+/* Asks Google's public DNS whether the email's domain exists and can receive mail. If the lookup itself
+   fails (offline, blocked network) we let the person continue — only a definite "no" blocks. */
+async function checkEmailDomain(email){
+  const domain = email.slice(email.lastIndexOf('@') + 1).toLowerCase();
+  if(domain in emailDomainCache) return emailDomainCache[domain];
+  let result = {ok:true, unknown:true};
+  if(typeof fetch === 'function'){
+    try{
+      const q = async type => {
+        const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        const timer = ctrl ? setTimeout(()=>ctrl.abort(), 4500) : null;
+        try{
+          const r = await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`, {signal: ctrl ? ctrl.signal : undefined});
+          if(!r.ok) throw new Error('dns');
+          return await r.json();
+        } finally { if(timer) clearTimeout(timer); }
+      };
+      const mx = await q('MX');
+      if(mx.Status === 3) result = {ok:false, reason:`The email domain "${domain}" does not exist. Please check your email address.`};
+      else if(Array.isArray(mx.Answer) && mx.Answer.some(a=>a.type === 15)) result = {ok:true};
+      else {
+        const a = await q('A');
+        result = (Array.isArray(a.Answer) && a.Answer.length) ? {ok:true}
+          : {ok:false, reason:`"${domain}" cannot receive email. Please use a different email address.`};
+      }
+    }catch(e){ result = {ok:true, unknown:true}; }
+  }
+  if(!result.unknown) emailDomainCache[domain] = result;
+  return result;
+}
+
+/* ---- registration: confirm the email with a 6-digit code ---- */
+const regVerify = {okEmail:'', verified:false, pendingEmail:'', code:'', expires:0, attempts:0, lastSent:0, busy:false};
+function regShowError(msg){
+  const e = document.getElementById('register-error');
+  if(!e) return;
+  e.textContent = msg; e.style.display = 'block';
+  if(e.scrollIntoView) e.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function setRegBusy(label){
+  const b = document.getElementById('reg-submit-btn');
+  if(!b) return;
+  b.disabled = !!label;
+  b.textContent = label || 'Submit Registration';
+}
+async function regEmailGate(email){
+  if(regVerify.busy) return;
+  regVerify.busy = true;
+  let proceed = false;
+  try{
+    setRegBusy('Checking your email…');
+    const chk = await checkEmailDomain(email);
+    if(!chk.ok){ regShowError(chk.reason); return; }
+    if(!emailEnabled() || !EMAIL_CONFIG.requireVerification){
+      regVerify.okEmail = email.toLowerCase(); regVerify.verified = false; proceed = true; return;
+    }
+    setRegBusy('Sending code…');
+    const sent = await sendVerifyCode(email);
+    if(!sent.ok){ regShowError(sent.error); return; }
+    openVerifyOverlay(email);
+  } finally {
+    regVerify.busy = false;
+    setRegBusy('');
+    if(proceed) registerSubmit();
+  }
+}
+async function sendVerifyCode(email){
+  const nameEl = document.getElementById('reg-name');
+  const name = nameEl ? nameEl.value.trim() : '';
+  let n;
+  if(typeof crypto !== 'undefined' && crypto.getRandomValues) n = crypto.getRandomValues(new Uint32Array(1))[0];
+  else n = Math.floor(Math.random() * 4294967296);
+  const code = String(n % 1000000).padStart(6, '0');
+  try{
+    await sendEmail(email, name || 'there', `Your ${EMAIL_CONFIG.appName} verification code: ${code}`,
+      `Hi ${firstName(name)},\n\nYour verification code is ${code}\nIt expires in 10 minutes.\n\nEnter it on the registration page to finish registering. If you did not try to register, you can ignore this email.\n\n— ${EMAIL_CONFIG.appName}`);
+  }catch(err){
+    console.error('Verification email failed:', err);
+    return {ok:false, error:`We couldn't send a verification code to ${email}. Please make sure the address is correct and try again in a moment.`};
+  }
+  regVerify.pendingEmail = email; regVerify.code = code;
+  regVerify.expires = Date.now() + 10 * 60 * 1000; regVerify.attempts = 0; regVerify.lastSent = Date.now();
+  return {ok:true};
+}
+function openVerifyOverlay(email){
+  document.getElementById('reg-verify-msg').textContent = `We sent a 6-digit code to ${repMaskEmail(email)}. It expires in 10 minutes. Check your Spam folder if you can't find it.`;
+  document.getElementById('reg-verify-code').value = '';
+  document.getElementById('reg-verify-error').style.display = 'none';
+  document.getElementById('reg-verify-overlay').classList.add('open');
+  setTimeout(()=>{ const i = document.getElementById('reg-verify-code'); if(i && i.focus) i.focus(); }, 50);
+}
+function verifyShowError(msg){
+  const e = document.getElementById('reg-verify-error');
+  e.textContent = msg; e.style.display = 'block';
+}
+function submitVerifyCode(){
+  const input = document.getElementById('reg-verify-code');
+  if(!regVerify.code) return verifyShowError('Tap "Resend code" to get a new code.');
+  if(Date.now() > regVerify.expires){ regVerify.code = ''; return verifyShowError('That code has expired. Tap "Resend code" to get a new one.'); }
+  if(input.value.length !== 6) return verifyShowError('Enter the 6-digit code from your email.');
+  regVerify.attempts += 1;
+  if(input.value !== regVerify.code){
+    if(regVerify.attempts >= 5){ regVerify.code = ''; return verifyShowError('Too many wrong tries. Tap "Resend code" to get a new code.'); }
+    return verifyShowError(`That code is not correct. ${5 - regVerify.attempts} ${5 - regVerify.attempts === 1 ? 'try' : 'tries'} left.`);
+  }
+  regVerify.okEmail = regVerify.pendingEmail.toLowerCase();
+  regVerify.verified = true;
+  regVerify.code = '';
+  closeVerifyOverlay();
+  registerSubmit(); // the rest of the registration continues now that the email is confirmed
+}
+async function resendVerifyCode(){
+  const wait = 60000 - (Date.now() - regVerify.lastSent);
+  if(wait > 0) return verifyShowError(`Please wait ${Math.ceil(wait / 1000)} seconds before asking for another code.`);
+  const btn = document.getElementById('reg-verify-resend');
+  if(btn) btn.disabled = true;
+  const sent = await sendVerifyCode(regVerify.pendingEmail);
+  if(btn) btn.disabled = false;
+  if(!sent.ok) return verifyShowError(sent.error);
+  document.getElementById('reg-verify-code').value = '';
+  document.getElementById('reg-verify-error').style.display = 'none';
+  showToastOnly('A new code was sent ✓');
+}
+function closeVerifyOverlay(){
+  const el = document.getElementById('reg-verify-overlay');
+  if(el) el.classList.remove('open');
+}
+function cancelEmailVerify(){
+  closeVerifyOverlay();
+  regVerify.code = ''; regVerify.okEmail = ''; regVerify.verified = false;
+  const e = document.getElementById('reg-email');
+  if(e && e.focus) e.focus();
+}
+
+/* ---- accepted / rejected → email the person ---- */
+let emailHintShown = false;
+function emailWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
+function canNotifyRegistration(r){
+  return !!r && r.status !== 'Pending' && (currentRole === 'admin' || canReviewRegistration(r));
+}
+async function notifyRegistrationDecision(reg, decision, manual){
+  const repaint = ()=>{
+    renderRegistrationsAdmin();
+    if(currentRole === 'coach') buildMyTeam();
+    const ov = document.getElementById('player-detail-overlay');
+    if(ov && ov.classList.contains('open')) openPlayerDetails(reg.id);
+    schedulePersist();
+  };
+  if(!emailEnabled()){
+    reg.notifyStatus = 'skipped'; reg.notifyNote = 'Email notifications are not set up.'; reg.notifyAt = '';
+    repaint();
+    if(manual || !emailHintShown){
+      emailHintShown = true;
+      setTimeout(()=>showToastOnly('ℹ Email notifications are not set up yet, so no email was sent.'), manual ? 0 : 1400);
+    }
+    return 'skipped';
+  }
+  // Registrations made before the email checks existed may contain made-up addresses: never email those automatically.
+  if(reg.emailVerified === undefined && !manual){
+    reg.notifyStatus = 'skipped'; reg.notifyNote = 'Old registration — the email address was never checked.'; reg.notifyAt = '';
+    repaint();
+    setTimeout(()=>showToastOnly(`ℹ ${reg.name} registered before email checks existed, so no email was sent. Use "Send email" if the address is real.`), 1400);
+    return 'skipped';
+  }
+  const mail = buildRegistrationEmail(reg, decision);
+  try{
+    await sendEmail(reg.email, reg.name, mail.subject, mail.message);
+    reg.notifyStatus = 'sent'; reg.notifyNote = ''; reg.notifyAt = new Date().toISOString(); reg.notifyDecision = decision;
+    await emailWait(manual ? 0 : 1300);
+    repaint();
+    showToastOnly(`📧 Email sent to ${reg.name} (${repMaskEmail(reg.email)})`);
+    return 'sent';
+  }catch(err){
+    console.error('Notification email failed:', err);
+    reg.notifyStatus = 'failed'; reg.notifyNote = String((err && err.message) || err).slice(0, 160); reg.notifyAt = '';
+    await emailWait(manual ? 0 : 1300);
+    repaint();
+    showToastOnly(`⚠ ${reg.name} was ${decision.toLowerCase()}, but the email could not be sent. Use "Send email" to try again.`);
+    return 'failed';
+  }
+}
+function resendRegistrationEmail(id){
+  const r = registrations.find(x=>x.id === id);
+  if(!r || !canNotifyRegistration(r)){ showToast("You can't send this email."); return; }
+  showToastOnly('Sending email…');
+  notifyRegistrationDecision(r, r.status, true);
+}
+function notifyText(r){
+  if(r.status === 'Pending') return 'Will be emailed once reviewed';
+  if(r.notifyStatus === 'sent') return 'Sent ' + (r.notifyAt ? new Date(r.notifyAt).toLocaleString() : '');
+  if(r.notifyStatus === 'failed') return 'Not sent — ' + (r.notifyNote || 'error');
+  if(r.notifyStatus === 'skipped') return 'Not sent — ' + (r.notifyNote || '');
+  return 'Not sent yet';
+}
+function emailBadgesHtml(r){
+  let h = '';
+  if(r.emailVerified === true) h += `<span class="rep-badge rb-ok" title="This person confirmed their email with a code">✓ Email verified</span> `;
+  else if(r.emailVerified === false) h += `<span class="rep-badge rb-mute" title="The email was not confirmed with a code">Email unverified</span> `;
+  if(r.status !== 'Pending'){
+    if(r.notifyStatus === 'sent') h += `<span class="rep-badge rb-ok" title="${escAttr(notifyText(r))}">✉ Emailed</span> `;
+    else if(r.notifyStatus === 'failed') h += `<span class="rep-badge rb-warn" title="${escAttr(r.notifyNote)}">✉ Not sent</span> `;
+    else if(r.notifyStatus === 'skipped') h += `<span class="rep-badge rb-mute" title="${escAttr(r.notifyNote)}">✉ Not emailed</span> `;
+  }
+  return h;
+}
+
+/* ---- connect email ONCE from inside the app (Registrations page → admin) ----
+   The three EmailJS values are saved in Firestore (meta/emailConfig) so every device — including the
+   phones of people who are registering — picks them up automatically. No code editing, no redeploy.
+   (The EmailJS "public key" is meant to be public; it is not a password.) */
+const emailConfigDocRef = () => db.collection('meta').doc('emailConfig');
+function applyEmailConfigDoc(d){
+  EMAIL_CONFIG.serviceId = String(d.serviceId || '');
+  EMAIL_CONFIG.templateId = String(d.templateId || '');
+  EMAIL_CONFIG.publicKey = String(d.publicKey || '');
+  EMAIL_CONFIG.requireVerification = d.requireVerification !== false;
+  renderEmailStatusCard();
+  refreshEmailHint();
+}
+function listenToEmailConfigDoc(){
+  return new Promise(resolve=>{
+    let first = true;
+    const unsub = emailConfigDocRef().onSnapshot(doc=>{
+      if(doc.exists) applyEmailConfigDoc(doc.data() || {});
+      if(first){ first = false; resolve(); }
+    }, err=>{
+      console.error('Firestore email-config listener error:', err);
+      noteQuotaError(err);
+      if(first){ first = false; resolve(); }
+    });
+    firestoreUnsubs.push(unsub);
+  });
+}
+function refreshEmailHint(){
+  const h = document.getElementById('reg-email-hint');
+  if(!h) return;
+  h.textContent = !emailEnabled() ? 'Use a real email address you can open.'
+    : EMAIL_CONFIG.requireVerification
+      ? 'Use a real email you can open — after you press Submit we send a 6-digit code to confirm it, and you are emailed when you are accepted.'
+      : 'Use a real email you can open — you will be emailed when you are accepted.';
+}
+async function saveEmailConfig(){
+  if(currentRole !== 'admin'){ showToast('Only the Administrator can change the email settings.'); return; }
+  const g = id => { const e = document.getElementById(id); return e ? e.value.trim() : ''; };
+  const serviceId = g('ec-service'), templateId = g('ec-template'), publicKey = g('ec-key');
+  const reqEl = document.getElementById('ec-require');
+  const requireVerification = reqEl ? !!reqEl.checked : true;
+  if(!serviceId || !templateId || !publicKey){ showToast('Fill in all three values: Service ID, Template ID and Public Key.'); return; }
+  if(!fsReady){ showToast("Can't save right now — the database is not connected. Check your internet and try again."); return; }
+  try{
+    await emailConfigDocRef().set({serviceId, templateId, publicKey, requireVerification, updatedAt: new Date().toISOString(), updatedBy: 'Administrator'});
+  }catch(err){
+    console.error('Saving email settings failed:', err);
+    noteQuotaError(err);
+    showToast('⚠ Could not save the email settings: ' + String((err && err.message) || err).slice(0, 80));
+    return;
+  }
+  applyEmailConfigDoc({serviceId, templateId, publicKey, requireVerification});
+  logAudit('Email Settings Updated', 'Email notifications were connected / updated.', 'Administrator');
+  showToast('Email connected ✓ — now send yourself a test email to make sure it works.');
+}
+async function disconnectEmailConfig(){
+  if(currentRole !== 'admin') return;
+  if(!confirm('Disconnect email?\n\nNew registrants will no longer get a verification code and accepted people will no longer be emailed until you connect it again.')) return;
+  if(!fsReady){ showToast("Can't save right now — the database is not connected."); return; }
+  try{
+    await emailConfigDocRef().set({serviceId:'', templateId:'', publicKey:'', requireVerification:true, updatedAt:new Date().toISOString(), updatedBy:'Administrator'});
+  }catch(err){ console.error(err); noteQuotaError(err); showToast('⚠ Could not disconnect: ' + String((err && err.message) || err).slice(0, 80)); return; }
+  applyEmailConfigDoc({});
+  logAudit('Email Settings Updated', 'Email notifications were disconnected.', 'Administrator');
+  showToast('Email disconnected.');
+}
+function copyEmailTemplate(btn){
+  const text = btn.dataset.copy || '';
+  const done = ()=>showToastOnly('Copied ✓');
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, ()=>showToastOnly('Press Ctrl+C to copy it.')); return; }
+  const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); done(); }catch(e){ showToastOnly('Press Ctrl+C to copy it.'); }
+  document.body.removeChild(ta);
+}
+
+/* ---- Registrations page: email status / one-time connect form ---- */
+function renderEmailStatusCard(){
+  const el = document.getElementById('email-status-card');
+  if(!el) return;
+  if(currentRole !== 'admin' && currentRole !== 'official'){ el.style.display = 'none'; return; }
+  el.style.display = 'block';
+  const on = emailEnabled(), isAdmin = currentRole === 'admin';
+  const sig = [currentRole, on, EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateId, EMAIL_CONFIG.publicKey, EMAIL_CONFIG.requireVerification].join('|');
+  if(el.dataset.sig === sig) return; // never redraw while someone is typing in the form
+  el.dataset.sig = sig;
+  const tplContent = '<div style="white-space:pre-line;font-family:Arial,sans-serif;font-size:15px;">{{message}}</div>';
+  const copyRow = (label, text)=>`<div style="display:flex;align-items:center;gap:8px;margin:4px 0;flex-wrap:wrap;">
+      <span class="rep-note" style="margin:0;min-width:120px;">${escH(label)}</span>
+      <code style="flex:1;min-width:180px;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;word-break:break-all;">${escH(text)}</code>
+      <button class="btn btn-ghost btn-sm" data-copy="${escAttr(text)}" onclick="copyEmailTemplate(this)">Copy</button></div>`;
+  const field = (id, label, val, ph)=>`<div><label style="display:block;font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;">${label}</label>
+      <input type="text" id="${id}" value="${escAttr(val)}" placeholder="${ph}" autocomplete="off" style="width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:9px 10px;color:var(--text);font-size:13px;outline:none;"></div>`;
+  const setup = !isAdmin ? '' : `
+    <details ${on ? '' : 'open'} style="margin-top:12px;">
+      <summary style="cursor:pointer;font-weight:600;font-size:13px;">${on ? 'Change email settings' : 'Connect email — one time, about 2 minutes'}</summary>
+      <ol class="rep-note" style="padding-left:18px;line-height:1.75;margin-top:10px;">
+        <li>Sign up free at <b>emailjs.com</b> → <b>Email Services</b> → <b>Add New Service</b> → choose <b>Gmail</b> and connect your Gmail → copy the <b>Service ID</b>.</li>
+        <li><b>Email Templates</b> → <b>Create New Template</b>. Paste these three into the template, save it, then copy the <b>Template ID</b>:
+          ${copyRow('To Email', '{{to_email}}')}${copyRow('Subject', '{{subject}}')}${copyRow('Content (HTML)', tplContent)}</li>
+        <li><b>Account → General</b> → copy your <b>Public Key</b>.</li>
+        <li>Paste the three values below and press <b>Save &amp; connect</b>.</li>
+      </ol>
+      <div class="rep-toolbar" style="margin-bottom:10px;">
+        ${field('ec-service', 'Service ID', EMAIL_CONFIG.serviceId, 'service_xxxxxxx')}
+        ${field('ec-template', 'Template ID', EMAIL_CONFIG.templateId, 'template_xxxxxxx')}
+        ${field('ec-key', 'Public Key', EMAIL_CONFIG.publicKey, 'Your public key')}
+      </div>
+      <label class="check-row" style="margin-bottom:10px;"><input type="checkbox" id="ec-require" ${EMAIL_CONFIG.requireVerification ? 'checked' : ''}><span>Ask new registrants to enter a 6-digit code sent to their email before their registration is submitted</span></label>
+      <div class="rep-actions"><button class="btn btn-primary btn-sm" onclick="saveEmailConfig()">Save &amp; connect</button>
+        ${on ? '<button class="btn btn-ghost btn-sm" onclick="disconnectEmailConfig()">Disconnect</button>' : ''}</div>
+    </details>`;
+  if(!on){
+    el.innerHTML = `<h3 style="font-size:14px;margin-bottom:6px;">📧 Email notifications — <span style="color:#FFB84D;">not connected yet</span></h3>
+      <p class="rep-note" style="margin:0;">${isAdmin
+        ? 'Emails — the 6-digit code when someone registers and the "you are accepted" message — are sent <b>automatically</b>, but an email always needs a sender account, so this has to be connected <b>once</b>. After that nobody has to set anything up again: every registrant gets their code and every accepted person is emailed on their own.'
+        : 'Ask the Administrator to connect email on this page. Until then nobody is emailed and registrants do not get a verification code.'}</p>${setup}`;
+    return;
+  }
+  el.innerHTML = `<h3 style="font-size:14px;margin-bottom:6px;">📧 Email notifications — <span style="color:var(--mint);">on</span></h3>
+    <p class="rep-note" style="margin:0 0 ${isAdmin ? '10' : '0'}px;"><b style="color:var(--mint);">On.</b> People are emailed automatically when their registration is accepted or rejected.${EMAIL_CONFIG.requireVerification ? ' New registrants must confirm their email with a 6-digit code.' : ''}</p>
+    ${isAdmin ? `<div class="rep-inline"><input type="email" id="email-test-to" placeholder="Send a test email to…" style="width:240px;"><button class="btn btn-ghost btn-sm" onclick="sendTestEmail()">Send test email</button></div>` : ''}${setup}`;
+}
+async function sendTestEmail(){
+  if(currentRole !== 'admin') return;
+  const to = (document.getElementById('email-test-to') || {}).value;
+  if(!to || !/^\S+@\S+\.\S+$/.test(to.trim())){ showToastOnly('Enter a valid email address to test.'); return; }
+  showToastOnly('Sending test email…');
+  try{
+    await sendEmail(to.trim(), 'Admin', `${EMAIL_CONFIG.appName} test email`, `This is a test email from ${EMAIL_CONFIG.appName}.\n\nIf you can read this, email notifications are working. 🎉`);
+    showToastOnly(`✓ Test email sent to ${to.trim()}`);
+  }catch(err){
+    console.error(err);
+    showToastOnly('⚠ Test email failed — check your Service ID, Template ID and Public Key. (' + String((err && err.message) || err).slice(0, 80) + ')');
+  }
+}
+
 /* ---- registration checks: unique player names + 11-digit phone numbers ---- */
 function normPersonName(n){
   return String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
@@ -2568,6 +3248,7 @@ function registerSubmit(){
 
   const emailOk = /^\S+@\S+\.\S+$/.test(email);
   if(!name || !emailOk) return fail('Please enter your full name and a valid email.');
+  { const quick = emailQuickCheck(email); if(quick) return fail(quick); }
   if(phone && !isValidPhone11(phone)) return fail('Phone number must be 11 digits and start with 09 (numbers only), e.g. 09171234567.');
   if(role === 'Player' && playerNameExists(name)){
     return fail(`A player named "${name}" is already in the system. If that is you, you are already registered. If you are a different person with the same name, add your middle name or initial (e.g. "Juan D. Cruz").`);
@@ -2620,6 +3301,8 @@ function registerSubmit(){
       consent: true, consentAt: new Date().toISOString()
     };
   }
+  // Email must be real: domain lookup (+ 6-digit code when email is set up). Skipped when the browser can't make web requests.
+  if(typeof fetch === 'function' && regVerify.okEmail !== emailLc){ errEl.style.display = 'none'; regEmailGate(email); return; }
   errEl.style.display = 'none';
 
   regIdCounter += 1;
@@ -2630,7 +3313,9 @@ function registerSubmit(){
     sport,
     status: 'Pending',
     date: new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}),
-    photo: pendingRegPhoto || null
+    photo: pendingRegPhoto || null,
+    emailVerified: !!(regVerify.verified && regVerify.okEmail === emailLc),
+    notifyStatus: '', notifyNote: '', notifyAt: ''
   }, extra);
   if(needsPassword) newReg.password = password;
   registrations.push(newReg);
@@ -2671,6 +3356,7 @@ function registerSubmit(){
   document.querySelectorAll('#gate-register input[type="checkbox"]').forEach(c=>{ c.checked = false; });
   document.querySelectorAll('#gate-register select').forEach(s=>{ s.selectedIndex = 0; });
   resetRegImages();
+  regVerify.okEmail = ''; regVerify.verified = false; regVerify.code = '';
   document.querySelectorAll('.role-opt').forEach(r=>r.classList.remove('selected'));
   document.querySelector('.role-opt[data-role="Player"]').classList.add('selected');
   applyRoleUI('Player');
@@ -2754,7 +3440,7 @@ function enterApp(role, name){
   // Officials assist the admin on tournament operations: schedule management, standings stay admin-only, bracket generation is shared.
   document.getElementById('schedule-admin-add').style.display = (isAdmin||isOfficial) ? 'block' : 'none';
   document.getElementById('standings-add-btn').style.display = isAdmin ? 'inline-flex' : 'none';
-  document.getElementById('standings-actions-head').style.display = isAdmin ? 'table-cell' : 'none';
+  document.getElementById('standings-actions-head').style.display = (isAdmin||isOfficial) ? 'table-cell' : 'none';
   document.getElementById('bracket-generator-card').style.display = (isAdmin||isOfficial) ? 'block' : 'none';
   document.getElementById('schedule-generator-card').style.display = (isAdmin||isOfficial) ? 'block' : 'none';
   const regRoleFilterEl = document.getElementById('reg-role-filter');
@@ -3076,18 +3762,35 @@ function buildAll(){
   if(toggle) toggle.checked = publicInfoVisible;
 }
 
-const TICKER_ITEMS = [
-  {live:true, t:'Iron Spikers vs Coastal Smash', s:'2 - 1'},
-  {live:true, t:'Team Vortex vs Neon Circuit', s:'13 - 9'},
-  {live:false, t:'Northside Ballers def. River Hawks', s:'88 - 75'},
-  {live:false, t:'Granite Wolves vs Summit FC', s:'Finals Aug 24'},
-  {live:false, t:'Regional Esports Showdown', s:'Round 3 underway'},
-  {live:false, t:'City Volleyball Championship', s:'Semis this weekend'},
-];
+/* The ticker is not a static list any more: it only shows matches whose status is
+   actually Live right now, sourced from the same real-time schedule as every other
+   screen. When no match is live the whole ticker bar is hidden instead of scrolling
+   finished/upcoming teams. */
+function liveTickerItems(){
+  return schedule.filter(m=>m.status==='live').map(m=>({
+    live:true,
+    t:`${m.a} vs ${m.b}`,
+    s:(m.scoreA!=null && m.scoreB!=null) ? `${m.scoreA} - ${m.scoreB}` : 'LIVE'
+  }));
+}
 function buildTicker(elId){
-  const html = TICKER_ITEMS.map(i=>`<div class="tick-item">${i.live?'<span class="tick-live">LIVE</span>':'<span>●</span>'} ${i.t} <span class="tick-score">${i.s}</span></div>`).join('');
-  const target = document.getElementById(elId || 'ticker-track');
-  if(target) target.innerHTML = html + html;
+  if(!elId){
+    buildTicker('ticker-track');
+    buildTicker('landing-ticker-track');
+    return;
+  }
+  const target = document.getElementById(elId);
+  if(!target) return;
+  const items = liveTickerItems();
+  const wrap = target.closest('.ticker-wrap, .landing-ticker-wrap');
+  if(!items.length){
+    target.innerHTML = '';
+    if(wrap) wrap.style.display = 'none';
+    return;
+  }
+  if(wrap) wrap.style.display = 'flex';
+  const html = items.map(i=>`<div class="tick-item"><span class="tick-live">LIVE</span> ${escH(i.t)} <span class="tick-score">${escH(i.s)}</span></div>`).join('');
+  target.innerHTML = html + html;
 }
 
 /* ---- Public landing: live sports, visible to everyone, no login required ---- */
@@ -3198,6 +3901,7 @@ function renderRegistrationsAdmin(){
   const el = document.getElementById('registrations-list');
   const countEl = document.getElementById('reg-count');
   updateRegistrationBadges();
+  renderEmailStatusCard();
   if(!el) return;
   const help = document.getElementById('reg-help-text');
   if(help){
@@ -3232,6 +3936,8 @@ function renderRegistrationsAdmin(){
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
         <div class="reg-contact">${escH(r.email)}<br>${escH(r.phone||'')}</div>
         <span class="pill ${r.status==='Approved'?'pill-upcoming':r.status==='Rejected'?'pill-done':'pill-live'}">${escH(r.status)}</span>
+        ${emailBadgesHtml(r)}
+        ${canNotifyRegistration(r) && r.notifyStatus !== 'sent' ? `<button class="btn btn-ghost btn-sm" onclick="resendRegistrationEmail(${r.id})">Send email</button>` : ''}
         ${waiting ? `<span class="topbar-sub" style="text-transform:none;margin:0;font-size:11.5px;">${waiting}</span>` : ''}
         ${canViewPlayerDetails(r) && hasPlayerDetails(r) ? `<button class="btn btn-outline-mint btn-sm" onclick="openPlayerDetails(${r.id})">View Details</button>` : ''}
         ${canReview ? `
@@ -3271,6 +3977,7 @@ function approveRegistration(id){
     renderDirectory();
     renderPlayers();
     showToast(`${reg.name} accepted and added to ${team.name}.`);
+    notifyRegistrationDecision(reg, 'Approved');
     return;
   }
 
@@ -3301,6 +4008,7 @@ function approveRegistration(id){
   }
   renderRegistrationsAdmin();
   renderDirectory();
+  notifyRegistrationDecision(reg, 'Approved');
 }
 function rejectRegistration(id){
   const reg = registrations.find(r=>r.id === id);
@@ -3315,6 +4023,7 @@ function rejectRegistration(id){
   renderDirectory();
   if(currentRole === 'coach') buildMyTeam();
   showToast(`Rejected ${reg.name}'s registration.`);
+  notifyRegistrationDecision(reg, 'Rejected');
 }
 function deleteRegistration(id){
   const reg = registrations.find(r=>r.id === id);
@@ -3436,7 +4145,10 @@ function openPlayerDetails(id){
     <div class="detail-grid">
       ${detailItem('Accepted / reviewed by', r.reviewedBy ? ('Coach ' + r.reviewedBy) : '')}${detailItem('Reviewed on', r.reviewedAt)}
       ${detailItem('Consent confirmed', r.consentAt ? new Date(r.consentAt).toLocaleString() : '')}
+      ${detailItem('Email confirmed with a code', r.emailVerified === true ? 'Yes' : r.emailVerified === false ? 'No' : 'Not checked (old registration)')}
+      ${detailItem('Notification email', notifyText(r))}
     </div>
+    ${canNotifyRegistration(r) && r.notifyStatus !== 'sent' ? `<button class="btn btn-ghost btn-sm" style="margin-top:12px;" onclick="resendRegistrationEmail(${r.id})">Send email now</button>` : ''}
   `;
   document.getElementById('player-detail-overlay').classList.add('open');
 }
@@ -3825,6 +4537,7 @@ const DASHBOARD_UPDATE_TYPES = new Set([
   'Tournament Created', 'Tournament Deleted', 'Official Assigned',
   'Bracket Generated', 'Schedule Generated',
   'Match Added', 'Match Updated', 'Match Deleted',
+  'Live Video Set', 'Live Video Removed',
   'Standings Updated', 'Standings Row Removed',
   'Score Updated', 'Match Ended', 'Team Approved',
 ]);
@@ -4256,15 +4969,18 @@ function buildSchedule(){
       </div>
       <div class="sched-venue">${m.venue}</div>
       ${matchPillHtml(m)}
+      ${m.status==='live' && m.liveUrl ? `<span class="pill" style="background:rgba(76,141,255,0.14);color:var(--lime);">📺 Video</span>` : ''}
       ${conflict ? `<span class="pill" style="background:rgba(255,77,109,0.14);color:var(--danger);" title="Same time+venue or a team is double-booked">⚠ Conflict</span>` : ''}
       ${canManage ? `
       <div class="sched-actions">
+        ${canQr ? `<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();openLiveLinkModal(${m.id})" title="Set the YouTube/Facebook live video for this match">📺 ${m.status==='live' && m.liveUrl ? 'Live' : 'Video'}</button>` : ''}
         ${canQr ? `<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();openMatchQr(${m.id})">📱 QR</button>` : ''}
         ${fullyEditable ? `<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();editMatch(${m.id})">Edit</button>` : ''}
         <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteMatch(${m.id})">Delete</button>
       </div>` : ''}
     </div>`;
   }).join('') || `<p class="topbar-sub" style="text-transform:none;">No matches scheduled for this period.</p>`;
+  buildTicker(); // keeps the header ticker in step with any status/score/delete change
 }
 function addMatch(){
   const tournamentSel = document.getElementById('new-match-tournament');
@@ -4380,9 +5096,18 @@ function setStandingsTournament(v){
   editingStandingId = null;
   renderStandings();
 }
+/* Admin can delete any row. An Official can delete a row ONLY when every tournament that team
+   belongs to is one they are assigned to — so they never touch another tournament's standings. */
+function canDeleteStanding(s){
+  if(currentRole === 'admin') return true;
+  if(currentRole !== 'official' || !s) return false;
+  const owners = tournaments.filter(t=>seasonTeamNames(t).has(s.team));
+  return owners.length > 0 && owners.every(t=>isAssignedOfficial(t));
+}
 function renderStandings(){
   resortStandings();
   const isAdmin = currentRole === 'admin';
+  const isOfficial = currentRole === 'official';
 
   // Tournament filter (only tournaments that currently have teams in the standings)
   let tObj = standingsTournament ? tournaments.find(t=>t.name === standingsTournament) : null;
@@ -4446,7 +5171,9 @@ function renderStandings(){
       ${isAdmin ? `<td><div style="display:flex;gap:6px;">
         <button class="btn btn-ghost btn-sm" onclick="editStanding(${s.id})">Edit</button>
         <button class="btn btn-danger btn-sm" onclick="deleteStanding(${s.id})">Delete</button>
-      </div></td>` : ''}
+      </div></td>` : (isOfficial ? `<td>${canDeleteStanding(s)
+        ? `<button class="btn btn-danger btn-sm" onclick="deleteStanding(${s.id})">Delete</button>`
+        : `<span class="topbar-sub" style="text-transform:none;" title="Only the official assigned to this team's tournament can delete it">—</span>`}</td>` : '')}
     </tr>`;
   }).join('') || `<tr><td colspan="7"><p class="topbar-sub" style="text-transform:none;">${escH(emptyMsg)}</p></td></tr>`;
   if(typeof renderStandingsSeason === 'function') renderStandingsSeason();
@@ -4489,11 +5216,15 @@ function saveStanding(id){
 function deleteStanding(id){
   const s = standings.find(s=>s.id===id);
   if(!s) return;
+  if(!canDeleteStanding(s)){
+    showToast("Only the admin or the official assigned to this team's tournament can delete it.");
+    return;
+  }
   if(!confirm(`Remove ${s.team} from the standings? This can't be undone.`)) return;
   const idx = standings.findIndex(x=>x.id===id);
   standings.splice(idx,1);
   deleteFromFirestore('standings', id);
-  logAudit('Standings Row Removed', `${s.team} removed from the standings.`, 'Administrator');
+  logAudit('Standings Row Removed', `${s.team} removed from the standings.`, actorLabel());
   renderStandings();
   showToast(`Removed ${s.team}`);
 }
@@ -5239,6 +5970,7 @@ function repAttentionItems(){
   add('warn', teams.filter(t=>t.tournament && t.tournament !== '—' && repRosterCheck(t).label !== 'OK').length, 'Teams are short of (or over) the allowed number of players', 'Open', "repGoTab('teams')");
   add('warn', registrations.filter(r=>r.role === 'Player' && r.status !== 'Rejected' && repMissingDocs(r).length).length, 'Player registrations have missing documents or details', 'Open', "repGoTab('registration')");
   add('warn', repDuplicates().length, 'Duplicate or suspicious registrations found', 'Open', "repGoTab('registration')");
+  add('info', emailEnabled() ? 0 : 1, 'Email notifications are not set up — accepted people will not be emailed', 'Open', "nav('registrations')");
   return items;
 }
 function repRenderAttention(){
@@ -6031,6 +6763,170 @@ function exportToast(type){
   showToast(`${type} export ready for download`);
 }
 
+/* ---------------- LIVE VIDEO (YouTube / Facebook embed) ----------------
+   Admin, or the official assigned to a match's tournament, pastes the YouTube or
+   Facebook live link on the match. It is stored as m.liveUrl on the schedule doc,
+   so it syncs to every account through the same Firestore listener as the score.
+   The player is only rendered while m.status === 'live' — ending the match or
+   removing the link takes it down everywhere. Nothing is uploaded to Firebase;
+   the video itself streams straight from YouTube/Facebook's iframe. */
+let liveLinkMatchId = null;
+
+function normalizeLiveUrl(raw){
+  let value = String(raw == null ? '' : raw).trim();
+  if(!value) return '';
+  if(!/^https?:\/\//i.test(value)) value = 'https://' + value;
+  try{
+    const u = new URL(value);
+    if(u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+    return u.toString();
+  }catch(e){ return null; }
+}
+function livePlatformLabel(raw){
+  try{
+    const host = new URL(normalizeLiveUrl(raw)).hostname.replace(/^www\./,'').toLowerCase();
+    if(host === 'youtu.be' || host.endsWith('youtube.com')) return 'YouTube';
+    if(host === 'fb.watch' || host.endsWith('facebook.com')) return 'Facebook';
+  }catch(e){}
+  return 'External';
+}
+/* Turns a normal watch/share link into the link that can actually be embedded.
+   Returns null for links we can't embed — those still open in a new tab instead. */
+function liveEmbedUrl(raw){
+  const safe = normalizeLiveUrl(raw);
+  if(!safe) return null;
+  const u = new URL(safe);
+  const host = u.hostname.replace(/^www\./,'').toLowerCase();
+  let vid = null;
+  if(host === 'youtu.be'){
+    vid = u.pathname.split('/').filter(Boolean)[0];
+  }else if(host === 'youtube.com' || host === 'm.youtube.com' || host === 'music.youtube.com'){
+    if(u.pathname === '/watch') vid = u.searchParams.get('v');
+    else {
+      const match = u.pathname.match(/\/(?:embed|live|shorts)\/([A-Za-z0-9_-]{6,})/);
+      if(match) vid = match[1];
+    }
+  }
+  if(vid && /^[A-Za-z0-9_-]{6,}$/.test(vid)){
+    return `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+  }
+  if(host === 'facebook.com' || host === 'm.facebook.com' || host === 'web.facebook.com' || host === 'fb.watch'){
+    return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(safe)}&show_text=false&autoplay=1&width=1280`;
+  }
+  return null;
+}
+function liveVideoActive(m){
+  return !!(m && m.status === 'live' && m.liveUrl);
+}
+/* Renders (or clears) a live video into a container. It remembers the last URL it
+   rendered so score-only Firestore updates don't reload the iframe mid-stream. */
+function renderLiveVideoInto(container, m){
+  if(!container) return false;
+  const active = liveVideoActive(m);
+  const url = active ? normalizeLiveUrl(m.liveUrl) : '';
+  const embed = url ? liveEmbedUrl(url) : null;
+  const key = active ? (embed || url || '') : '';
+  if(container.dataset.videoKey === key){
+    return !!key;
+  }
+  container.dataset.videoKey = key;
+  if(!key){
+    container.innerHTML = '';
+    container.classList.remove('has-video');
+    return false;
+  }
+  container.classList.add('has-video');
+  if(embed){
+    container.innerHTML = `<iframe src="${escAttr(embed)}" title="${escAttr((m.a||'Team A')+' vs '+(m.b||'Team B')+' live video')}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+  }else{
+    container.innerHTML = `
+      <div class="live-video-fallback">
+        <div class="live-video-fallback-icon">📺</div>
+        <p>This ${escH(livePlatformLabel(url))} link can't be embedded here, but the live stream is still available.</p>
+        <a class="btn btn-primary btn-sm" href="${escAttr(url)}" target="_blank" rel="noopener">Open live stream ↗</a>
+      </div>`;
+  }
+  return true;
+}
+
+function openLiveLinkModal(id){
+  const m = schedule.find(s=>s.id===id);
+  if(!m) return;
+  const t = tournaments.find(x=>x.name===m.tournament);
+  if(!canManageTournament(t)){
+    showToast("Only the admin or this tournament's assigned official can set the live video.");
+    return;
+  }
+  liveLinkMatchId = id;
+  document.getElementById('live-link-title').textContent = `${m.a} vs ${m.b}`;
+  document.getElementById('live-link-sub').textContent = `${m.venue} · ${m.time}${m.tournament ? ' · '+m.tournament : ''} · ${m.status==='live' ? 'Currently Live' : m.status==='done' ? 'Accomplished' : 'Not live'}`;
+  document.getElementById('live-link-input').value = m.liveUrl || '';
+  document.getElementById('live-link-go-live').textContent = m.status === 'live' ? 'Update & Keep Live' : 'Save & Go Live';
+  document.getElementById('live-link-remove').style.display = m.liveUrl ? 'block' : 'none';
+  updateLiveLinkPreview();
+  document.getElementById('live-link-overlay').classList.add('open');
+}
+function closeLiveLinkModal(){
+  document.getElementById('live-link-overlay').classList.remove('open');
+  liveLinkMatchId = null;
+}
+function updateLiveLinkPreview(){
+  const raw = document.getElementById('live-link-input').value;
+  const preview = document.getElementById('live-link-preview');
+  if(!raw.trim()){
+    preview.textContent = '';
+    preview.className = 'live-link-preview';
+    return;
+  }
+  const url = normalizeLiveUrl(raw);
+  if(!url){
+    preview.textContent = '⚠ Paste a valid http(s) link.';
+    preview.className = 'live-link-preview bad';
+    return;
+  }
+  const embed = liveEmbedUrl(url);
+  preview.innerHTML = embed
+    ? `✓ ${escH(livePlatformLabel(url))} link detected — it will play inside TournamentPro.`
+    : `✓ ${escH(livePlatformLabel(url))} link detected — it will open in a new tab instead of embedding.`;
+  preview.className = 'live-link-preview ok';
+}
+function saveLiveLink(goLive){
+  const m = schedule.find(s=>s.id===liveLinkMatchId);
+  if(!m) return;
+  const raw = document.getElementById('live-link-input').value;
+  const url = normalizeLiveUrl(raw);
+  if(raw.trim() && !url){ showToast('That does not look like a valid link.'); return; }
+  if(goLive && !url){ showToast('Paste a YouTube or Facebook live link first.'); return; }
+  m.liveUrl = url || '';
+  if(goLive){
+    m.status = 'live';
+    syncTournamentLiveStatus(m.tournament);
+  }
+  logAudit('Live Video Set', `${m.a} vs ${m.b}: ${url ? livePlatformLabel(url)+' live video linked' : 'live video link cleared'}${goLive ? ' (match is live)' : ''}.`, actorLabel());
+  closeLiveLinkModal();
+  buildSchedule();
+  buildDashboard();
+  buildLandingLive();
+  if(liveViewerMatchId) renderLiveViewer();
+  if(publicLiveMatchId) renderPublicLiveMatch();
+  showToast(goLive ? 'Match is live — the video is now visible to everyone ✓' : 'Live video link saved ✓');
+}
+function removeLiveLink(){
+  const m = schedule.find(s=>s.id===liveLinkMatchId);
+  if(!m) return;
+  if(!m.liveUrl){ showToast('No video link to remove.'); return; }
+  if(!confirm(`Remove the live video link from ${m.a} vs ${m.b}? The match stays live; only the video disappears.`)) return;
+  m.liveUrl = '';
+  logAudit('Live Video Removed', `${m.a} vs ${m.b}: live video link removed.`, actorLabel());
+  closeLiveLinkModal();
+  buildSchedule();
+  buildDashboard();
+  buildLandingLive();
+  if(liveViewerMatchId) renderLiveViewer();
+  if(publicLiveMatchId) renderPublicLiveMatch();
+  showToast('Live video removed');
+}
+
 /* ---------------- MATCH LIVE-SCORE / QR CONTROL (new feature) ----------------
    Admin, or the official assigned to a match's tournament, opens this from a Schedule
    row. It shows a QR code (and plain link) to a public, no-login "live score" page for
@@ -6164,16 +7060,22 @@ function renderPublicLiveMatch(){
   const scoreRow = document.getElementById('public-live-score-row');
   const updateBtn = document.getElementById('public-live-update-btn');
   const statusEl = document.getElementById('public-live-status');
+  const videoEl = document.getElementById('public-live-video');
   if(!m){
     document.getElementById('public-live-team-a').textContent = 'Match not found';
     document.getElementById('public-live-team-b').textContent = '';
     scoreRow.style.display = 'none';
     updateBtn.style.display = 'none';
     statusEl.style.display = 'none';
+    if(videoEl){ renderLiveVideoInto(videoEl, null); videoEl.style.display = 'none'; }
     venueEl.textContent = 'This match may have been removed.';
     return;
   }
   scoreRow.style.display = 'flex';
+  if(videoEl){
+    const hasVideo = renderLiveVideoInto(videoEl, m);
+    videoEl.style.display = hasVideo ? 'block' : 'none';
+  }
   document.getElementById('public-live-tournament').textContent = m.tournament || 'TournamentPro';
   document.getElementById('public-live-team-a').textContent = m.a;
   document.getElementById('public-live-team-b').textContent = m.b;
@@ -6268,36 +7170,67 @@ let liveViewerMatchId = null;
 const liveChatByMatch = {}; // per-match in-memory guest comments, frontend only — resets on page reload
 
 function scoreForMatch(m){
-  if(m.scoreA!=null && m.scoreB!=null) return `${m.scoreA} - ${m.scoreB}`;
-  const t = TICKER_ITEMS.find(i => i.live && i.t === `${m.a} vs ${m.b}`);
-  return t ? t.s : null;
+  if(!m || m.scoreA==null || m.scoreB==null) return null;
+  return `${m.scoreA} - ${m.scoreB}`;
+}
+/* Re-renders the open viewer from the latest schedule data. Called on open AND by
+   scheduleRebuild(), so if the admin updates the score (or ends the match) while
+   someone is watching, the score updates live and the video disappears on end. */
+function renderLiveViewer(){
+  const m = schedule.find(s=>s.id===liveViewerMatchId);
+  if(!m){ closeLiveViewer(); return; }
+  const isLive = m.status === 'live';
+  const score = scoreForMatch(m);
+  document.getElementById('live-viewer-team-a').textContent = m.a;
+  document.getElementById('live-viewer-team-b').textContent = m.b;
+  document.getElementById('live-viewer-score').textContent = score || 'VS';
+  document.getElementById('live-viewer-time').textContent = m.time + (m.date ? ' · '+fmtShortDate(m.date) : '');
+  document.getElementById('live-viewer-venue').textContent = isLive ? `${m.a} vs ${m.b} · Live` : `${m.a} vs ${m.b} · ${m.status==='done' ? 'Match ended' : 'Not live'}`;
+  document.getElementById('live-viewer-venue-2').textContent = m.venue;
+
+  const badge = document.getElementById('live-viewer-badge');
+  if(badge) badge.style.display = isLive ? '' : 'none';
+
+  const stage = document.getElementById('live-stage');
+  const slot = document.getElementById('live-viewer-video');
+  const hasVideo = renderLiveVideoInto(slot, m);
+  if(stage) stage.classList.toggle('has-video', hasVideo);
+  refreshLiveChatUI(); // keeps the cheer buttons' team names current
+
+  const label = document.getElementById('live-stage-label');
+  const preview = document.getElementById('live-stage-preview');
+  if(!hasVideo && label && preview){
+    label.textContent = isLive ? 'Live Match' : (m.status==='done' ? 'Match Ended' : 'Video Offline');
+    if(isLive){
+      preview.textContent = m.liveUrl
+        ? 'Preparing the live player…'
+        : ((currentRole==='admin' || currentRole==='official')
+            ? 'No live video link yet — add one from the Schedule page.'
+            : 'The organizer has not added a live video link for this match yet.');
+    }else{
+      preview.textContent = m.status==='done'
+        ? `Final score: ${score || '—'} · the live video has ended`
+        : 'The live video is only shown while this match is live.';
+    }
+  }
 }
 function openLiveViewer(matchId){
   const m = schedule.find(s=>s.id===matchId);
   if(!m || m.status!=='live') return; // only LIVE cards open the viewer
   liveViewerMatchId = matchId;
 
-  document.getElementById('live-viewer-team-a').textContent = m.a;
-  document.getElementById('live-viewer-team-b').textContent = m.b;
-  const score = scoreForMatch(m);
-  document.getElementById('live-viewer-score').textContent = score || 'VS';
-  document.getElementById('live-viewer-time').textContent = m.time;
-  document.getElementById('live-viewer-venue').textContent = `${m.a} vs ${m.b}`;
-  document.getElementById('live-viewer-venue-2').textContent = m.venue;
-
-  // Seed a couple of sample comments the first time this match's viewer is opened
-  if(!liveChatByMatch[matchId]){
-    liveChatByMatch[matchId] = [
-      {who:'Guest', txt:"Let's go!"},
-      {who:'Fan123', txt:'Great match!'}
-    ];
-  }
+  // Live chat is now shared through Firestore (everyone watching this match sees the same messages)
+  if(liveChatName === null) liveChatName = loadLiveChatName();
+  refreshLiveChatUI();
+  startLiveChatListener(matchId);
   renderLiveChat();
+  renderLiveViewer();
 
   document.getElementById('live-viewer-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeLiveViewer(){
+  stopLiveChatListener();
   document.getElementById('live-viewer-overlay').classList.remove('open');
   document.body.style.overflow = '';
   liveViewerMatchId = null;
@@ -6307,24 +7240,141 @@ function escapeHtml(s){
   d.textContent = s;
   return d.innerHTML;
 }
+/* ---------------- LIVE CHAT v2 (shared via Firestore) ----------------
+   Messages live in  liveChat/{matchId}/messages  — a separate collection that is NOT part of
+   FS_COLLECTIONS / persistAll, so it can't affect any other sync. The listener only runs while a
+   live viewer is open and only loads the latest 100 messages (keeps Firestore reads small). */
+const LIVE_CHAT_NAME_KEY = 'stms_live_chat_name';
+let liveChatName = null;      // null = hasn't picked a name yet; '' never stored (becomes 'Guest')
+let liveChatUnsub = null;
+let liveChatLastSent = 0;
+let liveChatError = '';
+
+function loadLiveChatName(){
+  try{ const v = localStorage.getItem(LIVE_CHAT_NAME_KEY); return (v && v.trim()) ? v.trim().slice(0,20) : null; }
+  catch(e){ return null; }
+}
+function saveLiveChatName(n){
+  try{ localStorage.setItem(LIVE_CHAT_NAME_KEY, n); }catch(e){}
+}
+function liveChatCol(matchId){
+  return db.collection('liveChat').doc(String(matchId)).collection('messages');
+}
+function stopLiveChatListener(){
+  if(liveChatUnsub){ try{ liveChatUnsub(); }catch(e){} liveChatUnsub = null; }
+}
+function startLiveChatListener(matchId){
+  stopLiveChatListener();
+  liveChatError = '';
+  try{
+    liveChatUnsub = liveChatCol(matchId).orderBy('ts').limitToLast(100).onSnapshot(snap=>{
+      liveChatError = '';
+      liveChatByMatch[matchId] = snap.docs.map(d=>{
+        const x = d.data() || {};
+        return {who: String(x.name || 'Guest'), txt: String(x.txt || ''), team: String(x.team || ''), cheer: !!x.cheer};
+      });
+      if(liveViewerMatchId === matchId) renderLiveChat();
+    }, err=>{
+      console.error('Live chat listener error:', err);
+      if(typeof noteQuotaError === 'function') noteQuotaError(err);
+      liveChatError = (err && err.code === 'permission-denied')
+        ? 'Live chat is not enabled yet (Firestore rules need updating).'
+        : 'Live chat is unavailable right now.';
+      if(liveViewerMatchId === matchId) renderLiveChat();
+    });
+  }catch(e){
+    console.error('Could not start live chat:', e);
+    liveChatError = 'Live chat is unavailable right now.';
+  }
+}
+function refreshLiveChatUI(){
+  const joinEl = document.getElementById('live-chat-join');
+  const cheersEl = document.getElementById('live-chat-cheers');
+  const rowEl = document.getElementById('live-chat-input-row');
+  const nameBtn = document.getElementById('live-chat-namebtn');
+  if(!joinEl || !cheersEl || !rowEl || !nameBtn) return;
+  const joined = liveChatName !== null;
+  joinEl.style.display = joined ? 'none' : 'flex';
+  rowEl.style.display = joined ? 'flex' : 'none';
+  nameBtn.style.display = joined ? '' : 'none';
+  if(joined) nameBtn.textContent = '👤 ' + liveChatName + ' ✎';
+  const m = schedule.find(x=>x.id===liveViewerMatchId);
+  if(joined && m){
+    cheersEl.style.display = 'flex';
+    cheersEl.innerHTML = `
+      <button class="live-chat-cheer-btn" onclick="cheerLiveTeam(0)">📣 Cheer ${escapeHtml(m.a || 'Team A')}</button>
+      <button class="live-chat-cheer-btn" onclick="cheerLiveTeam(1)">📣 Cheer ${escapeHtml(m.b || 'Team B')}</button>`;
+  }else{
+    cheersEl.style.display = 'none';
+    cheersEl.innerHTML = '';
+  }
+}
+function joinLiveChat(asGuest){
+  const input = document.getElementById('live-chat-name-input');
+  let n = asGuest ? '' : (input ? input.value : '');
+  n = String(n || '').replace(/\s+/g,' ').trim().slice(0,20);
+  liveChatName = n || 'Guest';
+  saveLiveChatName(liveChatName);
+  if(input) input.value = '';
+  refreshLiveChatUI();
+  const msg = document.getElementById('live-chat-input');
+  if(msg) msg.focus();
+}
+function changeLiveChatName(){
+  liveChatName = null;
+  try{ localStorage.removeItem(LIVE_CHAT_NAME_KEY); }catch(e){}
+  refreshLiveChatUI();
+  const input = document.getElementById('live-chat-name-input');
+  if(input) input.focus();
+}
 function renderLiveChat(){
   const el = document.getElementById('live-chat-messages');
+  if(!el) return;
   const msgs = liveChatByMatch[liveViewerMatchId] || [];
+  const nearBottom = (el.scrollHeight - el.scrollTop - el.clientHeight) < 80;
+  if(liveChatError && !msgs.length){
+    el.innerHTML = `<div class="live-chat-empty">${escapeHtml(liveChatError)}</div>`;
+    return;
+  }
+  if(!msgs.length){
+    el.innerHTML = '<div class="live-chat-empty">No messages yet — be the first to say something or cheer for your team! 📣</div>';
+    return;
+  }
   el.innerHTML = msgs.map(c=>`
-    <div class="live-chat-msg">
-      <div class="who ${c.who==='Guest'?'guest':''}">${escapeHtml(c.who)}</div>
+    <div class="live-chat-msg ${c.cheer?'cheer':''}">
+      <div class="who ${c.who==='Guest'?'guest':''}">${escapeHtml(c.who)}${c.cheer && c.team ? `<span class="team-tag">· cheering ${escapeHtml(c.team)}</span>` : ''}</div>
       <div class="txt">${escapeHtml(c.txt)}</div>
     </div>`).join('');
-  el.scrollTop = el.scrollHeight;
+  if(nearBottom) el.scrollTop = el.scrollHeight;
+}
+function sendLiveChat(txt, extra){
+  if(!liveViewerMatchId || liveChatName === null) return false;
+  txt = String(txt || '').trim().slice(0,200);
+  if(!txt) return false;
+  const now = Date.now();
+  if(now - liveChatLastSent < 1500){ showToastOnly('Slow down a little 🙂'); return false; }
+  liveChatLastSent = now;
+  const doc = Object.assign({name: liveChatName || 'Guest', txt, ts: firebase.firestore.FieldValue.serverTimestamp()}, extra || {});
+  liveChatCol(liveViewerMatchId).add(doc).catch(err=>{
+    console.error('Live chat send failed:', err);
+    if(typeof noteQuotaError === 'function') noteQuotaError(err);
+    showToastOnly(err && err.code === 'permission-denied'
+      ? '⚠️ Chat is not enabled yet — ask the admin to update the Firestore rules.'
+      : '⚠️ Could not send your message. Please try again.');
+  });
+  return true;
 }
 function postLiveComment(){
-  if(!liveViewerMatchId) return;
   const input = document.getElementById('live-chat-input');
-  const txt = input.value.trim();
-  if(!txt) return;
-  liveChatByMatch[liveViewerMatchId].push({who:'Guest', txt});
-  input.value = '';
-  renderLiveChat();
+  if(!input) return;
+  if(sendLiveChat(input.value)) input.value = '';
+}
+function cheerLiveTeam(idx){
+  const m = schedule.find(x=>x.id===liveViewerMatchId);
+  if(!m) return;
+  const team = idx === 0 ? m.a : m.b;
+  if(!team) return;
+  sendLiveChat(`📣 Go ${team}!`, {cheer:true, team:String(team).slice(0,40)});
 }
 
 let toastTimer;
@@ -6339,6 +7389,31 @@ function showToast(msg){
   showToastOnly(msg);
   schedulePersist(); // most actions call showToast() right after mutating data — piggyback the Firestore sync here
 }
+</script>
+
+<script>
+/* ---- Mobile menu drawer (opens the existing sidebar on phones). Self-contained: no existing function is modified. ---- */
+function closeMobileMenu(){
+  document.body.classList.remove('menu-open');
+  var b=document.getElementById('mnav-menu-btn'); if(b) b.setAttribute('aria-expanded','false');
+}
+function toggleMobileMenu(){
+  var open = document.body.classList.toggle('menu-open');
+  var b=document.getElementById('mnav-menu-btn'); if(b) b.setAttribute('aria-expanded', open?'true':'false');
+}
+(function(){
+  var sb = document.querySelector('.sidebar');
+  /* choosing a page (or logging out) inside the drawer closes it */
+  if(sb) sb.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('.navlink, .logout-btn')) closeMobileMenu();
+  });
+  /* bottom-bar tabs also close it, Esc closes it, and growing past the phone breakpoint resets it */
+  document.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('.mnav-item:not(.mnav-menu)')) closeMobileMenu();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMobileMenu(); });
+  window.addEventListener('resize', function(){ if(window.innerWidth>880) closeMobileMenu(); });
+})();
 </script>
 </body>
 </html>
