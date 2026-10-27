@@ -478,6 +478,11 @@ input,select{font-family:inherit;}
 .mrow .score{font-family:var(--font-mono);font-weight:700;}
 .mrow .team-name{display:flex;align-items:center;gap:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .mseed{color:var(--muted-2);font-size:10.5px;width:16px;}
+/* Double elimination bracket (Winners / Losers / Grand Final sections) */
+.de-wrap{display:flex;flex-direction:column;gap:28px;width:100%;}
+.de-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+.de-note{font-size:11.5px;color:var(--muted-2);text-align:center;padding:6px 8px;}
+.matchup.bye-auto{opacity:.55;}
 
 /* Table */
 .table-wrap{overflow-x:auto;}
@@ -1447,13 +1452,13 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
             </div>
             <button class="btn btn-primary btn-sm" onclick="onGenerateBracketClick()">Generate Bracket</button>
           </div>
-          <p class="topbar-sub" style="text-transform:none;margin-top:10px;">Seeds a single-elimination bracket from that tournament's approved teams (randomized seeding).</p>
+          <p class="topbar-sub" style="text-transform:none;margin-top:10px;">Seeds a single- or double-elimination bracket (based on the tournament's format) from that tournament's approved teams (randomized seeding).</p>
         </div>
         <div class="card">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
             <div>
               <h2 style="font-size:16px;">Bracket</h2>
-              <span class="topbar-sub" style="text-transform:none;">Single Elimination</span>
+              <span class="topbar-sub" id="bracket-format-label" style="text-transform:none;">Single Elimination</span>
             </div>
             <span class="pill pill-live">Live</span>
           </div>
@@ -1661,6 +1666,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
           <div class="format-grid" id="format-grid">
             <div class="format-opt selected" data-f="Round Robin" onclick="pickFormat(this)"><h3>Round Robin</h3><p>Every team plays every other team once.</p></div>
             <div class="format-opt" data-f="Single Elim" onclick="pickFormat(this)"><h3>Single Elimination</h3><p>Lose once, you're out. Fastest path to a champion.</p></div>
+            <div class="format-opt" data-f="Double Elim" onclick="pickFormat(this)"><h3>Double Elimination</h3><p>Lose twice, you're out. A losers bracket gives every team a second chance.</p></div>
           </div>
           <button class="btn btn-primary btn-block" style="margin-top:22px;" onclick="generateTourney()">Generate Tournament</button>
         </div>
@@ -4695,6 +4701,9 @@ let currentBracketTournament = null; // which tournament currentBracket belongs 
                                       // newly-decided round can be auto-published to the right Schedule
 
 function buildBracket(){
+  const fmtLbl = document.getElementById('bracket-format-label');
+  if(fmtLbl) fmtLbl.textContent = isDoubleElimBracket() ? 'Double Elimination' : 'Single Elimination';
+  if(isDoubleElimBracket()){ buildDoubleElimBracket(); return; }
   document.getElementById('bracket-render').innerHTML = currentBracket.map(r=>`
     <div class="bracket-round">
       <div class="round-title">${r.round}</div>
@@ -4725,6 +4734,7 @@ function shuffle(arr){
 function generateBracketFor(tournamentName){
   const tData0 = tournaments.find(t=>t.name===tournamentName);
   if(!canManageTournament(tData0)){ showToast('You can only generate a bracket for the tournament assigned to you.'); return; }
+  if(tData0 && /double/i.test(tData0.format || '')){ generateDoubleElimBracketFor(tournamentName); return; }
   const roster = teams.filter(t=>t.tournament===tournamentName && t.status==='Approved').map(t=>t.name);
   if(roster.length < 2){
     showToast('Need at least 2 approved teams in this tournament to generate a bracket.');
@@ -4781,6 +4791,7 @@ function generateBracketFor(tournamentName){
    sync; already-scheduled pairings are skipped so re-running it never creates duplicates. */
 function publishReadyBracketMatches(tournamentName){
   if(!tournamentName || !currentBracket) return 0;
+  if(isDoubleElimBracket()) return publishReadyBracketMatchesDE(tournamentName);
   const tData = tournaments.find(t=>t.name===tournamentName);
   const venue = tData ? tData.venue : 'TBA';
   let added = 0;
@@ -4802,6 +4813,240 @@ function publishReadyBracketMatches(tournamentName){
     buildDashboard();
   }
   return added;
+}
+/* ====================================================================================
+   DOUBLE ELIMINATION
+   Used only when a tournament's format is "Double Elimination". The bracket is stored in the
+   same currentBracket / meta/bracket doc as before (array of {round, matches}), but every round
+   carries side:'W' (Winners), 'L' (Losers) or 'GF' (Grand Final), and every match carries a
+   unique key plus w / l = where its winner / loser goes next ({r:roundIndex, m:matchIndex, s:'a'|'b'}).
+   Single elimination brackets have no side tags, so none of the code below ever runs for them.
+   ==================================================================================== */
+function isDoubleElimBracket(){
+  return Array.isArray(currentBracket) && currentBracket.some(r => r && r.side === 'W');
+}
+function deSetSlot(dest, name){
+  const mt = currentBracket[dest.r] && currentBracket[dest.r].matches[dest.m];
+  if(!mt) return;
+  if(dest.s === 'a') mt.a = name; else mt.b = name;
+}
+/* Sends a decided match's winner (and loser, if it has a losers-bracket drop) to their next slots. */
+function deRoute(ri, mi){
+  const bm = currentBracket[ri].matches[mi];
+  if(!bm.winner) return;
+  const win = bm.winner === 'a' ? bm.a : bm.b;
+  const lose = bm.winner === 'a' ? bm.b : bm.a;
+  if(bm.w) deSetSlot(bm.w, win);
+  if(bm.l) deSetSlot(bm.l, lose);
+}
+/* A BYE never plays: the real team (if any) moves on automatically. Repeats until nothing changes,
+   so a bye that only becomes resolvable after another result arrives is still handled. */
+function deResolveByes(){
+  let changed = true, guard = 0;
+  while(changed && guard++ < 200){
+    changed = false;
+    currentBracket.forEach((round, ri)=>{
+      if(round.side === 'GF') return;
+      round.matches.forEach((bm, mi)=>{
+        if(bm.winner) return;
+        const aB = bm.a === 'BYE', bB = bm.b === 'BYE';
+        let w = null;
+        if(aB && bB) w = 'a';
+        else if(aB && bm.b !== 'TBA') w = 'b';
+        else if(bB && bm.a !== 'TBA') w = 'a';
+        if(!w) return;
+        bm.winner = w; bm.sa = '—'; bm.sb = '—'; bm.live = false; bm.auto = true;
+        deRoute(ri, mi);
+        changed = true;
+      });
+    });
+  }
+}
+function buildDoubleElimRounds(roster){
+  let size = 2;
+  while(size < roster.length) size *= 2;
+  const k = Math.log2(size);            // winners-bracket rounds
+  const lbCount = 2 * (k - 1);          // losers-bracket rounds
+  const lbIdx = j => k + j;
+  const gfIdx = k + lbCount;
+  const mk = key => ({key, a:'TBA', sa:'—', b:'TBA', sb:'—', winner:null, live:false, w:null, l:null});
+  const rounds = [];
+  // Winners bracket
+  for(let r=0; r<k; r++){
+    const count = size / Math.pow(2, r+1);
+    rounds.push({round: r===k-1 ? 'Winners Final' : `Winners Round ${r+1}`, side:'W',
+      matches: Array.from({length: count}, (_, i) => mk(`W${r}-${i}`))});
+  }
+  // Losers bracket
+  for(let j=0; j<lbCount; j++){
+    const count = size / Math.pow(2, Math.floor(j/2) + 2);
+    rounds.push({round: j===lbCount-1 ? 'Losers Final' : `Losers Round ${j+1}`, side:'L',
+      matches: Array.from({length: count}, (_, i) => mk(`L${j}-${i}`))});
+  }
+  // Grand final
+  rounds.push({round:'Grand Final', side:'GF', matches:[mk('GF')]});
+
+  // Wiring — where each match's winner / loser goes
+  for(let r=0; r<k; r++){
+    const count = rounds[r].matches.length;
+    rounds[r].matches.forEach((bm, i)=>{
+      bm.w = r < k-1 ? {r:r+1, m:Math.floor(i/2), s:(i%2===0?'a':'b')} : {r:gfIdx, m:0, s:'a'};
+      if(r === 0)            bm.l = {r:lbIdx(0), m:Math.floor(i/2), s:(i%2===0?'a':'b')};
+      else if(r < k-1)       bm.l = {r:lbIdx(2*r-1), m:count-1-i, s:'b'};   // reversed drop-in avoids instant rematches
+      else                   bm.l = {r:lbIdx(lbCount-1), m:0, s:'b'};
+    });
+  }
+  for(let j=0; j<lbCount; j++){
+    rounds[lbIdx(j)].matches.forEach((bm, i)=>{
+      if(j === lbCount-1)    bm.w = {r:gfIdx, m:0, s:'b'};
+      else if(j % 2 === 0)   bm.w = {r:lbIdx(j+1), m:i, s:'a'};
+      else                   bm.w = {r:lbIdx(j+1), m:Math.floor(i/2), s:(i%2===0?'a':'b')};
+      bm.l = null;
+    });
+  }
+
+  // Seed the first winners round — byes are spread out so no BYE ever faces another BYE there
+  const seeded = shuffle(roster);
+  const half = size / 2, byes = size - roster.length;
+  const byePos = new Set();
+  for(let b=0; b<byes; b++) byePos.add(b%2===0 ? b/2 : half-1-(b-1)/2);
+  let ti = 0;
+  for(let i=0; i<half; i++){
+    const bm = rounds[0].matches[i];
+    bm.a = seeded[ti++];
+    bm.b = byePos.has(i) ? 'BYE' : seeded[ti++];
+  }
+  return rounds;
+}
+function generateDoubleElimBracketFor(tournamentName){
+  const roster = teams.filter(t=>t.tournament===tournamentName && t.status==='Approved').map(t=>t.name);
+  if(roster.length < 3){
+    showToast('Double elimination needs at least 3 approved teams in this tournament to generate a bracket.');
+    return;
+  }
+  currentBracket = buildDoubleElimRounds(roster);
+  currentBracketTournament = tournamentName;
+  deResolveByes();
+  buildBracket();
+  persistBracket();
+
+  // Re-generating replaces this tournament's previously auto-published matchups instead of duplicating them.
+  const removedIds = [];
+  for(let i=schedule.length-1;i>=0;i--){
+    if(schedule[i].fromBracket && schedule[i].tournament===tournamentName){ removedIds.push(schedule[i].id); schedule.splice(i,1); }
+  }
+  clearCollectionFromFirestore('schedule', removedIds);
+  publishReadyBracketMatchesDE(tournamentName);
+
+  logAudit('Bracket Generated', `New double-elimination bracket generated for "${tournamentName}" (${roster.length} teams) — first round published to the Schedule.`, actorLabel());
+  showToast(`Double-elimination bracket generated for ${tournamentName} — first round added to the Schedule`);
+}
+/* Same idea as publishReadyBracketMatches, but matches are tracked by their unique bracket key —
+   in double elimination two teams can meet more than once (e.g. a Grand Final rematch), so
+   matching by team names alone would wrongly treat the rematch as already scheduled. */
+function publishReadyBracketMatchesDE(tournamentName){
+  if(!tournamentName || !currentBracket) return 0;
+  const tData = tournaments.find(t=>t.name===tournamentName);
+  const venue = tData ? tData.venue : 'TBA';
+  let added = 0;
+  currentBracket.forEach(round=>{
+    round.matches.forEach(m=>{
+      if(m.a==='TBA' || m.b==='TBA' || m.a==='BYE' || m.b==='BYE') return;
+      if(m.winner) return;
+      const alreadyScheduled = schedule.some(s => s.tournament===tournamentName && s.fromBracket && s.bracketKey===m.key);
+      if(alreadyScheduled) return;
+      scheduleIdCounter += 1;
+      schedule.push({id: scheduleIdCounter, time:'TBA', a:m.a, b:m.b, venue, status:'upcoming', tournament: tournamentName, fromBracket:true, day:'today', bracketKey:m.key});
+      added++;
+    });
+  });
+  if(added){
+    schedule.sort((x,y)=> x.time.localeCompare(y.time));
+    buildSchedule();
+    buildDashboard();
+  }
+  return added;
+}
+/* Mirrors a schedule result onto the matching double-elim bracket match (found by its bracket key),
+   then moves the winner forward and the loser into the losers bracket. */
+function syncScoreToDoubleElim(m){
+  if(currentBracketTournament && m.tournament && m.tournament !== currentBracketTournament) return;
+  const samePair = bm => (bm.a===m.a && bm.b===m.b) || (bm.a===m.b && bm.b===m.a);
+  let ri = -1, mi = -1;
+  for(let r=0; r<currentBracket.length && ri===-1; r++){
+    const idx = currentBracket[r].matches.findIndex(bm => m.bracketKey ? (bm.key===m.bracketKey && samePair(bm)) : (!bm.winner && samePair(bm)));
+    if(idx !== -1){ ri = r; mi = idx; }
+  }
+  if(ri === -1) return;
+  const bm = currentBracket[ri].matches[mi];
+  const swapped = bm.a===m.b && bm.b===m.a;
+  bm.sa = (swapped ? m.scoreB : m.scoreA) ?? '—';
+  bm.sb = (swapped ? m.scoreA : m.scoreB) ?? '—';
+  bm.live = m.status === 'live';
+  if(m.status === 'done' && m.scoreA!=null && m.scoreB!=null && m.scoreA !== m.scoreB){
+    const aWon = swapped ? (m.scoreB > m.scoreA) : (m.scoreA > m.scoreB);
+    bm.winner = aWon ? 'a' : 'b';
+    bm.live = false;
+    if(currentBracket[ri].side === 'GF') deHandleGrandFinal();
+    else { deRoute(ri, mi); deResolveByes(); }
+  } else if(m.status !== 'done'){
+    bm.winner = null;
+    if(currentBracket[ri].side === 'GF') deHandleGrandFinal();
+  }
+  buildBracket();
+  persistBracket();
+  publishReadyBracketMatchesDE(currentBracketTournament || m.tournament);
+}
+/* Grand Final: the winners-bracket champion has no losses yet, so if the losers-bracket champion
+   wins, a second "Grand Final Reset" game is added. If the winners-bracket champion wins, it's over. */
+function deHandleGrandFinal(){
+  const gfRound = currentBracket.find(r => r.side==='GF' && r.matches[0] && r.matches[0].key==='GF');
+  if(!gfRound) return;
+  const gf = gfRound.matches[0];
+  const resetIdx = currentBracket.findIndex(r => r.side==='GF' && r.matches[0] && r.matches[0].key==='GFR');
+  if(gf.winner === 'b'){
+    if(resetIdx === -1){
+      currentBracket.push({round:'Grand Final Reset', side:'GF', matches:[
+        {key:'GFR', a:gf.a, sa:'—', b:gf.b, sb:'—', winner:null, live:false, w:null, l:null}
+      ]});
+    }
+  } else if(resetIdx !== -1){
+    currentBracket.splice(resetIdx, 1);
+    const removedIds = [];
+    for(let i=schedule.length-1;i>=0;i--){
+      if(schedule[i].fromBracket && schedule[i].tournament===currentBracketTournament && schedule[i].bracketKey==='GFR'){ removedIds.push(schedule[i].id); schedule.splice(i,1); }
+    }
+    if(removedIds.length) clearCollectionFromFirestore('schedule', removedIds);
+  }
+}
+function buildDoubleElimBracket(){
+  const el = document.getElementById('bracket-render');
+  const roundHtml = r => {
+    const isGF = r.side === 'GF';
+    return `
+    <div class="bracket-round">
+      <div class="round-title">${r.round}</div>
+      ${r.matches.map(m=>{
+        const decisive = isGF && m.winner && r === currentBracket[currentBracket.length-1];
+        return `
+        <div class="matchup ${decisive ? 'champion' : ''} ${m.auto ? 'bye-auto' : ''}">
+          <div class="mrow ${m.winner==='a'?'winner':''}"><span class="team-name">${m.winner==='a' && !m.auto ?'🏅 ':''}${m.a}</span><span class="score">${m.sa}</span></div>
+          <div class="mrow ${m.winner==='b'?'winner':''}"><span class="team-name">${m.winner==='b' && !m.auto ?'🏅 ':''}${m.b}</span><span class="score">${m.sb}</span></div>
+          ${decisive ? `<div class="champion-banner">🏆 Champion: ${m.winner==='a'?m.a:m.b}</div>` : ''}
+        </div>`;
+      }).join('')}
+    </div>`;
+  };
+  const section = (title, side, note) => {
+    const rs = currentBracket.filter(r => side==='GF' ? r.side==='GF' : r.side===side);
+    if(!rs.length) return '';
+    return `<div><div class="de-title">${title}</div>${note ? `<div class="de-note">${note}</div>` : ''}<div class="bracket" style="min-width:0;padding:0;">${rs.map(roundHtml).join('')}</div></div>`;
+  };
+  el.innerHTML = `<div class="de-wrap">
+    ${section('Winners Bracket', 'W')}
+    ${section('Losers Bracket — one more loss and you\'re out', 'L')}
+    ${section('Grand Final', 'GF', 'If the Losers Bracket champion wins the Grand Final, a Reset game decides the champion.')}
+  </div>`;
 }
 function onGenerateBracketClick(){
   const sel = document.getElementById('bracket-tournament-select');
@@ -5251,6 +5496,7 @@ function seasonRows(t){
 function bracketFinal(t){
   if(!currentBracket || !currentBracket.length || currentBracketTournament !== t.name) return null;
   const last = currentBracket[currentBracket.length - 1];
+  if(isDoubleElimBracket()) return (last && last.side === 'GF' && last.matches.length === 1) ? last.matches[0] : null;
   return (last && last.round === 'Finals' && last.matches.length === 1) ? last.matches[0] : null;
 }
 function bracketSig(f){ return f ? `${f.a}|${f.b}|${f.sa}|${f.sb}` : ''; }
@@ -6981,6 +7227,7 @@ function copyMatchQrLink(){
    out the winner and slots that winner into the next round, same as a normal bracket advance. */
 function syncScoreToBracket(m){
   if(!currentBracket || !currentBracket.length) return;
+  if(isDoubleElimBracket()){ syncScoreToDoubleElim(m); return; }
   let changed = false;
   for(let ri=0; ri<currentBracket.length; ri++){
     const round = currentBracket[ri];
